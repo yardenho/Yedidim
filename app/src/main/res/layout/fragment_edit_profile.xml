@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/myProfile_bt_editProfile"
+                android:id="@+id/myProfile_btn_editProfile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -33,13 +33,13 @@
                 android:backgroundTint="#F07470"
                 android:text="CANCEL"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/myProfile_bt_deleteAccount"
+                app:layout_constraintEnd_toStartOf="@+id/myProfile_btn_deleteAccount"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="608dp" />
 
             <Button
-                android:id="@+id/myProfile_bt_deleteAccount"
+                android:id="@+id/myProfile_btn_deleteAccount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -49,7 +49,7 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/myProfile_bt_editProfile"
+                app:layout_constraintStart_toEndOf="@+id/myProfile_btn_editProfile"
                 tools:layout_editor_absoluteY="608dp" />
 
             <TextView

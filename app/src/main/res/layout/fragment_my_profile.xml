@@ -34,7 +34,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/myProfile_bt_editProfile"
+                    android:id="@+id/myProfile_btn_editProfile"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -44,13 +44,13 @@
                     android:backgroundTint="#F07470"
                     android:text="Edit Profile"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/myProfile_bt_deleteAccount"
+                    app:layout_constraintBottom_toTopOf="@+id/myProfile_btn_deleteAccount"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_phoneNumber" />
 
                 <Button
-                    android:id="@+id/myProfile_bt_deleteAccount"
+                    android:id="@+id/myProfile_btn_deleteAccount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
