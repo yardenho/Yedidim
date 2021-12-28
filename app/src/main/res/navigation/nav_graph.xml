@@ -45,4 +45,9 @@
         android:name="com.example.yedidim.EditReportFragment"
         android:label="fragment_edit_report"
         tools:layout="@layout/fragment_edit_report" />
+    <fragment
+        android:id="@+id/viewReportFragment"
+        android:name="com.example.yedidim.ViewReportFragment"
+        android:label="fragment_view_report"
+        tools:layout="@layout/fragment_view_report" />
 </navigation>
