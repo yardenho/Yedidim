@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainScreenFragment">
+    app:startDestination="@id/mapFragment">
 
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -50,4 +50,9 @@
         android:name="com.example.yedidim.ViewReportFragment"
         android:label="fragment_view_report"
         tools:layout="@layout/fragment_view_report" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.yedidim.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
 </navigation>
