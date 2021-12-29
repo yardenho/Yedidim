@@ -163,9 +163,9 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_manufactureYear"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/myProfile_tv_manufactureYear"
-                    tools:layout_editor_absoluteY="107dp" />
+                    app:layout_constraintStart_toEndOf="@+id/myProfile_tv_manufactureYear" />
 
                 <EditText
                     android:id="@+id/myProfile_et_fuelType"
