@@ -63,4 +63,9 @@
         android:name="com.example.yedidim.testFrag"
         android:label="testFrag"
         tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/reportsListFragment"
+        android:name="com.example.yedidim.ReportsListFragment"
+        android:label="fragment_reports_list"
+        tools:layout="@layout/fragment_reports_list" />
 </navigation>
