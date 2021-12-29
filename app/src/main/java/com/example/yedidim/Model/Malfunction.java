@@ -17,15 +17,19 @@ public class Malfunction {
     private String notes;
     private User user;
     private ImageView image; // כשנוסיף העלאת תמונה אולי נשנה את הסוג
+    private double longitude;
+    private double latitude;
 
     public Malfunction(){
     }
-    public Malfunction(int ID, String problem, String notes, User u, ImageView iv){
+    public Malfunction(int ID, String problem, String notes, User u, ImageView iv, double longitude, double latitude){
         this.IDMalfunction= ID;
         this.problem=problem;
         this.notes=notes;
         this.user=u;
         this.image=iv;
+        this.longitude=longitude;
+        this.latitude=latitude;
     }
     public void setProblem(String p){
         this.problem = p;
@@ -36,4 +40,8 @@ public class Malfunction {
     public void setImage(ImageView iv){
         this.image = iv;
     }
+    public void setLongitude(double lo) {this.longitude = lo;}
+    public void setLatitude(double la) {this.latitude = la;}
+
+
 }
