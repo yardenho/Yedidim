@@ -57,11 +57,6 @@
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
-        android:id="@+id/scrollFragment"
-        android:name="com.example.yedidim.scrollFragment"
-        android:label="fragment_scroll"
-        tools:layout="@layout/fragment_scroll" />
-    <fragment
         android:id="@+id/testFrag"
         android:name="com.example.yedidim.testFrag"
         android:label="fragment_test"
