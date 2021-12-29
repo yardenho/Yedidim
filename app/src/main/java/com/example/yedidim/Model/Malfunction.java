@@ -31,6 +31,9 @@ public class Malfunction {
         this.longitude=longitude;
         this.latitude=latitude;
     }
+    // need to add set user
+    // need to add getters for all members
+    public void setMalfunctionID(int malfunctionID) {this.malfunctionID = malfunctionID;}
     public void setProblem(String p){
         this.problem = p;
     }

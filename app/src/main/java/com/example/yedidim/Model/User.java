@@ -73,5 +73,6 @@ public class User {
     public void setPhoneNumber(String pn){
         this.phoneNumber = pn;
     }
-
+    public void setUserName(String un) {this.userName = un;}
+    public void setPassword(String password) {this.password = password;}
 }
