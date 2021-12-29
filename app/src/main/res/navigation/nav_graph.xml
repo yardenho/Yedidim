@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
 
+    app:startDestination="@id/myProfileFragment">
     app:startDestination="@id/viewReportFragment">
-    app:startDestination="@id/viewReportFragment">
-    app:startDestination="@id/signUpFragment">
+    app:startDestination="@id/myProfileFragment">
 
     <fragment
         android:id="@+id/mainScreenFragment"

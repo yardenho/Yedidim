@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="40dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp"
         tools:context=".scrollViewTest">
 
         <TextView
@@ -29,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:text="Notes:"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
             android:id="@+id/addingReport_btn_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="344dp"
             android:backgroundTint="#F07470"
             android:text="CANCEL"
@@ -64,6 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="40dp"
             android:backgroundTint="#F07470"
             android:text="REPORT"
