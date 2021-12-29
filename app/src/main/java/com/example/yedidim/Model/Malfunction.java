@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey;
 public class Malfunction {
     @PrimaryKey
     @NonNull
-    private int IDMalfunction;
+    private int malfunctionID;
     private String problem;
     private String notes;
     private User user;
@@ -23,7 +23,7 @@ public class Malfunction {
     public Malfunction(){
     }
     public Malfunction(int ID, String problem, String notes, User u, ImageView iv, double longitude, double latitude){
-        this.IDMalfunction= ID;
+        this.malfunctionID= ID;
         this.problem=problem;
         this.notes=notes;
         this.user=u;
