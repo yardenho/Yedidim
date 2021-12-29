@@ -5,8 +5,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private NavController navctrl;
@@ -18,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
         navctrl = nav_host.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navctrl);
 
-
-    }
+//        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+//        List<Address> addresses = null;
+//        try {
+//            addresses = geocoder.getFromLocation(33.4162, 35.8570, 1);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String cityName = addresses.get(0).getAddressLine(0);
+//        Log.d("TAG", "city:" + cityName);
+//
+//    }
 }
