@@ -34,5 +34,5 @@ public class MainActivity extends AppCompatActivity {
 //        String cityName = addresses.get(0).getAddressLine(0);
 //        Log.d("TAG", "city:" + cityName);
 //
-//    }
+    }
 }
