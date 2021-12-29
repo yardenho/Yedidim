@@ -216,7 +216,7 @@
 
         <Button
             android:id="@+id/editProfile_btn_save"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:backgroundTint="#F07470"
