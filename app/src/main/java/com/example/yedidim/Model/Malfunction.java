@@ -15,7 +15,7 @@ public class Malfunction {
     private int malfunctionID;
     private String problem;
     private String notes;
-    private User user;
+    private User user=new User();
     private ImageView image; // כשנוסיף העלאת תמונה אולי נשנה את הסוג
     private double longitude;
     private double latitude;
