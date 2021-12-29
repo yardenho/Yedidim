@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mapFragment">
+    app:startDestination="@id/scrollFragment">
 
     <fragment
         android:id="@+id/mainScreenFragment"
@@ -55,4 +55,9 @@
         android:name="com.example.yedidim.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/scrollFragment"
+        android:name="com.example.yedidim.scrollFragment"
+        android:label="fragment_scroll"
+        tools:layout="@layout/fragment_scroll" />
 </navigation>
