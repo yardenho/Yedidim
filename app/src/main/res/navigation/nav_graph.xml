@@ -149,7 +149,8 @@
         <argument android:name="username"
             app:argType="string" />
     </fragment>
-    <action android:id="@+id/action_global_mainScreenFragment" app:destination="@id/mainScreenFragment" />
+    <action android:id="@+id/action_global_mainScreenFragment" app:destination="@id/mainScreenFragment" app:popUpTo="@+id/fragment_students_list"
+        app:popUpToInclusive="true"/>
     <action android:id="@+id/action_global_aboutUsFragment" app:destination="@id/aboutUsFragment" />
     <action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment" />
     <action android:id="@+id/action_global_myReportsFragment" app:destination="@id/myReportsFragment" />

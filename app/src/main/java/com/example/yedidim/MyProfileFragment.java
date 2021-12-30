@@ -80,7 +80,8 @@ public class MyProfileFragment extends Fragment {
                         Model.getInstance().deleteUser(user, new Model.deleteUserListener() {
                             @Override
                             public void onComplete() {
-
+                                //TODO: check if it is back like it should
+                                Navigation.findNavController(v).navigate(MyProfileFragmentDirections.actionGlobalMainScreenFragment());
                             }
                         });
                     }
