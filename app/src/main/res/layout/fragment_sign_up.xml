@@ -7,12 +7,15 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+<!--    tools:context=".signUpFragment"-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="40dp"
         android:paddingBottom="40dp"
-        tools:context=".scrollViewTest">
+        tools:context=".signUpFragment">
+<!--        tools:context=".scrollViewTest">-->
 
         <TextView
             android:id="@+id/signUp_tv_signUpMassege"
@@ -260,4 +263,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 </ScrollView>
