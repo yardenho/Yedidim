@@ -1,25 +1,21 @@
 package com.example.yedidim;
 
-import static android.content.Context.LOCATION_SERVICE;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
+
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
+
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,11 +24,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+
+import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 
 public class AddingReportFragment extends Fragment {
@@ -41,19 +40,12 @@ public class AddingReportFragment extends Fragment {
     private Button reportBtn;
     private EditText problemEt;
     private EditText noteEt;
+    // צריך להוסיף שדה של תמונה? - לצפות איך עושים הקלטה 11!!!!!!!!!!!!
     //****************************************
     double longitude;
     double latitude;
-    //    FusedLocationProviderClient client;
-    LocationManager locationManager;
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-
-    boolean isGPSEnabled = false;
-    Location location; // Location
+    FusedLocationProviderClient fusedLocationProviderClient;
+    Location location;
 
     public AddingReportFragment() {
     }
@@ -64,7 +56,6 @@ public class AddingReportFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(AddingReportViewModel.class);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,8 +72,12 @@ public class AddingReportFragment extends Fragment {
         ProgressBar pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
 
+        // צריך להחזיר את השורה הזאת כנסיים לממש את הGPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
-//        getCurrentLatitude();
+
+        // initialize fusedLocationProviderClient
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,38 +97,40 @@ public class AddingReportFragment extends Fragment {
                 report.setProblem(problemEt.getText().toString());
                 report.setNotes(noteEt.getText().toString());
                 report.setUserName(viewModel.getUsername());
-
-
+                activateGPS(report, v);
             }
         });
-
-
         return view;
     }
-
-//    public double getCurrentLatitude() {
-//
-//        LocationManager lm = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-//        if (ActivityCompat.checkSelfPermission(MyApplication.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MyApplication.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//        }
-//        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//        Log.d("TAG", "LAT" + location.getLatitude());
-//        return location.getLatitude();
-//        }
+    public void activateGPS(Report report, View v)
+    {
+        // check permission
+        // TODO: check for replacing MyApplication
+        if(ActivityCompat.checkSelfPermission(MyApplication.getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // permission granted
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    Location location = task.getResult();
+                    Log.d("TAG", "latitude" + location.getLatitude());
+                    Log.d("TAG", "latitude" + location.getLongitude());
+                    report.setLatitude(location.getLatitude());
+                    report.setLongitude(location.getLongitude());
+                    Model.getInstance().addNewReport(report,()->{
+                        Navigation.findNavController(v).navigateUp();
+                    });
+                }
+            });
+        }
+        else {
+            // permission denied
+            // TODO: check what does the number of the requestCode mean
+            // TODO: check if what to do after requesting permission
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
     }
-//
-//    public double getCurrentLatitude() {
-//        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//
-//        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//        return location.getLongitude();
-//    }
 
-//}
+
+    }
