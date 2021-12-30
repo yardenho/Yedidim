@@ -81,6 +81,9 @@
         <argument
             android:name="username"
             app:argType="string" />
+        <argument
+            android:name="malfunctionID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/viewReportFragment"
@@ -90,6 +93,9 @@
         <argument
             android:name="username"
             app:argType="string" />
+        <argument
+            android:name="malfunctionID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -98,7 +104,8 @@
         tools:layout="@layout/fragment_map" >
         <argument
             android:name="malfunctionID"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
         <action
             android:id="@+id/action_mapFragment_to_addingReportFragment"
             app:destination="@id/addingReportFragment" />
