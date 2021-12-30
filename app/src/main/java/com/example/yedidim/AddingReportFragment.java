@@ -5,7 +5,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 
 import android.os.Bundle;
 
@@ -42,10 +41,8 @@ public class AddingReportFragment extends Fragment {
     private EditText noteEt;
     // צריך להוסיף שדה של תמונה? - לצפות איך עושים הקלטה 11!!!!!!!!!!!!
     //****************************************
-    double longitude;
-    double latitude;
+
     FusedLocationProviderClient fusedLocationProviderClient;
-    Location location;
 
     public AddingReportFragment() {
     }
@@ -72,7 +69,7 @@ public class AddingReportFragment extends Fragment {
         ProgressBar pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
 
-        // צריך להחזיר את השורה הזאת כנסיים לממש את הGPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // צריך להחזיר את השורה הזאת כנסיים לממש את ה- GPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
         // initialize fusedLocationProviderClient
