@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
@@ -23,14 +24,14 @@ public class EditReportFragment extends Fragment {
     private EditReportViewModel viewModel;
     private Report report;
     private User user; // לא חייב כי לא ניתן לשנות פרטים של משתמש אלא רק פרטי דיווח
-    TextView problem;
-    TextView notes;
-    TextView vehicleBrand;
-    TextView manufactureYear;
-    TextView fuelType;
-    TextView firstName;
-    TextView lastName;
-    TextView phoneNumber;
+    private EditText problem;
+    private EditText notes;
+    private EditText vehicleBrand;
+    private EditText manufactureYear;
+    private EditText fuelType;
+    private EditText firstName;
+    private EditText lastName;
+    private EditText phoneNumber;
     private Button cancelBtn;
     private Button saveBtn;
     View view;
