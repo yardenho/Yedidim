@@ -85,4 +85,79 @@ public class Model {
 
 
 
+    private Model(){}
+
+    public static Model getInstance(){return instance;}
+
+    public interface GetAllMalfunctionsListener{
+        void onComplete(List<Malfunction> data);
+    }
+
+    public void getMalfunctionsList(GetAllMalfunctionsListener listener){
+        MyApplication.executorService.execute(()->{
+            List <Malfunction> data = AppLocalDB.db.malfunctionDao().getAll();
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete(data);
+            });
+        });
+    }
+
+    public interface addNewMalfunctionListener{
+        void onComplete();
+    }
+
+    public void addNewMalfunction(Malfunction malfunction,addNewMalfunctionListener listener){
+
+        MyApplication.executorService.execute(()->{
+            AppLocalDB.db.malfunctionDao().insertAll(malfunction);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete();
+            });
+        });
+    }
+
+    public interface getMalfunctionByMalfunctionIDListener{
+        void onComplete(Malfunction malfunction);
+    }
+
+    public void getStudentByID(String malfunctionID, getMalfunctionByMalfunctionIDListener listener)
+    {
+        MyApplication.executorService.execute(()->{
+            Malfunction malfunction = AppLocalDB.db.malfunctionDao().getMalfunctionByID(malfunctionID);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete(malfunction);
+            });
+        });
+    }
+
+    public interface deleteMalfunctionByMalfunctionIDListener{
+        void onComplete();
+    }
+
+    public void deleteStudentByID(Malfunction malfunction,deleteMalfunctionByMalfunctionIDListener listener )
+    {
+        MyApplication.executorService.execute(()->{
+            AppLocalDB.db.malfunctionDao().delete(malfunction);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete();
+            });
+        });
+    }
+
+    public interface editMalfunctionListener{
+        void onComplete();
+    }
+
+    public void editStudent(Malfunction malfunction,editMalfunctionListener listener){
+        MyApplication.executorService.execute(()->{
+            AppLocalDB.db.malfunctionDao().editMalfunction(malfunction);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete();
+            });
+        });
+    }
+
+
+
 }
+
