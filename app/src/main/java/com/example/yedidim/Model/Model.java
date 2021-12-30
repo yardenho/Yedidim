@@ -9,7 +9,13 @@ import java.util.List;
 public class Model {
     static  final private Model instance = new Model();
     private List<User> userList =new LinkedList<User>();
-    private List<Malfunction> malfunctionList =new LinkedList<Malfunction>();
+    private List<Report> ReportList =new LinkedList<Report>();
+
+
+
+    private Model(){}
+
+    public static Model getInstance(){return instance;}
 
     public interface GetAllUsersListener{
         void onComplete(List<User> data);
@@ -86,79 +92,73 @@ public class Model {
 
 
 
-    private Model(){}
 
-    public static Model getInstance(){return instance;}
-
-    public interface GetAllMalfunctionsListener{
-        void onComplete(List<Malfunction> data);
+    public interface GetAllReportsListener{
+        void onComplete(List<Report> data);
     }
 
-    public void getMalfunctionsList(GetAllMalfunctionsListener listener){
+    public void getReportsList(GetAllReportsListener listener){
         MyApplication.executorService.execute(()->{
-            List <Malfunction> data = AppLocalDB.db.malfunctionDao().getAll();
+            List <Report> data = AppLocalDB.db.reportDao().getAll();
             MyApplication.mainHandler.post(()->{
                 listener.onComplete(data);
             });
         });
     }
 
-    public interface addNewMalfunctionListener{
+    public interface addNewReportListener{
         void onComplete();
     }
 
-    public void addNewMalfunction(Malfunction malfunction,addNewMalfunctionListener listener){
+    public void addNewReport(Report report,addNewReportListener listener){
 
         MyApplication.executorService.execute(()->{
-            AppLocalDB.db.malfunctionDao().insertAll(malfunction);
+            AppLocalDB.db.reportDao().insertAll(report);
             MyApplication.mainHandler.post(()->{
                 listener.onComplete();
             });
         });
     }
 
-    public interface getMalfunctionByMalfunctionIDListener{
-        void onComplete(Malfunction malfunction);
+    public interface getReportByReportIDListener{
+        void onComplete(Report report);
     }
 
-    public void getStudentByID(String malfunctionID, getMalfunctionByMalfunctionIDListener listener)
+    public void getReportByID(String reportID, getReportByReportIDListener listener)
     {
         MyApplication.executorService.execute(()->{
-            Malfunction malfunction = AppLocalDB.db.malfunctionDao().getMalfunctionByID(malfunctionID);
+            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
             MyApplication.mainHandler.post(()->{
-                listener.onComplete(malfunction);
+                listener.onComplete(report);
             });
         });
     }
 
-    public interface deleteMalfunctionByMalfunctionIDListener{
+    public interface deleteReportListener{
         void onComplete();
     }
 
-    public void deleteStudentByID(Malfunction malfunction,deleteMalfunctionByMalfunctionIDListener listener )
+    public void deleteReport(Report report,deleteReportListener listener )
     {
         MyApplication.executorService.execute(()->{
-            AppLocalDB.db.malfunctionDao().delete(malfunction);
+            AppLocalDB.db.reportDao().delete(report);
             MyApplication.mainHandler.post(()->{
                 listener.onComplete();
             });
         });
     }
 
-    public interface editMalfunctionListener{
+    public interface editReportListener{
         void onComplete();
     }
 
-    public void editStudent(Malfunction malfunction,editMalfunctionListener listener){
+    public void editReport(Report report,editReportListener listener){
         MyApplication.executorService.execute(()->{
-            AppLocalDB.db.malfunctionDao().editMalfunction(malfunction);
+            AppLocalDB.db.reportDao().editReport(report);
             MyApplication.mainHandler.post(()->{
                 listener.onComplete();
             });
         });
     }
-
-
-
 }
 

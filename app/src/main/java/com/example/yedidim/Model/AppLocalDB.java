@@ -6,10 +6,10 @@ import androidx.room.RoomDatabase;
 
 import com.example.yedidim.MyApplication;
 
-@Database(entities = {User.class, Malfunction.class}, version = 2)
+@Database(entities = {User.class, Report.class}, version = 2)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract UserDao userDao();
-    public abstract MalfunctionDao malfunctionDao();
+    public abstract ReportDao reportDao();
 }
 
 public class AppLocalDB {
