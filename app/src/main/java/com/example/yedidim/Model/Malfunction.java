@@ -1,6 +1,7 @@
 package com.example.yedidim.Model;
 
 
+import android.provider.ContactsContract;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ public class Malfunction {
     private String problem;
     private String notes;
     private User user=new User();
+    //private String UserId;
     private ImageView image; // כשנוסיף העלאת תמונה אולי נשנה את הסוג
     private double longitude;
     private double latitude;
@@ -31,8 +33,11 @@ public class Malfunction {
         this.longitude=longitude;
         this.latitude=latitude;
     }
-    // need to add set user
+//     need to add set user or userId
+//    public void setUserId(String userId) {this.userId = userId;}
     // need to add getters for all members
+
+    //getters
     public void setMalfunctionID(int malfunctionID) {this.malfunctionID = malfunctionID;}
     public void setProblem(String p){
         this.problem = p;
@@ -46,5 +51,12 @@ public class Malfunction {
     public void setLongitude(double lo) {this.longitude = lo;}
     public void setLatitude(double la) {this.latitude = la;}
 
-
+    // setters
+//    public String getUserId() {return userId;}   check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111111
+    public String getProblem() {return problem;}
+    public String getNotes() {return notes;}
+    public int getMalfunctionID() {return malfunctionID;}
+    public ImageView getImage() {return image;}
+    public double getLatitude() { return latitude; }
+    public double getLongitude() { return longitude; }
 }
