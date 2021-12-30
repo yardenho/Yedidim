@@ -236,7 +236,7 @@
             app:layout_constraintStart_toEndOf="@+id/signUp_tv_phoneNumber" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/signUp_btn_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
