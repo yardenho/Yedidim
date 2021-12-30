@@ -19,6 +19,9 @@ import com.example.yedidim.Model.User;
 
 public class ViewReportFragment extends Fragment {
     private viewReportViewModel viewModel;
+    private User u; // dose it need to be here
+    private Report r;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -49,26 +52,25 @@ public class ViewReportFragment extends Fragment {
         Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
             @Override
             public void onComplete(User user) {
-                viewModel.setUser(user);
+                u=user;
             }
         });
 
         Model.getInstance().getReportByID(viewModel.getReportId(), new Model.getReportByReportIDListener() {
             @Override
             public void onComplete(Report report) {
-                viewModel.setReport(report);
+                r=report;
             }
         });
-        Report report = viewModel.getReport();
-        User user = viewModel.getUser();
-        problemTv.setText(report.getProblem());
-        notesTv.setText(report.getNotes());
-        vehicleBrandTv.setText(user.getVehicleBrand());
-        manufactureYearTv.setText(user.getManufactureYear());
-        fuelTypeTv.setText(user.getFuelType());
-        firstNameTv.setText(user.getFirstName());
-        lastNameTv.setText(user.getLastName());
-        phoneNumberTv.setText(user.getPhoneNumber());
+
+        problemTv.setText(r.getProblem());
+        notesTv.setText(r.getNotes());
+        vehicleBrandTv.setText(u.getVehicleBrand());
+        manufactureYearTv.setText(u.getManufactureYear());
+        fuelTypeTv.setText(u.getFuelType());
+        firstNameTv.setText(u.getFirstName());
+        lastNameTv.setText(u.getLastName());
+        phoneNumberTv.setText(u.getPhoneNumber());
         //*****************************************************
         //TODO: to add image references
         //*****************************************************

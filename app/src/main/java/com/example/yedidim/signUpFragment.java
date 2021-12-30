@@ -2,7 +2,6 @@ package com.example.yedidim;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -39,6 +38,7 @@ public class signUpFragment extends Fragment {
         EditText firstNameEt = view.findViewById(R.id.signUp_et_firstName);
         EditText lastNameEt = view.findViewById(R.id.signUp_et_lastName);
         EditText phoneNumberEt = view.findViewById(R.id.signUp_et_phoneNumber);
+        EditText carNumberEt = view.findViewById(R.id.signUp_et_carNumber);
         pb = view.findViewById(R.id.signUp_progressBar);
         pb.setVisibility(View.GONE);
 
@@ -56,6 +56,7 @@ public class signUpFragment extends Fragment {
                 user.setManufactureYear(manufactureYearEt.getText().toString());
                 user.setFuelType(fuelTypeEt.getText().toString());
                 user.setPhoneNumber(phoneNumberEt.getText().toString());
+                user.setCarNumber(carNumberEt.getText().toString());
                 Model.getInstance().addNewUser(user, ()->{
                     signUpFragmentDirections.ActionSignUpFragmentToReportsListFragment action = signUpFragmentDirections.actionSignUpFragmentToReportsListFragment(user.getUserName());
                     Navigation.findNavController(v).navigate(action);

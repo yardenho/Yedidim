@@ -8,8 +8,6 @@ import com.example.yedidim.Model.User;
 public class viewReportViewModel extends ViewModel {
     private String username;
     private String reportId;
-    private User user; // dose it need to be here
-    private Report report;
 
 
     public String getUsername(){
@@ -27,11 +25,5 @@ public class viewReportViewModel extends ViewModel {
     public void setReportId(String reportId){
         this.reportId = reportId;
     }
-
-    public User getUser(){return user;}
-    public void setUser(User u){user = u;}
-
-    public Report getReport(){return report;}
-    public void setReport(Report r){report = r;}
 
 }

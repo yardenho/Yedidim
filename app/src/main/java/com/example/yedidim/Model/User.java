@@ -17,10 +17,11 @@ public class User {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private String carNumber;
 
     public User(){}
 
-    public User(String userName, String password, String vehicleBrand, String manufactureYear, String fuelType, String firstName, String lastName, String phoneNumber){
+    public User(String userName, String password, String vehicleBrand, String manufactureYear, String fuelType, String firstName, String lastName, String phoneNumber, String cerNumber){
         this.userName= userName;
         this.password= password;
         this.vehicleBrand= vehicleBrand;
@@ -29,6 +30,7 @@ public class User {
         this.firstName= firstName;
         this.lastName= lastName;
         this.phoneNumber=phoneNumber;
+        this.carNumber = cerNumber;
     }
     public String getUserName(){
         return userName;
@@ -54,6 +56,7 @@ public class User {
     public String getPhoneNumber(){
         return phoneNumber;
     }
+    public String getCarNumber(){return carNumber;}
 
     public void setVehicleBrand(String vb){
         this.vehicleBrand = vb;
@@ -75,4 +78,5 @@ public class User {
     }
     public void setUserName(String un) {this.userName = un;}
     public void setPassword(String password) {this.password = password;}
+    public void setCarNumber(String carNumber){this.carNumber = carNumber;}
 }
