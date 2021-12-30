@@ -5,6 +5,7 @@ import com.example.yedidim.MyApplication;
 import java.util.LinkedList;
 import java.util.List;
 
+///מחבר לנו בין הפרגמנטים לDATA
 public class Model {
     static  final private Model instance = new Model();
     private List<User> userList =new LinkedList<User>();

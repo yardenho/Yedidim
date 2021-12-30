@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
 
-    app:startDestination="@id/myProfileFragment">
+    app:startDestination="@id/mainScreenFragment">
     app:startDestination="@id/viewReportFragment">
     app:startDestination="@id/myProfileFragment">
 
@@ -12,17 +12,32 @@
         android:id="@+id/mainScreenFragment"
         android:name="com.example.yedidim.mainScreenFragment"
         android:label="fragment_main_screen"
-        tools:layout="@layout/fragment_main_screen" />
+        tools:layout="@layout/fragment_main_screen" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.yedidim.logInFragment"
         android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" />
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_reportsListFragment"
+            app:destination="@id/reportsListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.yedidim.signUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_reportsListFragment"
+            app:destination="@id/reportsListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
         android:name="com.example.yedidim.aboutUsFragment"
@@ -32,32 +47,68 @@
         android:id="@+id/addingReportFragment"
         android:name="com.example.yedidim.AddingReportFragment"
         android:label="fragment_adding_report"
-        tools:layout="@layout/fragment_adding_report" />
+        tools:layout="@layout/fragment_adding_report" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.yedidim.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.example.yedidim.MyProfileFragment"
         android:label="fragment_my_profile"
-        tools:layout="@layout/fragment_my_profile" />
+        tools:layout="@layout/fragment_my_profile" >
+        <action
+            android:id="@+id/action_myProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/editReportFragment"
         android:name="com.example.yedidim.EditReportFragment"
         android:label="fragment_edit_report"
-        tools:layout="@layout/fragment_edit_report" />
+        tools:layout="@layout/fragment_edit_report" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/viewReportFragment"
         android:name="com.example.yedidim.ViewReportFragment"
         android:label="fragment_view_report"
-        tools:layout="@layout/fragment_view_report" />
+        tools:layout="@layout/fragment_view_report" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.yedidim.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="malfunctionID"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_mapFragment_to_addingReportFragment"
+            app:destination="@id/addingReportFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_viewReportFragment"
+            app:destination="@id/viewReportFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/testFrag"
         android:name="com.example.yedidim.testFrag"
@@ -67,5 +118,36 @@
         android:id="@+id/reportsListFragment"
         android:name="com.example.yedidim.ReportsListFragment"
         android:label="fragment_reports_list"
-        tools:layout="@layout/fragment_reports_list" />
+        tools:layout="@layout/fragment_reports_list" >
+        <action
+            android:id="@+id/action_reportsListFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_reportsListFragment_to_addingReportFragment"
+            app:destination="@id/addingReportFragment" />
+        <action
+            android:id="@+id/action_reportsListFragment_to_viewReportFragment"
+            app:destination="@id/viewReportFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/myReportsFragment"
+        android:name="com.example.yedidim.myReportsFragment"
+        android:label="fragment_my_reports"
+        tools:layout="@layout/fragment_my_reports" >
+        <action
+            android:id="@+id/action_myReportsFragment_to_viewReportFragment"
+            app:destination="@id/viewReportFragment" />
+        <action
+            android:id="@+id/action_myReportsFragment_to_editReportFragment"
+            app:destination="@id/editReportFragment" />
+        <argument android:name="username"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_mainScreenFragment" app:destination="@id/mainScreenFragment" />
+    <action android:id="@+id/action_global_aboutUsFragment" app:destination="@id/aboutUsFragment" />
+    <action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment" />
+    <action android:id="@+id/action_global_myReportsFragment" app:destination="@id/myReportsFragment" />
 </navigation>
