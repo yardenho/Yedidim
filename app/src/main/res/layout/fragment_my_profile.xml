@@ -55,8 +55,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/myProfile_et_vehicleBrand"
+        <TextView
+            android:id="@+id/myProfile_text_vehicleBrand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -135,8 +135,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_lastName" />
 
-        <EditText
-            android:id="@+id/myProfile_et_manufactureYear"
+        <TextView
+            android:id="@+id/myProfile_text_manufactureYear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -148,8 +148,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myProfile_tv_manufactureYear" />
 
-        <EditText
-            android:id="@+id/myProfile_et_fuelType"
+        <TextView
+            android:id="@+id/myProfile_text_fuelType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -161,8 +161,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myProfile_tv_fuelType" />
 
-        <EditText
-            android:id="@+id/myProfile_et_carNumber"
+        <TextView
+            android:id="@+id/myProfile_text_carNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -174,8 +174,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myProfile_tv_carNumber" />
 
-        <EditText
-            android:id="@+id/myProfile_et_firstName"
+        <TextView
+            android:id="@+id/myProfile_text_firstName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -187,8 +187,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myProfile_tv_firstName" />
 
-        <EditText
-            android:id="@+id/myProfile_et_lastName"
+        <TextView
+            android:id="@+id/myProfile_text_lastName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -200,8 +200,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myProfile_tv_lastName" />
 
-        <EditText
-            android:id="@+id/myProfile_et_phoneNumber"
+        <TextView
+            android:id="@+id/myProfile_text_phoneNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

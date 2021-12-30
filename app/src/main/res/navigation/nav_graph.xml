@@ -78,7 +78,7 @@
             android:name="username"
             app:argType="string" />
         <argument
-            android:name="malfunctionID"
+            android:name="reportID"
             app:argType="string" />
     </fragment>
     <fragment
@@ -90,7 +90,7 @@
             android:name="username"
             app:argType="string" />
         <argument
-            android:name="malfunctionID"
+            android:name="reportID"
             app:argType="string" />
     </fragment>
     <fragment
