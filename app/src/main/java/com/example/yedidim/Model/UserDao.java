@@ -24,7 +24,7 @@ public interface UserDao {
     @Update
     void editUser(User u);
 
-    @Query("SELECT * FROM User WHERE userName=:id")
-    User getUserByID(String id);
+    @Query("SELECT * FROM User WHERE userName=:uName")
+    User getUserByUserName(String uName);
 
 }
