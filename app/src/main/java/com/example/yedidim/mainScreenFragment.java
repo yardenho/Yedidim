@@ -41,6 +41,14 @@ public class mainScreenFragment extends Fragment {
                 Navigation.findNavController(v).navigate(action);
             }
         });
+        
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                @NonNull NavDirections action = mainScreenFragmentDirections.actionMainScreenFragmentToLogInFragment();
+                Navigation.findNavController(v).navigate(action);
+            }
+        });
 
         return view;
     }

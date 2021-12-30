@@ -16,9 +16,6 @@ import android.widget.ProgressBar;
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class signUpFragment extends Fragment {
 
     private ProgressBar pb;
