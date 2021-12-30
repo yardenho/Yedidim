@@ -33,15 +33,17 @@ public class signUpFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
-        Button signUpBtn = getView().findViewById(R.id.signUp_btn_signup);
-        EditText userNameEt = getView().findViewById(R.id.signUp_et_username);
-        EditText passwordEt = getView().findViewById(R.id.signUp_et_password);
-        EditText vehicleBrandEt = getView().findViewById(R.id.signUp_et_vehicleBrand);
-        EditText manufactureYearEt = getView().findViewById(R.id.signUp_et_manufYear);
-        EditText fuelTypeEt = getView().findViewById(R.id.signUp_et_fuelType);
-        EditText firstNameEt = getView().findViewById(R.id.signUp_et_firstName);
-        EditText lastNameEt = getView().findViewById(R.id.signUp_et_lastName);
-        EditText phoneNumberEt = getView().findViewById(R.id.signUp_et_phoneNumber);
+        Button signUpBtn = view.findViewById(R.id.signUp_btn_signup);
+        EditText userNameEt = view.findViewById(R.id.signUp_et_username);
+        EditText passwordEt = view.findViewById(R.id.signUp_et_password);
+        EditText vehicleBrandEt = view.findViewById(R.id.signUp_et_vehicleBrand);
+        EditText manufactureYearEt = view.findViewById(R.id.signUp_et_manufYear);
+        EditText fuelTypeEt = view.findViewById(R.id.signUp_et_fuelType);
+        EditText firstNameEt = view.findViewById(R.id.signUp_et_firstName);
+        EditText lastNameEt = view.findViewById(R.id.signUp_et_lastName);
+        EditText phoneNumberEt = view.findViewById(R.id.signUp_et_phoneNumber);
+        pb = view.findViewById(R.id.signUp_progressBar);
+        pb.setVisibility(View.GONE);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +63,7 @@ public class signUpFragment extends Fragment {
                     signUpFragmentDirections.ActionSignUpFragmentToReportsListFragment action = signUpFragmentDirections.actionSignUpFragmentToReportsListFragment(user.getUserName());
                     Navigation.findNavController(v).navigate(action);
                 });
+
             }
         });
         return view;

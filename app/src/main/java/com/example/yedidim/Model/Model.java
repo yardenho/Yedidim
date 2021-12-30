@@ -7,7 +7,9 @@ import java.util.List;
 
 ///מחבר לנו בין הפרגמנטים לDATA
 public class Model {
-    static  final private Model instance = new Model();
+
+    static final private Model instance = new Model();
+
     private List<User> userList =new LinkedList<User>();
     private List<Report> ReportList =new LinkedList<Report>();
 
@@ -15,7 +17,9 @@ public class Model {
 
     private Model(){}
 
-    public static Model getInstance(){return instance;}
+    public static Model getInstance(){
+        return instance;
+    }
 
     public interface GetAllUsersListener{
         void onComplete(List<User> data);
@@ -31,21 +35,19 @@ public class Model {
         });
     }
 
-
     public interface addNewUserListener{
         void onComplete();
     }
 
     public void addNewUser(User user,addNewUserListener listener){
-
-        MyApplication.executorService.execute(()->{
-            AppLocalDB.db.userDao().insertAll(user);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete();
+            MyApplication.executorService.execute(() -> {
+                AppLocalDB.db.userDao().insertAll(user);
+                MyApplication.mainHandler.post(() -> {
+                    listener.onComplete();
+                });
             });
-        });
-    }
 
+    }
 
     public interface getUserByUserNameListener{
         void onComplete(User user);

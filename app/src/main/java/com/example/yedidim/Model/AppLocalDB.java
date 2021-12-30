@@ -20,5 +20,6 @@ public class AppLocalDB {
                     .fallbackToDestructiveMigration()
                     .build();
     private AppLocalDB(){}
+
 }
 

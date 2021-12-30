@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment nav_host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.base_navHost);
         navctrl = nav_host.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navctrl);
+        Log.d("TAG", "111");
 
 //        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 //        List<Address> addresses = null;

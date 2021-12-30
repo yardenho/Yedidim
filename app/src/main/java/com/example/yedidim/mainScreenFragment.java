@@ -28,15 +28,17 @@ public class mainScreenFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_screen, container, false);
 
-        Button signUpBtn = getView().findViewById(R.id.mainScreen_btn_signUp);
-        Button loginBtn = getView().findViewById(R.id.mainScreen_btn_logIn);
+        Button signUpBtn = view.findViewById(R.id.mainScreen_btn_signUp);
+        Button loginBtn = view.findViewById(R.id.mainScreen_btn_logIn);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                mainScreenFragmentDirections.
 //                mainScreenFragmentDirections.ActionMainScreenFragmentToSignUpFragment action = mainScreenFragmentDirections.actionMainScreenFragmentToSignUpFragment();
-//                Navigation.findNavController(v).navigate(action);
+                @NonNull NavDirections action = mainScreenFragmentDirections.actionMainScreenFragmentToSignUpFragment();
+
+                Navigation.findNavController(v).navigate(action);
             }
         });
 
