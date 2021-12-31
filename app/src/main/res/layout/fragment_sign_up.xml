@@ -268,18 +268,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="30dp"
-                    android:text="carNumber:"
+                    android:text="Car Number:"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toStartOf="@+id/signUp_et_carNumber"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/signUp_tv_fuelType" />
 
-                <TextView
+                <EditText
                     android:id="@+id/signUp_et_carNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_carNumber"
                     app:layout_constraintEnd_toEndOf="parent"

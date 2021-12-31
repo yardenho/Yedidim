@@ -71,7 +71,7 @@ public class AddingReportFragment extends Fragment {
         ProgressBar pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
 
-        // צריך להחזיר את השורה הזאת כנסיים לממש את ה- GPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TODO: צריך להחזיר את השורה הזאת כנסיים לממש את ה- GPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
         // initialize fusedLocationProviderClient

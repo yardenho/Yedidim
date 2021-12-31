@@ -9,6 +9,7 @@ import java.util.List;
 public class Model {
 
     static final private Model instance = new Model();
+    ModelFirebase modelFirebase = new ModelFirebase();
 
     private List<User> userList =new LinkedList<User>();
     private List<Report> ReportList =new LinkedList<Report>();
@@ -27,6 +28,10 @@ public class Model {
     }
 
     public void getUsersList(GetAllUsersListener listener){
+        // TODO: this belong to Firebase
+
+//        modelFirebase.getUsersList(listener);
+        // TODO: this belong to ROOM
         MyApplication.executorService.execute(()->{
             List <User> data = AppLocalDB.db.userDao().getAll();
             MyApplication.mainHandler.post(()->{
@@ -40,6 +45,11 @@ public class Model {
     }
 
     public void addNewUser(User user,addNewUserListener listener){
+        // TODO: this belong to Firebase
+
+//        modelFirebase.addNewUser(user, listener);
+        // TODO: this belong to ROOM
+
             MyApplication.executorService.execute(() -> {
                 AppLocalDB.db.userDao().insertAll(user);
                 MyApplication.mainHandler.post(() -> {
@@ -55,6 +65,11 @@ public class Model {
 
     public void getUserByUserName(String userName, getUserByUserNameListener listener)
     {
+        // TODO: this belong to Firebase
+
+//        modelFirebase.getUserByUserName(userName, listener);
+        // TODO: this belong to ROOM
+
         MyApplication.executorService.execute(()->{
             User user = AppLocalDB.db.userDao().getUserByUserName(userName);
             MyApplication.mainHandler.post(()->{
@@ -70,6 +85,11 @@ public class Model {
 
     public void deleteUser(User user,deleteUserListener listener )
     {
+        // TODO: this belong to Firebase
+
+//        modelFirebase.deleteUser(user, listener);
+        // TODO: this belong to ROOM
+
         MyApplication.executorService.execute(()->{
             AppLocalDB.db.userDao().delete(user);
             MyApplication.mainHandler.post(()->{
@@ -84,6 +104,11 @@ public class Model {
 
     // updating by key member of user which is userName
     public void editUser(User u,editUserListener listener){
+        // TODO: this belong to Firebase
+
+//        modelFirebase.editUser(u, listener);
+        // TODO: this belong to ROOM
+
         MyApplication.executorService.execute(()->{
             AppLocalDB.db.userDao().editUser(u);
             MyApplication.mainHandler.post(()->{
@@ -100,6 +125,11 @@ public class Model {
     }
 
     public void getReportsList(GetAllReportsListener listener){
+        // TODO: this belong to Firebase
+
+//        modelFirebase.getReportsList(listener);
+        // TODO: this belong to ROOM
+
         MyApplication.executorService.execute(()->{
             List <Report> data = AppLocalDB.db.reportDao().getAll();
             MyApplication.mainHandler.post(()->{
@@ -113,6 +143,10 @@ public class Model {
     }
 
     public void addNewReport(Report report,addNewReportListener listener){
+        // TODO: this belong to Firebase
+
+//        modelFirebase.addNewReport(report, listener);
+        // TODO: this belong to ROOM
 
         MyApplication.executorService.execute(()->{
             AppLocalDB.db.reportDao().insertAll(report);
@@ -128,6 +162,11 @@ public class Model {
 
     public void getReportByID(String reportID, getReportByReportIDListener listener)
     {
+        // TODO: this belong to Firebase
+
+//        modelFirebase.getReportByID(reportID, listener);
+        // TODO: this belong to ROOM
+
         MyApplication.executorService.execute(()->{
             Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
             MyApplication.mainHandler.post(()->{
@@ -142,6 +181,11 @@ public class Model {
 
     public void deleteReport(Report report,deleteReportListener listener )
     {
+        // TODO: this belong to Firebase
+
+//        modelFirebase.deleteReport(report, listener);
+        // TODO: this belong to ROOM
+
         MyApplication.executorService.execute(()->{
             AppLocalDB.db.reportDao().delete(report);
             MyApplication.mainHandler.post(()->{
@@ -155,6 +199,11 @@ public class Model {
     }
 
     public void editReport(Report report,editReportListener listener){
+        // TODO: this belong to Firebase
+
+//        modelFirebase.editReport(report, listener);
+        // TODO: this belong to ROOM
+
         MyApplication.executorService.execute(()->{
             AppLocalDB.db.reportDao().editReport(report);
             MyApplication.mainHandler.post(()->{

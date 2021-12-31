@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "516166163472",
+    "project_id": "yedidim-e08ec",
+    "storage_bucket": "yedidim-e08ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516166163472:android:d0e51160b90685ed043e95",
+        "android_client_info": {
+          "package_name": "com.example.yedidim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516166163472-rp3jbhccni2ga0v87bkht19uu03ffd5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmUYC1YiNw4o7tbxHm2nPVkzpP23OJa6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516166163472-rp3jbhccni2ga0v87bkht19uu03ffd5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
