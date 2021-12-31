@@ -92,9 +92,11 @@ public class EditProfileFragment extends Fragment {
     private void setDetails() {
         user.setVehicleBrand(vehicleBrand.getText().toString());
         user.setManufactureYear(manufactureYear.getText().toString());
-        //TODO not finish
-
-
+        user.setFuelType(fuelType.getText().toString());
+        user.setCarNumber(carNumber.getText().toString());
+        user.setFirstName(firstName.getText().toString());
+        user.setLastName(lastName.getText().toString());
+        user.setPhoneNumber(phoneNumber.getText().toString());
     }
 
 
