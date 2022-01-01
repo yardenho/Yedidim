@@ -2,63 +2,114 @@ package com.example.yedidim;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link myReportsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.yedidim.Model.Model;
+import com.example.yedidim.Model.Report;
+
+import java.util.LinkedList;
+import java.util.List;
+
+
 public class myReportsFragment extends Fragment {
+    List<Report> myReports = new LinkedList<Report>();
+    View view;
+    ReportsListFragment.MyAdapter adapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+//    public myReportsFragment() {
+//    }
+// TODO עצרתי רגע כי אנחנו צריכות לתכנן איך רק הדיווחים של יוזר מסויים יוצגו
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public myReportsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment myReportsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static myReportsFragment newInstance(String param1, String param2) {
-        myReportsFragment fragment = new myReportsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_reports, container, false);
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        view = inflater.inflate(R.layout.fragment_my_reports, container, false);
+//        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
+//            @Override
+//            public void onComplete(List<Report> d) {
+//                myReports = d;
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
+//        RecyclerView list = view.findViewById(R.id.reportsList_recycler);
+//        list.setHasFixedSize(true);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        list.setLayoutManager(layoutManager);
+//        adapter = new MyAdapter();
+//        list.setAdapter(adapter);
+//        adapter.setOnItemClickListener(new ReportsListFragment.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//                Report r = myReports.get(position);
+//                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(r.getUserName(),r.getReportID());
+//                Navigation.findNavController(view).navigate(action);
+//            }
+//        });
+//        return view;
+//    }
+//    class MyViewHolder extends RecyclerView.ViewHolder{
+//        private final ReportsListFragment.OnItemClickListener listener;
+//        TextView problem;
+//        Button deleteBtn;
+//        Button editBtn;
+//
+//        public MyViewHolder(@NonNull View itemView, ReportsListFragment.OnItemClickListener listener) {
+//            super(itemView);
+//            problem = itemView.findViewById(R.id.myReports_row_tv_problem);
+//            this.listener = listener;
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int pos = getAdapterPosition();
+//                    if(listener != null)
+//                        listener.onItemClick(pos);
+//                }
+//            });
+//        }
+//        public void bind(Report report) {
+//            problem.setText(report.getProblem());
+//        }
+//    }
+//
+//    interface OnItemClickListener{
+//        void onItemClick(int position);
+//    }
+//
+//    class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
+//        private ReportsListFragment.OnItemClickListener listener;
+//
+//        public void setOnItemClickListener(ReportsListFragment.OnItemClickListener listener){
+//            this.listener = listener;
+//        }
+//
+//        @NonNull
+//        @Override
+//        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//            View rowView = getLayoutInflater().inflate(R.layout.my_reports_row,parent,false);
+//            MyViewHolder viewHolder = new MyViewHolder(rowView, listener);
+//            return viewHolder;
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+//            Report report = myReports.get(position);
+//            holder.bind(report);
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return myReports.size();
+//        }
+//    }
 }

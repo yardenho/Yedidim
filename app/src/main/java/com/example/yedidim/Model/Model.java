@@ -160,7 +160,7 @@ public class Model {
         void onComplete(Report report);
     }
 
-    public void getReportByID(String reportID, getReportByReportIDListener listener)
+    public void getReportByID(Long reportID, getReportByReportIDListener listener)
     {
         // TODO: this belong to Firebase
 

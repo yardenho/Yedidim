@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
 
-    app:startDestination="@id/mainScreenFragment">
+    app:startDestination="@id/reportsListFragment">
     app:startDestination="@id/viewReportFragment">
     app:startDestination="@id/myProfileFragment">
 
@@ -79,7 +79,7 @@
             app:argType="string" />
         <argument
             android:name="reportID"
-            app:argType="string" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/viewReportFragment"
@@ -91,7 +91,7 @@
             app:argType="string" />
         <argument
             android:name="reportID"
-            app:argType="string" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -99,9 +99,8 @@
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
         <argument
-            android:name="malfunctionID"
-            app:argType="string"
-            app:nullable="true" />
+            android:name="reportID"
+            app:argType="long" />
         <action
             android:id="@+id/action_mapFragment_to_addingReportFragment"
             app:destination="@id/addingReportFragment" />

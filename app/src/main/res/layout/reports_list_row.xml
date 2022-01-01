@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/reportListRow_iv"
         android:layout_width="111dp"
         android:layout_height="105dp"
         android:layout_marginStart="10dp"
@@ -18,7 +18,7 @@
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/reportListRow_problem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -27,11 +27,11 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/reportListRow_iv"
         tools:layout_editor_absoluteY="44dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/reportListRow_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -40,6 +40,6 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/reportListRow_iv"
+        app:layout_constraintTop_toBottomOf="@+id/reportListRow_problem" />
 </androidx.constraintlayout.widget.ConstraintLayout>

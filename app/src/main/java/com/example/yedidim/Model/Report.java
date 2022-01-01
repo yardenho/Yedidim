@@ -56,5 +56,10 @@ public class Report {
     //    public ImageView getImage() {return image;}
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
+    public String getLocation() {
+        return "Ashdod";
+        //TODO לחשב את המיקום ולהחזיר}
+    }
     static public long getIdCounter(){return idCounter;}
+
 }

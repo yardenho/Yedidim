@@ -25,5 +25,5 @@ public interface ReportDao {
     void editReport(Report report);
 
     @Query("SELECT * FROM Report WHERE reportID=:id")
-    Report getReportByID(String id);
+    Report getReportByID(Long id);
 }
