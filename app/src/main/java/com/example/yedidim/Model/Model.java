@@ -212,6 +212,20 @@ public class Model {
         });
     }
 
+    //get only reports that belong to a specific user
+    public interface GetUserReportsListener{
+        void onComplete(List<Report> data);
+    }
+
+    public void getUserReportsList(String username, GetUserReportsListener listener){
+
+        MyApplication.executorService.execute(()->{
+            List <Report> data = AppLocalDB.db.reportDao().getMyReports(username);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete(data);
+            });
+        });
+    }
 
 }
 

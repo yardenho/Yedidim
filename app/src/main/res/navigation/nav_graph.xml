@@ -47,7 +47,11 @@
         android:id="@+id/addingReportFragment"
         android:name="com.example.yedidim.AddingReportFragment"
         android:label="fragment_adding_report"
-        tools:layout="@layout/fragment_adding_report" />
+        tools:layout="@layout/fragment_adding_report" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.yedidim.EditProfileFragment"

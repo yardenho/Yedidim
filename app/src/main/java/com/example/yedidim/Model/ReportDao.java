@@ -26,4 +26,7 @@ public interface ReportDao {
 
     @Query("SELECT * FROM Report WHERE reportID=:id")
     Report getReportByID(Long id);
+
+    @Query("SELECT * FROM Report WHERE userName=:u")
+    List<Report> getMyReports(String u);
 }

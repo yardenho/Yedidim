@@ -12,11 +12,8 @@
         <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_main_screen.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_map.xml" value="0.17119565217391305" />
         <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_my_profile.xml" value="0.2" />
-        <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_reports_list.xml" value="0.15677083333333333" />
         <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_sign_up.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_view_report.xml" value="0.17119565217391305" />
-        <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/my_reports_row.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Hadar/AndroidStudioProjects/Yedidim/app/src/main/res/layout/reports_list_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Ido/AndroidStudioProjects/Yedidim/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Ido/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_about_us.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Ido/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_adding_report.xml" value="0.25416666666666665" />
@@ -40,6 +37,8 @@
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_temp_map.xml" value="0.1234375" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_view_report.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/add_menu.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/base_menu.xml" value="0.12708333333333333" />
       </map>
     </option>
   </component>

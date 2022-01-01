@@ -70,6 +70,7 @@ public class AddingReportFragment extends Fragment {
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
         ProgressBar pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
+        viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
         // TODO: צריך להחזיר את השורה הזאת כנסיים לממש את ה- GPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());

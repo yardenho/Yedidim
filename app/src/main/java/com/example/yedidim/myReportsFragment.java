@@ -24,7 +24,7 @@ import java.util.List;
 public class myReportsFragment extends Fragment {
     List<Report> myReports = new LinkedList<Report>();
     View view;
-    ReportsListFragment.MyAdapter adapter;
+//    ReportsListFragment.MyAdapter adapter;
 
 //    public myReportsFragment() {
 //    }
