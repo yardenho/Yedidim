@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,12 +58,17 @@ public class ViewReportFragment extends Fragment {
 
         viewModel.setUsername(ViewReportFragmentArgs.fromBundle(getArguments()).getUsername());
         viewModel.setReportId(ViewReportFragmentArgs.fromBundle(getArguments()).getReportID());
+        Log.d("TAG", "username: " + viewModel.getUsername());
+        Log.d("TAG", "reportID: " + viewModel.getReportId());
+
 
         Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
             @Override
             public void onComplete(User user) {
                 u=user;
-                updateUserDetailsDisplay(user);
+                if(u == null)
+                    Log.d("TAG", "user is null");
+                updateUserDetailsDisplay(u);
             }
         });
 
@@ -70,7 +76,9 @@ public class ViewReportFragment extends Fragment {
             @Override
             public void onComplete(Report report) {
                 r=report;
-                updateReportDetailsDisplay(report);
+                if(r == null)
+                    Log.d("TAG", "report is null");
+                updateReportDetailsDisplay(r);
             }
         });
 
@@ -79,20 +87,20 @@ public class ViewReportFragment extends Fragment {
 
     public void updateUserDetailsDisplay(User u)
     {
-        problemTv.setText(r.getProblem());
-        notesTv.setText(r.getNotes());
-        //*****************************************************
-        //TODO: to add image assignment
-        //*****************************************************
-    }
-
-    public void updateReportDetailsDisplay(Report r)
-    {
         vehicleBrandTv.setText(u.getVehicleBrand());
         manufactureYearTv.setText(u.getManufactureYear());
         fuelTypeTv.setText(u.getFuelType());
         firstNameTv.setText(u.getFirstName());
         lastNameTv.setText(u.getLastName());
         phoneNumberTv.setText(u.getPhoneNumber());
+    }
+
+    public void updateReportDetailsDisplay(Report r)
+    {
+        problemTv.setText(r.getProblem());
+        notesTv.setText(r.getNotes());
+        //*****************************************************
+        //TODO: to add image assignment
+        //*****************************************************
     }
 }

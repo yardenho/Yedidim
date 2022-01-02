@@ -150,8 +150,8 @@ public class Model {
         MyApplication.executorService.execute(()->{
             AppLocalDB.db.reportDao().insertAll(report);
             MyApplication.mainHandler.post(()->{
-                Report.addOneToIdCounter();
                 listener.onComplete();
+                Report.addOneToIdCounter();
             });
         });
     }
