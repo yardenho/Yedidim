@@ -32,11 +32,10 @@ public class ModelFirebase {
         json.put("fuelType", user.getFuelType());
 
         // Add a new document with a generated ID
-        db.collection("users")
-                .add(json)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("users").document(user.getUserName()).set(json)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void unused) {
                         listener.onComplete();
                     }
                 })
@@ -73,11 +72,13 @@ public class ModelFirebase {
         // json.put("image", report.getImage());
 
         // Add a new document with a generated ID
-        db.collection("reports")
-                .add(json)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+        //TODO: check that value of method works
+        db.collection("reports").document(String.valueOf(report.getReportID()))
+                .set(json)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void unused) {
                         listener.onComplete();
                     }
                 })

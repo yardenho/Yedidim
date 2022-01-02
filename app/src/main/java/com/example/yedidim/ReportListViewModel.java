@@ -6,6 +6,6 @@ public class ReportListViewModel extends ViewModel {
 
     private  String username;
 
-    public void setUsername(String u){username = u ;}
-    public String getUsername(){return username;}
+    public void setUserName(String u){username = u ;}
+    public String getUserName(){return username;}
 }

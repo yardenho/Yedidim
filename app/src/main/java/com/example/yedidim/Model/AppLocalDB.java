@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.yedidim.MyApplication;
 
-@Database(entities = {User.class, Report.class}, version = 3)
+@Database(entities = {User.class, Report.class}, version = 4)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract ReportDao reportDao();

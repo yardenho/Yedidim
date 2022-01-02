@@ -29,7 +29,6 @@ public class Model {
 
     public void getUsersList(GetAllUsersListener listener){
         // TODO: this belong to Firebase
-
 //        modelFirebase.getUsersList(listener);
         // TODO: this belong to ROOM
         MyApplication.executorService.execute(()->{

@@ -43,7 +43,7 @@ public class ReportsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_reports_list, container, false);
-        viewModel.setUsername(ReportsListFragmentArgs.fromBundle(getArguments()).getUsername());
+        viewModel.setUserName(ReportsListFragmentArgs.fromBundle(getArguments()).getUsername());
 
         Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
             @Override
@@ -62,7 +62,7 @@ public class ReportsListFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Report r = reports.get(position);
-                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(r.getUserName(), r.getReportID());
+                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(viewModel.getUserName(), r.getReportID());
                 Navigation.findNavController(view).navigate(action);
             }
         });
@@ -82,7 +82,7 @@ public class ReportsListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.addMenu_addReport:
                 //TODO: when we after the sign up maybe not allow to return there
-                ReportsListFragmentDirections.ActionReportsListFragmentToAddingReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToAddingReportFragment(viewModel.getUsername());
+                ReportsListFragmentDirections.ActionReportsListFragmentToAddingReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToAddingReportFragment(viewModel.getUserName());
                 Navigation.findNavController(view).navigate(action);
                 return true;
             default:

@@ -22,6 +22,15 @@ public class ViewReportFragment extends Fragment {
     private User u; // dose it need to be here
     private Report r;
 
+    TextView problemTv;
+    TextView notesTv;
+    TextView vehicleBrandTv;
+    TextView manufactureYearTv;
+    TextView fuelTypeTv;
+    TextView firstNameTv;
+    TextView lastNameTv;
+    TextView phoneNumberTv;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -34,14 +43,14 @@ public class ViewReportFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_report, container, false);
-        TextView problemTv = view.findViewById(R.id.viewReport_text_problem);
-        TextView notesTv = view.findViewById(R.id.viewReport_text_notes);
-        TextView vehicleBrandTv = view.findViewById(R.id.viewReport_text_vehicleBrand);
-        TextView manufactureYearTv = view.findViewById(R.id.viewReport_text_manufactureYear);
-        TextView fuelTypeTv = view.findViewById(R.id.viewReport_text_fuelType);
-        TextView firstNameTv = view.findViewById(R.id.viewReport_text_firstName);
-        TextView lastNameTv = view.findViewById(R.id.viewReport_text_lastName);
-        TextView phoneNumberTv = view.findViewById(R.id.viewReport_text_phoneNumber);
+        problemTv = view.findViewById(R.id.viewReport_text_problem);
+        notesTv = view.findViewById(R.id.viewReport_text_notes);
+        vehicleBrandTv = view.findViewById(R.id.viewReport_text_vehicleBrand);
+        manufactureYearTv = view.findViewById(R.id.viewReport_text_manufactureYear);
+        fuelTypeTv = view.findViewById(R.id.viewReport_text_fuelType);
+        firstNameTv = view.findViewById(R.id.viewReport_text_firstName);
+        lastNameTv = view.findViewById(R.id.viewReport_text_lastName);
+        phoneNumberTv = view.findViewById(R.id.viewReport_text_phoneNumber);
         //*****************************************************
         //TODO: to add image references
         //*****************************************************
@@ -53,6 +62,7 @@ public class ViewReportFragment extends Fragment {
             @Override
             public void onComplete(User user) {
                 u=user;
+                updateUserDetailsDisplay(user);
             }
         });
 
@@ -60,21 +70,29 @@ public class ViewReportFragment extends Fragment {
             @Override
             public void onComplete(Report report) {
                 r=report;
+                updateReportDetailsDisplay(report);
             }
         });
 
+        return view;
+    }
+
+    public void updateUserDetailsDisplay(User u)
+    {
         problemTv.setText(r.getProblem());
         notesTv.setText(r.getNotes());
+        //*****************************************************
+        //TODO: to add image assignment
+        //*****************************************************
+    }
+
+    public void updateReportDetailsDisplay(Report r)
+    {
         vehicleBrandTv.setText(u.getVehicleBrand());
         manufactureYearTv.setText(u.getManufactureYear());
         fuelTypeTv.setText(u.getFuelType());
         firstNameTv.setText(u.getFirstName());
         lastNameTv.setText(u.getLastName());
         phoneNumberTv.setText(u.getPhoneNumber());
-        //*****************************************************
-        //TODO: to add image references
-        //*****************************************************
-
-        return view;
     }
 }
