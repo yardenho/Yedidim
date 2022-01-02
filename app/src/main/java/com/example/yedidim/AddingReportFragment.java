@@ -118,6 +118,7 @@ public class AddingReportFragment extends Fragment {
                     report.setLatitude(location.getLatitude());
                     report.setLongitude(location.getLongitude());
                     Model.getInstance().addNewReport(report,()->{
+                        Log.d("TAG", "r- " + report.getReportID());
                         Navigation.findNavController(v).navigateUp();
                     });
                 }

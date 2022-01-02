@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,10 +26,9 @@ import java.util.List;
 
 
 public class ReportsListFragment extends Fragment {
-    List<Report> reports = new LinkedList<Report>();
-    ReportListViewModel viewModel;
-    View view;
-    MyAdapter adapter;
+    private ReportListViewModel viewModel;
+    private View view;
+    private MyAdapter adapter;
 
     public ReportsListFragment() {
     }
@@ -45,25 +46,27 @@ public class ReportsListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_reports_list, container, false);
         viewModel.setUserName(ReportsListFragmentArgs.fromBundle(getArguments()).getUsername());
 
-        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
-            @Override
-            public void onComplete(List<Report> d) {
-                reports = d;
-                adapter.notifyDataSetChanged();
-            }
-        });
         RecyclerView list = view.findViewById(R.id.reportsList_recycler);
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
+
+        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
+            @Override
+            public void onComplete(List<Report> d) {
+                viewModel.setReports(d);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         adapter = new MyAdapter();
         list.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                Report r = reports.get(position);
+            public void onItemClick(int position, View v) {
+                Report r = viewModel.getReports().get(position);
                 ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(viewModel.getUserName(), r.getReportID());
-                Navigation.findNavController(view).navigate(action);
+                Navigation.findNavController(v).navigate(action);
             }
         });
 
@@ -92,7 +95,7 @@ public class ReportsListFragment extends Fragment {
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         private final OnItemClickListener listener;
         TextView problem;
         TextView location;
@@ -109,7 +112,7 @@ public class ReportsListFragment extends Fragment {
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (listener != null)
-                        listener.onItemClick(pos);
+                        listener.onItemClick(pos, v);
                 }
             });
 
@@ -123,7 +126,7 @@ public class ReportsListFragment extends Fragment {
     }
 
     interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position, View v);
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
@@ -136,20 +139,24 @@ public class ReportsListFragment extends Fragment {
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View rowView = getLayoutInflater().inflate(R.layout.reports_list_row, parent, false);
+            //יוצר אובייקט חדש מהשורה
+            LayoutInflater inflater = getLayoutInflater();
+            View rowView = inflater.inflate(R.layout.reports_list_row, parent, false);
+            //יצירת הולדר שיעטוף אותו
             MyViewHolder viewHolder = new MyViewHolder(rowView, listener);
             return viewHolder;
         }
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            Report report = reports.get(position);
+            //תחבר לי את הview עם הdata של אותה שורה
+            Report report = viewModel.getReports().get(position);
             holder.bind(report);
         }
 
         @Override
         public int getItemCount() {
-            return reports.size();
+            return viewModel.getReports().size();
         }
     }
 }

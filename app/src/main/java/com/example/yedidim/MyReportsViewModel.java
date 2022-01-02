@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MyReportsViewModel extends ViewModel {
     private String username;
-    private List<Report> myReports;    //TODO: to do new ? ????
+    private List<Report> myReports = new LinkedList<Report>();    //TODO: to do new ? ????
 
 
     public void setUsername(String u){username = u;}

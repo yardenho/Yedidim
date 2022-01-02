@@ -27,9 +27,9 @@ public class myReportsFragment extends Fragment {
 //    List<Report> myReports = new LinkedList<Report>();     //TODO: put it in the view model
 
 
-    MyReportsViewModel viewModel;
-    View view;
-    MyAdapter adapter;
+    private MyReportsViewModel viewModel;
+    private View view;
+    private myReportsFragment.MyAdapter adapter;
 
     public myReportsFragment() {
     }
@@ -59,17 +59,19 @@ public class myReportsFragment extends Fragment {
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
-        adapter = new MyAdapter();
+        adapter = new myReportsFragment.MyAdapter();
 
         list.setAdapter(adapter);
-        adapter.setOnItemClickListener(new ReportsListFragment.OnItemClickListener() {
+        adapter.setOnItemClickListener(new myReportsFragment.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position, View v) {
                 Report r = viewModel.getMyReports().get(position);
-                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(viewModel.getUsername(),r.getReportID());
-                Navigation.findNavController(view).navigate(action);
+                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(viewModel.getUsername(), r.getReportID());
+                Navigation.findNavController(v).navigate(action);
             }
         });
+
+
 
         adapter.setOnDeleteClickListener(new OnDeleteClickListener() {
             @Override
@@ -102,14 +104,14 @@ public class myReportsFragment extends Fragment {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        private final ReportsListFragment.OnItemClickListener listener;
+        private final myReportsFragment.OnItemClickListener listener;
         private final OnDeleteClickListener deleteListener;
         private final OnEditClickListener editListener;
         TextView problem;
         Button deleteBtn;
         Button editBtn;
 
-        public MyViewHolder(@NonNull View itemView, ReportsListFragment.OnItemClickListener listener,OnDeleteClickListener deleteListener,OnEditClickListener editListener) {
+        public MyViewHolder(@NonNull View itemView, myReportsFragment.OnItemClickListener listener,OnDeleteClickListener deleteListener,OnEditClickListener editListener) {
             super(itemView);
             problem = itemView.findViewById(R.id.myReports_row_tv_problem);
             deleteBtn = itemView.findViewById(R.id.myReports_row_btn_delete);
@@ -142,7 +144,7 @@ public class myReportsFragment extends Fragment {
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(listener != null)
-                        listener.onItemClick(pos);
+                        listener.onItemClick(pos, v);
                 }
             });
         }
@@ -152,7 +154,7 @@ public class myReportsFragment extends Fragment {
     }
 
     interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClick(int position, View v);
     }
 
     public interface OnDeleteClickListener{
@@ -164,11 +166,11 @@ public class myReportsFragment extends Fragment {
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
-        private ReportsListFragment.OnItemClickListener listener;
+        private myReportsFragment.OnItemClickListener listener;
         private OnDeleteClickListener deleteListener;
         private OnEditClickListener editListener;
 
-        public void setOnItemClickListener(ReportsListFragment.OnItemClickListener listener){
+        public void setOnItemClickListener(myReportsFragment.OnItemClickListener listener){
             this.listener = listener;
         }
 

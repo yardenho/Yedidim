@@ -45,7 +45,7 @@ public class Report {
     public void setLongitude(double lo) {this.longitude = lo;}
     public void setLatitude(double la) {this.latitude = la;}
     public void setUserName(String userName) {this.userName = userName;}
-    static public void setIdCounter(long counter){ idCounter = counter;}
+    static public void addOneToIdCounter(){ idCounter +=1;}
 
 
     //getters
