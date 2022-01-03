@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".mainScreenFragment">
 
+    <TextView
+        android:id="@+id/mainScreen_tv_yedidim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:text="Hello, welcom to Yedidim !"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/mainScreen_btn_logIn"
         android:layout_width="180dp"

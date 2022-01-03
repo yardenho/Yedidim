@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
@@ -44,13 +43,13 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
-        vehicleBrand = view.findViewById(R.id.editProfile_et_vehicleBrand);
-        manufactureYear = view.findViewById(R.id.editProfile_et_manufYear);
+        vehicleBrand = view.findViewById(R.id.editProfile_et_firstName);
+        manufactureYear = view.findViewById(R.id.editProfile_et_lastName);
         carNumber = view.findViewById(R.id.editProfile_et_carNumber);
-        fuelType = view.findViewById(R.id.editProfile_et_fuelType);
-        firstName = view.findViewById(R.id.editProfile_et_firstName);
-        lastName = view.findViewById(R.id.editProfile_et_lastName);
-        phoneNumber = view.findViewById(R.id.editProfile_et_phoneNumber);
+        fuelType = view.findViewById(R.id.editProfile_et_phoneNumber);
+        firstName = view.findViewById(R.id.editProfile_et_vehicleBrand);
+        lastName = view.findViewById(R.id.editProfile_et_manufYear);
+        phoneNumber = view.findViewById(R.id.editProfile_et_fuelType);
         viewModel.setUserName(EditProfileFragmentArgs.fromBundle(getArguments()).getUsername());
         Model.getInstance().getUserByUserName(viewModel.getUserName(), (u) ->
         {

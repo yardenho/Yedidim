@@ -19,8 +19,8 @@
 
                 <TextView
                     android:id="@+id/signUp_tv_signUpMassege"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="268dp"
+                    android:layout_height="81dp"
                     android:fontFamily="sans-serif"
                     android:paddingTop="40dp"
                     android:text="Sign up to be our friend !"

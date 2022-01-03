@@ -5,12 +5,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,12 +45,12 @@ public class MyProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
-        vehicleBrandTv = view.findViewById(R.id.myProfile_text_vehicleBrand);
-        manufactureYearTv = view.findViewById(R.id.myProfile_text_manufactureYear);
-        fuelTypeTv = view.findViewById(R.id.myProfile_text_fuelType);
-        firstNameTv = view.findViewById(R.id.myProfile_text_firstName);
-        lastNameTv = view.findViewById(R.id.myProfile_text_lastName);
-        phoneNumberTv = view.findViewById(R.id.myProfile_text_phoneNumber);
+        vehicleBrandTv = view.findViewById(R.id.myProfile_text_firstName);
+        manufactureYearTv = view.findViewById(R.id.myProfile_text_lastName);
+        fuelTypeTv = view.findViewById(R.id.myProfile_text_phoneNumber);
+        firstNameTv = view.findViewById(R.id.myProfile_text_vehicleBrand);
+        lastNameTv = view.findViewById(R.id.myProfile_text_manufactureYear);
+        phoneNumberTv = view.findViewById(R.id.myProfile_text_fuelType);
         carNumberTv = view.findViewById(R.id.myProfile_text_carNumber);
         editProfileBtn = view.findViewById(R.id.myProfile_btn_editProfile);
         deleteAccountBtn = view.findViewById(R.id.myProfile_btn_deleteAccount);

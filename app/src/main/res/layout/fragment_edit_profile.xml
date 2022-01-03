@@ -20,121 +20,17 @@
 
 
         <TextView
-            android:id="@+id/editProfile_tv_vehicleBrand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="40dp"
-            android:text="Vehicle Brand: "
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_vehicleBrand"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/editProfile_et_vehicleBrand"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_vehicleBrand"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_vehicleBrand" />
-
-        <TextView
-            android:id="@+id/editProfile_tv_manufYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Manufacture year:"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_manufYear"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_vehicleBrand" />
-
-        <EditText
-            android:id="@+id/editProfile_et_manufYear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_manufYear"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_manufYear" />
-
-        <TextView
-            android:id="@+id/editProfile_tv_fuelType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="36dp"
-            android:text="Fuel type:"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_fuelType"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_manufYear" />
-
-        <EditText
-            android:id="@+id/editProfile_et_fuelType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_fuelType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_fuelType" />
-
-        <TextView
-            android:id="@+id/editProfile_tv_carNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Car Number:"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_carNumber"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_fuelType" />
-
-        <EditText
-            android:id="@+id/editProfile_et_carNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_carNumber"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_carNumber" />
-
-        <TextView
             android:id="@+id/editProfile_tv_firstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="First Name:"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/editProfile_et_firstName"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_carNumber" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editProfile_et_firstName"
@@ -180,8 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Phone Number:"
+            android:layout_marginTop="36dp"
+            android:text="Phone Number"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/editProfile_et_phoneNumber"
             app:layout_constraintHorizontal_bias="0.5"
@@ -193,7 +89,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginBottom="4dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="24sp"
@@ -201,6 +96,111 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/editProfile_tv_phoneNumber" />
+
+        <TextView
+            android:id="@+id/editProfile_tv_carNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:text="Car Number:"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_carNumber"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_phoneNumber" />
+
+        <EditText
+            android:id="@+id/editProfile_et_carNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_carNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_carNumber" />
+
+        <TextView
+            android:id="@+id/editProfile_tv_vehicleBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:text="Vehicle Brand: "
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_vehicleBrand"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_carNumber" />
+
+        <EditText
+            android:id="@+id/editProfile_et_vehicleBrand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_vehicleBrand"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_vehicleBrand" />
+
+        <TextView
+            android:id="@+id/editProfile_tv_manufactureYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:text="Manufacture year:"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_manufYear"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_vehicleBrand" />
+
+        <EditText
+            android:id="@+id/editProfile_et_manufYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_manufactureYear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_manufactureYear" />
+
+        <TextView
+            android:id="@+id/editProfile_tv_fuelType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:text="Fuel type:"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/editProfile_et_fuelType"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_manufactureYear" />
+
+        <EditText
+            android:id="@+id/editProfile_et_fuelType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="4dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/editProfile_tv_fuelType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editProfile_tv_fuelType" />
 
         <Button
             android:id="@+id/editProfile_btn_cancel"
@@ -214,7 +214,7 @@
             app:layout_constraintEnd_toStartOf="@+id/editProfile_btn_save"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_phoneNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/editProfile_tv_fuelType" />
 
         <Button
             android:id="@+id/editProfile_btn_save"

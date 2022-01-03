@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toTopOf="@+id/myProfile_btn_deleteAccount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_phoneNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_fuelType" />
 
         <Button
             android:id="@+id/myProfile_btn_deleteAccount"
@@ -45,18 +45,18 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/myProfile_tv_vehicleBrand"
+            android:id="@+id/myProfile_tv_firstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="70dp"
-            android:text="Vehicle Brand:"
+            android:layout_marginTop="20dp"
+            android:text="First Name:"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/myProfile_text_vehicleBrand"
+            android:id="@+id/myProfile_text_firstName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -64,54 +64,10 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_vehicleBrand"
+            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_firstName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_vehicleBrand" />
-
-        <TextView
-            android:id="@+id/myProfile_tv_manufactureYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
-            android:text="Manufacture year:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_vehicleBrand" />
-
-        <TextView
-            android:id="@+id/myProfile_tv_fuelType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
-            android:text="Fuel type:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_manufactureYear" />
-
-        <TextView
-            android:id="@+id/myProfile_tv_carNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
-            android:text="Car Number:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_fuelType" />
-
-        <TextView
-            android:id="@+id/myProfile_tv_firstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
-            android:text="First Name:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_carNumber" />
+            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_firstName" />
 
         <TextView
             android:id="@+id/myProfile_tv_lastName"
@@ -136,56 +92,48 @@
             app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_lastName" />
 
         <TextView
-            android:id="@+id/myProfile_text_manufactureYear"
-            android:layout_width="0dp"
+            android:id="@+id/myProfile_tv_carNumber"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_marginTop="25dp"
+            android:text="Car Number:"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_manufactureYear"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_manufactureYear" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_phoneNumber" />
 
         <TextView
-            android:id="@+id/myProfile_text_fuelType"
-            android:layout_width="0dp"
+            android:id="@+id/myProfile_tv_vehicleBrand"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_marginTop="25dp"
+            android:text="Vehicle Brand:"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_fuelType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_fuelType" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_carNumber" />
 
         <TextView
-            android:id="@+id/myProfile_text_carNumber"
-            android:layout_width="0dp"
+            android:id="@+id/myProfile_tv_manufactureYear"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_marginTop="25dp"
+            android:text="Manufacture year:"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_carNumber"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_carNumber" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_vehicleBrand" />
 
         <TextView
-            android:id="@+id/myProfile_text_firstName"
-            android:layout_width="0dp"
+            android:id="@+id/myProfile_tv_fuelType"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_marginTop="25dp"
+            android:text="Fuel type:"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_firstName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_firstName" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_manufactureYear" />
 
         <TextView
             android:id="@+id/myProfile_text_lastName"
@@ -212,5 +160,57 @@
             app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_phoneNumber"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myProfile_tv_phoneNumber" />
+
+        <TextView
+            android:id="@+id/myProfile_text_carNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_carNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_carNumber" />
+
+        <TextView
+            android:id="@+id/myProfile_text_vehicleBrand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_vehicleBrand"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_vehicleBrand" />
+
+        <TextView
+            android:id="@+id/myProfile_text_manufactureYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_manufactureYear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_manufactureYear" />
+
+        <TextView
+            android:id="@+id/myProfile_text_fuelType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/myProfile_tv_fuelType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/myProfile_tv_fuelType" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

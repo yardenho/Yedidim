@@ -14,16 +14,16 @@
         android:paddingBottom="60dp"
         tools:context=".scrollViewViewReport">
 
-            <TextView
-                android:id="@+id/viewReport_tv_problem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="40dp"
-                android:text="Problem:"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/viewReport_tv_problem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:text="Problem:"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/viewReport_tv_notes"
