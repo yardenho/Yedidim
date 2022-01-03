@@ -39,11 +39,13 @@
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_temp_map.xml" value="0.1234375" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/fragment_view_report.xml" value="0.12708333333333333" />
-        <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/my_reports_row.xml" value="0.184375" />
+        <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/my_reports_row.xml" value="0.264" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/layout/reports_list_row.xml" value="0.25" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/add_menu.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/back_menu.xml" value="0.1" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/base_menu.xml" value="0.264" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/log_out_menu.xml" value="0.25" />
+        <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/map_menu.xml" value="0.25" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/my_profile_menu.xml" value="0.25" />
         <entry key="..\:/Users/hovav/AndroidStudioProjects/Yedidim/app/src/main/res/menu/my_reports_menu.xml" value="0.25" />
       </map>

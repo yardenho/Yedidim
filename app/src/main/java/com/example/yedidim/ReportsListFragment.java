@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,6 +89,7 @@ public class ReportsListFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.add_menu, menu);
+        inflater.inflate(R.menu.map_menu, menu);
         inflater.inflate(R.menu.my_profile_menu, menu);
         inflater.inflate(R.menu.my_reports_menu, menu);
         inflater.inflate(R.menu.log_out_menu, menu);
@@ -103,12 +105,21 @@ public class ReportsListFragment extends Fragment {
                 return true;
             case R.id.myProfileMenu_myProfile:
                 //TODO
+//                ReportsListFragmentDirections.ActionGlobalMyProfileFragment action1 = ReportsListFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUserName());
+                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUserName()));
                 return true;
             case R.id.myReportsmenu_myReport:
-                //TODO
+                //TODO: check why the first line dos not working
+//                ReportsListFragmentDirections.ActionGlobalMyReportsFragment action2 = ReportsListFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUserName());
+                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUserName()));
                 return true;
             case R.id.log_out_menu_LogOut:
                 //TODO
+                NavDirections action3 = ReportsListFragmentDirections.actionGlobalMainScreenFragment();
+                Navigation.findNavController(view).navigate(action3);
+                return true;
+            case R.id.mapMenu_MoveToMap:
+                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(viewModel.getUserName()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

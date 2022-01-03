@@ -12,6 +12,9 @@ import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,6 +34,7 @@ public class MyProfileFragment extends Fragment {
     TextView carNumberTv;
     Button editProfileBtn;
     Button deleteAccountBtn;
+    View view;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -42,7 +46,7 @@ public class MyProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         vehicleBrandTv = view.findViewById(R.id.myProfile_text_vehicleBrand);
         manufactureYearTv = view.findViewById(R.id.myProfile_text_manufactureYear);
@@ -91,7 +95,7 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
-
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -103,5 +107,28 @@ public class MyProfileFragment extends Fragment {
         lastNameTv.setText(u.getLastName());
         phoneNumberTv.setText(u.getPhoneNumber());
         carNumberTv.setText(u.getCarNumber());
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.my_reports_menu, menu);
+        inflater.inflate(R.menu.log_out_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //TODO: קוד כפול ???
+        switch (item.getItemId()) {
+            case R.id.log_out_menu_LogOut:
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMainScreenFragment());
+                return true;
+            case R.id.myReportsmenu_myReport:
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUsername()));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -11,22 +11,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
 public class myReportsFragment extends Fragment {
-//    List<Report> myReports = new LinkedList<Report>();     //TODO: put it in the view model
-
-
     private MyReportsViewModel viewModel;
     private View view;
     private myReportsFragment.MyAdapter adapter;
@@ -66,7 +66,7 @@ public class myReportsFragment extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Report r = viewModel.getMyReports().get(position);
-                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(viewModel.getUsername(), r.getReportID());
+                myReportsFragmentDirections.ActionMyReportsFragmentToViewReportFragment action = myReportsFragmentDirections.actionMyReportsFragmentToViewReportFragment(viewModel.getUsername(), r.getReportID());
                 Navigation.findNavController(v).navigate(action);
             }
         });
@@ -99,8 +99,30 @@ public class myReportsFragment extends Fragment {
             }
         });
 
-
+        setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.my_profile_menu, menu);
+        inflater.inflate(R.menu.log_out_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //TODO: קוד כפול ???
+        switch (item.getItemId()) {
+            case R.id.log_out_menu_LogOut:
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMainScreenFragment());
+                return true;
+            case R.id.myProfileMenu_myProfile:
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUsername()));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
@@ -108,14 +130,14 @@ public class myReportsFragment extends Fragment {
         private final OnDeleteClickListener deleteListener;
         private final OnEditClickListener editListener;
         TextView problem;
-        Button deleteBtn;
-        Button editBtn;
+        ImageButton deleteBtn;
+        ImageButton editBtn;
 
         public MyViewHolder(@NonNull View itemView, myReportsFragment.OnItemClickListener listener,OnDeleteClickListener deleteListener,OnEditClickListener editListener) {
             super(itemView);
             problem = itemView.findViewById(R.id.myReports_row_tv_problem);
-            deleteBtn = itemView.findViewById(R.id.myReports_row_btn_delete);
-            editBtn = itemView.findViewById(R.id.myReports_row_btn_edit);
+            deleteBtn = itemView.findViewById(R.id.myReports_row_imageBtn_delete);
+            editBtn = itemView.findViewById(R.id.myReports_row_imageBtn_edit);
             this.listener = listener;
             this.deleteListener = deleteListener;
             this.editListener = editListener;

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -112,19 +113,29 @@ public class ViewReportFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.my_profile_menu, menu);
+        inflater.inflate(R.menu.my_reports_menu, menu);
         inflater.inflate(R.menu.log_out_menu, menu);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //TODO: קוד כפול ???
         switch (item.getItemId()) {
             case R.id.log_out_menu_LogOut:
                 //TODO
+                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMainScreenFragment());
                 return true;
+            case R.id.myProfileMenu_myProfile:
+                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUsername()));
+                return true;
+            case R.id.myReportsmenu_myReport:
+                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUsername()));
             default:
                 return super.onOptionsItemSelected(item);
         }
-        //        return true;
     }
+
+
 }
