@@ -157,5 +157,6 @@ public class ModelFirebase {
     }
 
     public void editReport(Report report, Model.editReportListener listener) {
+        // TODO: the same as addNewUser
     }
 }
