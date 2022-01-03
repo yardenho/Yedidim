@@ -87,6 +87,8 @@ public class EditReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setDetails();
+                //TODO: to add here edit the report
+                //TODO return to the back fragment
             }
         });
         return view;

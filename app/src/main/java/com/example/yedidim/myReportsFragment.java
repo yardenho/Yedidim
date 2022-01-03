@@ -77,12 +77,12 @@ public class myReportsFragment extends Fragment {
             @Override
             public void OnDeleteClick(int position) {
                 Report r = viewModel.getMyReports().get(position);
-                    Model.getInstance().deleteReport(r, new Model.deleteReportListener() {
-                        @Override
-                        public void onComplete() {
-                            //TODO: refresh list
-                        }
-                    });
+                Model.getInstance().deleteReport(r, new Model.deleteReportListener() {
+                    @Override
+                    public void onComplete() {
+                        //TODO: refresh list
+                    }
+                });
             }
         });
 
@@ -90,12 +90,9 @@ public class myReportsFragment extends Fragment {
             @Override
             public void OnEditClick(int position) {
                 Report r = viewModel.getMyReports().get(position);
-                Model.getInstance().editReport(r, new Model.editReportListener() {
-                    @Override
-                    public void onComplete() {
-                        //TODO: refresh data
-                    }
-                });
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionMyReportsFragmentToEditReportFragment(viewModel.getUsername(), r.getReportID()));
+                //TODO: refresh data
+
             }
         });
 
