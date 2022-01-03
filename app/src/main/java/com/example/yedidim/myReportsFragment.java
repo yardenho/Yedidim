@@ -145,7 +145,9 @@ public class myReportsFragment extends Fragment {
                 public void onClick(View v) {
                     //TODO: to check if needed here new list
                     int pos = getAdapterPosition();
+                    //need to do from model and remove delete listener
                     deleteListener.OnDeleteClick(pos);
+//                    adapter.notifyDataSetChanged();
                 }
             });
 
