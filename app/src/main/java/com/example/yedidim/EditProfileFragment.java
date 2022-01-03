@@ -54,8 +54,8 @@ public class EditProfileFragment extends Fragment {
         Model.getInstance().getUserByUserName(viewModel.getUserName(), (u) ->
         {
             user = u;
+            showUserDetails();
         });
-        showUserDetails();
 
         cancelBtn = view.findViewById(R.id.editProfile_btn_cancel);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +96,9 @@ public class EditProfileFragment extends Fragment {
         user.setFirstName(firstName.getText().toString());
         user.setLastName(lastName.getText().toString());
         user.setPhoneNumber(phoneNumber.getText().toString());
+        Model.getInstance().editUser(user, ()->{
+            Navigation.findNavController(view).navigateUp();
+        });
     }
 
 
