@@ -85,7 +85,7 @@ public class ViewReportFragment extends Fragment {
                 updateReportDetailsDisplay(r);
             }
         });
-
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -109,22 +109,22 @@ public class ViewReportFragment extends Fragment {
     }
 
 
-//    @Override
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.log_out_menu, menu);
-//
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.log_out_menu_LogOut:
-//                //TODO
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//        //        return true;
-//    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.log_out_menu, menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.log_out_menu_LogOut:
+                //TODO
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        //        return true;
+    }
 }
