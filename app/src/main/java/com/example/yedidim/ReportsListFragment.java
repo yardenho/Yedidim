@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
@@ -59,7 +60,7 @@ public class ReportsListFragment extends Fragment {
             }
         });
 
-        adapter = new MyAdapter();
+        adapter = new ReportsListFragment.MyAdapter();
         list.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -70,6 +71,15 @@ public class ReportsListFragment extends Fragment {
             }
         });
 
+//        Button mapBtn = view.findViewById(R.id.reportsList_btn_moveToMap);
+//        mapBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ReportsListFragmentDirections.ActionReportsListFragmentToMapFragment action = ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(viewModel.getUserName());
+//                Navigation.findNavController(v).navigate(action);
+//            }
+//        });
+
         setHasOptionsMenu(true);
         return view;
     }
@@ -78,6 +88,9 @@ public class ReportsListFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.add_menu, menu);
+        inflater.inflate(R.menu.my_profile_menu, menu);
+        inflater.inflate(R.menu.my_reports_menu, menu);
+        inflater.inflate(R.menu.log_out_menu, menu);
     }
 
     @Override
@@ -87,6 +100,15 @@ public class ReportsListFragment extends Fragment {
                 //TODO: when we after the sign up maybe not allow to return there
                 ReportsListFragmentDirections.ActionReportsListFragmentToAddingReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToAddingReportFragment(viewModel.getUserName());
                 Navigation.findNavController(view).navigate(action);
+                return true;
+            case R.id.myProfileMenu_myProfile:
+                //TODO
+                return true;
+            case R.id.myReportsmenu_myReport:
+                //TODO
+                return true;
+            case R.id.log_out_menu_LogOut:
+                //TODO
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

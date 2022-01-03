@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     //TODO: when we after the sign up maybe not allow to return there
                     navctrl.navigateUp();
                     return true;
-
+                case R.id.baseMenu_aboutUs:
+                    navctrl.navigate(aboutUsFragmentDirections.actionGlobalAboutUsFragment());
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }

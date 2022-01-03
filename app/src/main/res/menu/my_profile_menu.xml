@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/baseMenu_aboutUs"
-        android:title="about us" />
+        android:id="@+id/myProfileMenu_myProfile"
+        android:title="My Profile"
+        app:showAsAction="never" />
 </menu>

@@ -102,9 +102,6 @@
         android:name="com.example.yedidim.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
-        <argument
-            android:name="reportID"
-            app:argType="long" />
         <action
             android:id="@+id/action_mapFragment_to_addingReportFragment"
             app:destination="@id/addingReportFragment" />
@@ -114,6 +111,10 @@
         <argument
             android:name="username"
             app:argType="string" />
+        <argument
+            android:name="repoetID"
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
     <fragment
         android:id="@+id/testFrag"
