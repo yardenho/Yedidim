@@ -74,7 +74,7 @@ public class myReportsFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         //TODO: refresh list
-                        adapter.notifyItemChanged(position);
+                        refreshData();
                     }
                 });
             }
@@ -104,12 +104,15 @@ public class myReportsFragment extends Fragment {
     }
 
     public void refreshData(){
+        swipeRefresh.setRefreshing(true);
+
         Model.getInstance().getUserReportsList(viewModel.getUsername(), new Model.GetUserReportsListener() {
             @Override
             public void onComplete(List<Report> data) {
                 viewModel.setMyReports(data);
                 adapter.notifyDataSetChanged();
-                swipeRefresh.setRefreshing(false);
+                if(swipeRefresh.isRefreshing())
+                    swipeRefresh.setRefreshing(false);
             }
         });
     }
