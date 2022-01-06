@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import java.util.List;
 public class myReportsFragment extends Fragment {
     private MyReportsViewModel viewModel;
     private View view;
+    private SwipeRefreshLayout swipeRefresh;
     private myReportsFragment.MyAdapter adapter;
 
     public myReportsFragment() {
@@ -48,13 +50,6 @@ public class myReportsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_reports, container, false);
         viewModel.setUsername(MyProfileFragmentArgs.fromBundle(getArguments()).getUsername());
-        Model.getInstance().getUserReportsList(viewModel.getUsername(), new Model.GetUserReportsListener() {
-            @Override
-            public void onComplete(List<Report> data) {
-                viewModel.setMyReports(data);
-                adapter.notifyDataSetChanged();
-            }
-        });
         RecyclerView list = view.findViewById(R.id.myReports_recycler);
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -71,8 +66,6 @@ public class myReportsFragment extends Fragment {
             }
         });
 
-
-
         adapter.setOnDeleteClickListener(new OnDeleteClickListener() {
             @Override
             public void OnDeleteClick(int position) {
@@ -81,6 +74,7 @@ public class myReportsFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         //TODO: refresh list
+                        adapter.notifyItemChanged(position);
                     }
                 });
             }
@@ -96,8 +90,28 @@ public class myReportsFragment extends Fragment {
             }
         });
 
+        swipeRefresh = view.findViewById(R.id.myReports_swiprRefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
+
+        refreshData();
         setHasOptionsMenu(true);
         return view;
+    }
+
+    public void refreshData(){
+        Model.getInstance().getUserReportsList(viewModel.getUsername(), new Model.GetUserReportsListener() {
+            @Override
+            public void onComplete(List<Report> data) {
+                viewModel.setMyReports(data);
+                adapter.notifyDataSetChanged();
+                swipeRefresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override

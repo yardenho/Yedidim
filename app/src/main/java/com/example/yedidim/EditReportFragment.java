@@ -22,8 +22,6 @@ import com.example.yedidim.Model.User;
 
 public class EditReportFragment extends Fragment {
     private EditReportViewModel viewModel;
-    private Report report;
-    private User user; // לא חייב כי לא ניתן לשנות פרטים של משתמש אלא רק פרטי דיווח
     private EditText problem;
     private EditText notes;
     private EditText vehicleBrand;
@@ -51,7 +49,7 @@ public class EditReportFragment extends Fragment {
 
         viewModel.setUserName(EditReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
-        viewModel.setReportID(EditReportFragmentArgs.fromBundle(getArguments()).getReportID());
+        Long reportId = EditReportFragmentArgs.fromBundle(getArguments()).getReportID();
 
         view = inflater.inflate(R.layout.fragment_edit_report, container, false);
         problem = view.findViewById(R.id.editReport_et_problem);
@@ -62,14 +60,10 @@ public class EditReportFragment extends Fragment {
         firstName = view.findViewById(R.id.editReport_et_firstName);
         lastName = view.findViewById(R.id.editReport_et_lastName);
         phoneNumber = view.findViewById(R.id.editReport_et_phoneNumber);
-        Model.getInstance().getUserByUserName(viewModel.getUserName(), (u) ->
-        {
-            user = u;
-            showUserDetails();
-        });
 
-        Model.getInstance().getReportByID(viewModel.getReportID(), (r) -> {
-            report = r;
+
+        Model.getInstance().getReportByID(reportId, (r) -> {
+            viewModel.setReport(r);
             showReportDetails();
         });
 
@@ -88,13 +82,18 @@ public class EditReportFragment extends Fragment {
             public void onClick(View v) {
                 setDetails();
                 //TODO: to add here edit the report
-                //TODO return to the back fragment
+                Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {
+                    @Override
+                    public void onComplete() {
+                        Navigation.findNavController(view).navigateUp();
+                    }
+                });
             }
         });
         return view;
     }
 
-    private void showUserDetails() {
+    private void showUserDetails(User user) {
         vehicleBrand.setText(user.getVehicleBrand());
         manufactureYear.setText(user.getManufactureYear());
         fuelType.setText(user.getFuelType());
@@ -104,13 +103,20 @@ public class EditReportFragment extends Fragment {
     }
 
     private void showReportDetails() {
-        problem.setText(report.getProblem());
-        notes.setText(report.getNotes());
+        problem.setText(viewModel.getReport().getProblem());
+        notes.setText(viewModel.getReport().getNotes());
+        //TODO: add image
+        Model.getInstance().getUserByUserName(viewModel.getReport().getUserName(), (u) ->
+        {
+            showUserDetails(u);
+        });
+
+
     }
 
     private void setDetails() {
-        report.setProblem(problem.getText().toString());
-        report.setNotes(notes.getText().toString());
+        viewModel.getReport().setProblem(problem.getText().toString());
+        viewModel.getReport().setNotes(notes.getText().toString());
         //TODO set picture
     }
 
