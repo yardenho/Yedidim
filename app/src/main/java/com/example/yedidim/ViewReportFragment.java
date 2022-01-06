@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
@@ -36,6 +37,7 @@ public class ViewReportFragment extends Fragment {
     TextView firstNameTv;
     TextView lastNameTv;
     TextView phoneNumberTv;
+    ImageButton mapBtn;
 
 
     @Override
@@ -57,6 +59,7 @@ public class ViewReportFragment extends Fragment {
         firstNameTv = view.findViewById(R.id.viewReport_text_firstName);
         lastNameTv = view.findViewById(R.id.viewReport_text_lastName);
         phoneNumberTv = view.findViewById(R.id.viewReport_text_phoneNumber);
+        mapBtn = view.findViewById(R.id.viewReport_imageBtn_map);
         //*****************************************************
         //TODO: to add image references
         //*****************************************************
@@ -86,6 +89,14 @@ public class ViewReportFragment extends Fragment {
                 updateReportDetailsDisplay(r);
             }
         });
+
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(ViewReportFragmentDirections.actionViewReportFragmentToMapFragment(viewModel.getUsername(),viewModel.getReportId()));
+            }
+        });
+
         setHasOptionsMenu(true);
         return view;
     }

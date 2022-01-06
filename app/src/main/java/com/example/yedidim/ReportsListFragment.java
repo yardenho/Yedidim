@@ -72,14 +72,6 @@ public class ReportsListFragment extends Fragment {
             }
         });
 
-//        Button mapBtn = view.findViewById(R.id.reportsList_btn_moveToMap);
-//        mapBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ReportsListFragmentDirections.ActionReportsListFragmentToMapFragment action = ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(viewModel.getUserName());
-//                Navigation.findNavController(v).navigate(action);
-//            }
-//        });
 
         setHasOptionsMenu(true);
         return view;

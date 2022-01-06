@@ -1,10 +1,19 @@
 package com.example.yedidim.Model;
 
+import android.location.Address;
+import android.location.Geocoder;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.example.yedidim.MyApplication;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 @Entity
 public class Report {
@@ -57,8 +66,19 @@ public class Report {
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
     public String getLocation() {
-        return "Ashdod";
-        //TODO לחשב את המיקום ולהחזיר}
+
+        //TODO לחשב את המיקום ולהחזיר
+        Geocoder geocoder = new Geocoder(MyApplication.getContext(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        String cityName = addresses.get(0).getAddressLine(0);
+        String cityName = addresses.get(0).getAddressLine(0);
+        Log.d("TAG", "city:" + cityName);
+        return addresses.get(0).getAddressLine(0);
     }
 //    static public long getIdCounter(){return idCounter;}
 

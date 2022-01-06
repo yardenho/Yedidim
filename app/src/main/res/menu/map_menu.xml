@@ -4,6 +4,7 @@
 
     <item
         android:id="@+id/mapMenu_MoveToMap"
+        android:icon="@android:drawable/ic_dialog_map"
         android:title="Map"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>
