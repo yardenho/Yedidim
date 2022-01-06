@@ -117,8 +117,7 @@ public class AddingReportFragment extends Fragment {
                     Log.d("TAG", "latitude" + location.getLongitude());
                     report.setLatitude(location.getLatitude());
                     report.setLongitude(location.getLongitude());
-                    Model.getInstance().addNewReport(report,(reportId)->{
-                        Log.d("TAG", "newReport firebase id: " + reportId);
+                    Model.getInstance().addNewReport(report,()->{
                         Navigation.findNavController(v).navigateUp();
                     });
                 }

@@ -136,22 +136,22 @@ public class Model {
     }
 
     public interface addNewReportListener{
-        void onComplete(String reportID);
+        void onComplete();
     }
 
     public void addNewReport(Report report,addNewReportListener listener){
         // TODO: this belong to Firebase
 
-        modelFirebase.addNewReport(report, listener);
+//        modelFirebase.addNewReport(report, listener);
         // TODO: this belong to ROOM
-
-//        MyApplication.executorService.execute(()->{
-//            AppLocalDB.db.reportDao().insertAll(report);
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete(report.getReportID());    // TODO: no need to return reportID in ROOM
+        report.setReportID("1");
+        MyApplication.executorService.execute(()->{
+            AppLocalDB.db.reportDao().insertAll(report);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete();    // TODO: no need to return reportID in ROOM
 //                Report.addOneToIdCounter();   // TODO: need to delete
-//            });
-//        });
+            });
+        });
     }
 
     public interface getReportByReportIDListener{

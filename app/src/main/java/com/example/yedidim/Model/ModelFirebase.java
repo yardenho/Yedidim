@@ -112,7 +112,8 @@ public class ModelFirebase {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        listener.onComplete(documentReference.getId());
+                        listener.onComplete();
+                        // TODO: get reportID with documentReference.getId()
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
