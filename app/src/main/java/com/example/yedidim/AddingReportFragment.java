@@ -93,7 +93,7 @@ public class AddingReportFragment extends Fragment {
                 reportBtn.setEnabled(false);
                 cancelBtn.setEnabled(false);
                 Report report = new Report();
-                report.setReportID(Report.getIdCounter());
+//                report.setReportID(Report.getIdCounter());   // TODO: need to delete this line
                 report.setProblem(problemEt.getText().toString());
                 report.setNotes(noteEt.getText().toString());
                 report.setUserName(viewModel.getUsername());
@@ -117,8 +117,8 @@ public class AddingReportFragment extends Fragment {
                     Log.d("TAG", "latitude" + location.getLongitude());
                     report.setLatitude(location.getLatitude());
                     report.setLongitude(location.getLongitude());
-                    Model.getInstance().addNewReport(report,()->{
-                        Log.d("TAG", "r- " + report.getReportID());
+                    Model.getInstance().addNewReport(report,(reportId)->{
+                        Log.d("TAG", "newReport firebase id: " + reportId);
                         Navigation.findNavController(v).navigateUp();
                     });
                 }

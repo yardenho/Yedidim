@@ -13,12 +13,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class ModelFirebase {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void getUsersList(Model.GetAllUsersListener listener) {
+        LinkedList<User> usersList = new LinkedList<User>();
     }
 
     public void addNewUser(User user, Model.addNewUserListener listener) {
@@ -106,12 +108,11 @@ public class ModelFirebase {
         // Add a new document
 
         //TODO: check that value of method works
-        db.collection("reports").document(String.valueOf(report.getReportID()))
-                .set(json)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("reports").add(json)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void unused) {
-                        listener.onComplete();
+                    public void onSuccess(DocumentReference documentReference) {
+                        listener.onComplete(documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -120,6 +121,20 @@ public class ModelFirebase {
                         Log.d("TAG", e.getMessage());
                     }
                 });
+//        db.collection("reports").document(String.valueOf(report.getReportID()))
+//                .set(json)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        listener.onComplete();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.d("TAG", e.getMessage());
+//                    }
+//                });
     }
     
 
@@ -134,14 +149,13 @@ public class ModelFirebase {
                     if (document.exists()) {
                         Map<String, Object> json = document.getData();
                         Report report = new Report();
-                        report.setReportID((long)json.get("reportID"));   // TODO: check how to cast here
+                        report.setReportID(docRef.getId());   // TODO: check if it works
                         report.setUserName((String)json.get("username"));
                         report.setProblem((String)json.get("problem"));
                         report.setNotes((String)json.get("notes"));
                         report.setLongitude((double)json.get("longitude"));  // TODO: check how to cast here
                         report.setLatitude((double)json.get("latitude"));  // TODO: check how to cast here
                         listener.onComplete(report);
-
                     } else {
                         listener.onComplete(null);
                     }

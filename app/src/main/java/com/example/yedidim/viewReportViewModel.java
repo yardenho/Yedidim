@@ -7,7 +7,7 @@ import com.example.yedidim.Model.User;
 
 public class viewReportViewModel extends ViewModel {
     private String username;
-    private Long reportId;
+    private String reportId;
 
 
     public String getUsername(){
@@ -18,11 +18,11 @@ public class viewReportViewModel extends ViewModel {
         this.username = username;
     }
 
-    public Long getReportId(){
+    public String getReportId(){
         return reportId;
     }
 
-    public void setReportId(Long reportId){
+    public void setReportId(String reportId){
         this.reportId = reportId;
     }
 

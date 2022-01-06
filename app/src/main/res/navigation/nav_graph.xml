@@ -83,7 +83,7 @@
             app:argType="string" />
         <argument
             android:name="reportID"
-            app:argType="long" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/viewReportFragment"
@@ -95,7 +95,7 @@
             app:argType="string" />
         <argument
             android:name="reportID"
-            app:argType="long" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -112,9 +112,9 @@
             android:name="username"
             app:argType="string" />
         <argument
-            android:name="repoetID"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:name="reportID"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/testFrag"

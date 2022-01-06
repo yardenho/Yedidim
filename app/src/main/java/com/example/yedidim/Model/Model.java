@@ -117,8 +117,6 @@ public class Model {
     }
 
 
-
-
     public interface GetAllReportsListener{
         void onComplete(List<Report> data);
     }
@@ -138,41 +136,41 @@ public class Model {
     }
 
     public interface addNewReportListener{
-        void onComplete();
+        void onComplete(String reportID);
     }
 
     public void addNewReport(Report report,addNewReportListener listener){
         // TODO: this belong to Firebase
 
-//        modelFirebase.addNewReport(report, listener);
+        modelFirebase.addNewReport(report, listener);
         // TODO: this belong to ROOM
 
-        MyApplication.executorService.execute(()->{
-            AppLocalDB.db.reportDao().insertAll(report);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete();
-                Report.addOneToIdCounter();
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            AppLocalDB.db.reportDao().insertAll(report);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete(report.getReportID());    // TODO: no need to return reportID in ROOM
+//                Report.addOneToIdCounter();   // TODO: need to delete
+//            });
+//        });
     }
 
     public interface getReportByReportIDListener{
         void onComplete(Report report);
     }
 
-    public void getReportByID(Long reportID, getReportByReportIDListener listener)
+    public void getReportByID(String reportID, getReportByReportIDListener listener)
     {
         // TODO: this belong to Firebase
 
-//        modelFirebase.getReportByID(reportID, listener);
+        modelFirebase.getReportByID(reportID, listener);
         // TODO: this belong to ROOM
 
-        MyApplication.executorService.execute(()->{
-            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete(report);
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete(report);
+//            });
+//        });
     }
 
     public interface deleteReportListener{
@@ -218,7 +216,6 @@ public class Model {
     }
 
     public void getUserReportsList(String username, GetUserReportsListener listener){
-
         MyApplication.executorService.execute(()->{
             List <Report> data = AppLocalDB.db.reportDao().getMyReports(username);
             MyApplication.mainHandler.post(()->{

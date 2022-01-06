@@ -119,7 +119,7 @@ public class ReportsListFragment extends Fragment {
                 Navigation.findNavController(view).navigate(action3);
                 return true;
             case R.id.mapMenu_MoveToMap:
-                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(viewModel.getUserName()));
+                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(viewModel.getUserName(), null));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

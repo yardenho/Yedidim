@@ -49,7 +49,7 @@ public class EditReportFragment extends Fragment {
 
         viewModel.setUserName(EditReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
-        Long reportId = EditReportFragmentArgs.fromBundle(getArguments()).getReportID();
+        String reportId = EditReportFragmentArgs.fromBundle(getArguments()).getReportID();
 
         view = inflater.inflate(R.layout.fragment_edit_report, container, false);
         problem = view.findViewById(R.id.editReport_et_problem);
