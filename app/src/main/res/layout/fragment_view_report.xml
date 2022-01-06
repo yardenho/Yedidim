@@ -10,19 +10,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="40dp"
-        android:paddingBottom="60dp"
         tools:context=".scrollViewViewReport">
+<!--        android:paddingTop="40dp"-->
+<!--        android:paddingBottom="60dp"-->
 
         <TextView
             android:id="@+id/viewReport_tv_problem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
             android:text="Problem:"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="60dp" />
+            app:layout_constraintTop_toBottomOf="@+id/viewReport_imageBtn_map" />
 
             <TextView
                 android:id="@+id/viewReport_tv_notes"
@@ -224,8 +225,7 @@
             android:id="@+id/viewReport_imageBtn_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/viewReport_text_problem"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.954"
             app:layout_constraintStart_toStartOf="parent"
