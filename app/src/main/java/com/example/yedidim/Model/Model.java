@@ -126,7 +126,6 @@ public class Model {
 
 //        modelFirebase.getReportsList(listener);
         // TODO: this belong to ROOM
-
         MyApplication.executorService.execute(()->{
             List <Report> data = AppLocalDB.db.reportDao().getAll();
             MyApplication.mainHandler.post(()->{
@@ -162,15 +161,15 @@ public class Model {
     {
         // TODO: this belong to Firebase
 
-        modelFirebase.getReportByID(reportID, listener);
+//        modelFirebase.getReportByID(reportID, listener);
         // TODO: this belong to ROOM
 
-//        MyApplication.executorService.execute(()->{
-//            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete(report);
-//            });
-//        });
+        MyApplication.executorService.execute(()->{
+            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete(report);
+            });
+        });
     }
 
     public interface deleteReportListener{

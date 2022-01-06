@@ -25,7 +25,7 @@ public interface ReportDao {
     void editReport(Report report);
 
     @Query("SELECT * FROM Report WHERE reportID=:id")
-    Report getReportByID(Long id);
+    Report getReportByID(String id);
 
     @Query("SELECT * FROM Report WHERE userName=:u")
     List<Report> getMyReports(String u);

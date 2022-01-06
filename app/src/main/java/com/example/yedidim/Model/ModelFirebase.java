@@ -122,20 +122,6 @@ public class ModelFirebase {
                         Log.d("TAG", e.getMessage());
                     }
                 });
-//        db.collection("reports").document(String.valueOf(report.getReportID()))
-//                .set(json)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        listener.onComplete();
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d("TAG", e.getMessage());
-//                    }
-//                });
     }
     
 
