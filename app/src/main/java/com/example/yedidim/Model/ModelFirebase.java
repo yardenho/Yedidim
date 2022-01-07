@@ -80,7 +80,7 @@ public class ModelFirebase {
     }
 
     public void getUserByUserName(String userName, Model.getUserByUserNameListener listener) {
-        DocumentReference docRef = db.collection("students").document(userName);
+        DocumentReference docRef = db.collection("users").document(userName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             // TODO: need to handle cases were student returns as null
