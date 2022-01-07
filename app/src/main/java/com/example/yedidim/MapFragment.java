@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -31,6 +32,9 @@ import java.util.List;
 public class MapFragment extends Fragment {
     private GoogleMap gMap;
     private MapViewModel viewModel;
+    private View view;
+    private String username;        //TODO: need to be deleted because we will not save that in the future
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -42,12 +46,12 @@ public class MapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_map, container, false);
+        view = inflater.inflate(R.layout.fragment_map, container, false);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         viewModel.setReportID(MapFragmentArgs.fromBundle(getArguments()).getReportID());
         //TODO: need to be deleted because we will not save that in the future
-        String username = MapFragmentArgs.fromBundle(getArguments()).getUsername();
+        username = MapFragmentArgs.fromBundle(getArguments()).getUsername();
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
@@ -57,7 +61,7 @@ public class MapFragment extends Fragment {
                         @Override
                         public void onComplete(List<Report> data) {
                             for(Report r: data){
-                                googleMap.addMarker(new MarkerOptions().position(new LatLng(r.getLatitude(), r.getLongitude())).title("Marker in " + r.getLocation()));
+                                googleMap.addMarker(new MarkerOptions().position(new LatLng(r.getLatitude(), r.getLongitude())).title("Marker in " + r.getLocation())).setTag(r.getReportID());
                             }
                             //TODO: thy to set the camera on israel, not working to fix!
                             googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(31.3555, 34.3565)));
@@ -70,35 +74,55 @@ public class MapFragment extends Fragment {
                         @Override
                         public void onComplete(Report report) {
                             LatLng loc = new LatLng(report.getLatitude(), report.getLongitude());
-                            googleMap.addMarker(new MarkerOptions().position(loc).title("Marker in " + report.getLocation()));
+                            googleMap.addMarker(new MarkerOptions().position(loc).title("Marker in " + report.getLocation())).setTag(report.getReportID());
                             googleMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-
                         }
                     });
-
                 }
+
+                gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        Navigation.findNavController(view).navigate(MapFragmentDirections.actionMapFragmentToViewReportFragment(username, marker.getTag().toString()));
+                    }
+                });
             }
         });
+        setHasOptionsMenu(true);
         return view;
     }
     public GoogleMap getMap(){return gMap;}
 
-//    @Override
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        inflater.inflate(R.menu.log_out_menu, menu);
-//    }
-//
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.add_menu, menu);
+        inflater.inflate(R.menu.my_profile_menu, menu);
+        inflater.inflate(R.menu.my_reports_menu, menu);
+        inflater.inflate(R.menu.log_out_menu, menu);
+    }
+
 //    @Override
 //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 //        switch (item.getItemId()) {
+//            case R.id.addMenu_addReport:
+//                //TODO: when we after the sign up maybe not allow to return there
+//                MapFragmentDirections.ActionMapFragmentToAddingReportFragment action = MapFragmentDirections.actionMapFragmentToAddingReportFragment(username);
+//                Navigation.findNavController(view).navigate(action);
+//                return true;
 //            case R.id.log_out_menu_LogOut:
-//                //TODO:
+//                //TODO
+//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMainScreenFragment());
+//                return true;
+//            case R.id.myProfileMenu_myProfile:
+//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment(username));
+//                return true;
+//            case R.id.myReportsmenu_myReport:
+//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment(username));
 //                return true;
 //            default:
 //                return super.onOptionsItemSelected(item);
 //        }
-//        //        return true;
 //    }
 
 //    LatLng sydney = new LatLng(31.7683, 35.2137);

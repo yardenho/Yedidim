@@ -54,11 +54,13 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case android.R.id.home:
                     //TODO: when we after the sign up maybe not allow to return there
-                    navctrl.navigateUp();
+                    if(!(navctrl.getCurrentDestination().getId() == R.id.reportsListFragment))
+                        navctrl.navigateUp();
                     return true;
                 case R.id.baseMenu_aboutUs:
                     navctrl.navigate(aboutUsFragmentDirections.actionGlobalAboutUsFragment());
                     return true;
+
                 default:
                     return super.onOptionsItemSelected(item);
             }
