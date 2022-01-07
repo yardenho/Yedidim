@@ -29,14 +29,14 @@ public class Model {
 
     public void getUsersList(GetAllUsersListener listener){
         // TODO: this belong to Firebase
-//        modelFirebase.getUsersList(listener);
+        modelFirebase.getUsersList(listener);
         // TODO: this belong to ROOM
-        MyApplication.executorService.execute(()->{
-            List <User> data = AppLocalDB.db.userDao().getAll();
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete(data);
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            List <User> data = AppLocalDB.db.userDao().getAll();
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete(data);
+//            });
+//        });
     }
 
     public interface addNewUserListener{
@@ -46,15 +46,15 @@ public class Model {
     public void addNewUser(User user,addNewUserListener listener){
         // TODO: this belong to Firebase
 
-//        modelFirebase.addNewUser(user, listener);
+        modelFirebase.addNewUser(user, listener);
         // TODO: this belong to ROOM
 
-            MyApplication.executorService.execute(() -> {
-                AppLocalDB.db.userDao().insertAll(user);
-                MyApplication.mainHandler.post(() -> {
-                    listener.onComplete();
-                });
-            });
+//            MyApplication.executorService.execute(() -> {
+//                AppLocalDB.db.userDao().insertAll(user);
+//                MyApplication.mainHandler.post(() -> {
+//                    listener.onComplete();
+//                });
+//            });
 
     }
 
@@ -66,15 +66,15 @@ public class Model {
     {
         // TODO: this belong to Firebase
 
-//        modelFirebase.getUserByUserName(userName, listener);
+        modelFirebase.getUserByUserName(userName, listener);
         // TODO: this belong to ROOM
 
-        MyApplication.executorService.execute(()->{
-            User user = AppLocalDB.db.userDao().getUserByUserName(userName);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete(user);
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            User user = AppLocalDB.db.userDao().getUserByUserName(userName);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete(user);
+//            });
+//        });
     }
 
     public interface deleteUserListener{
@@ -105,15 +105,15 @@ public class Model {
     public void editUser(User u,editUserListener listener){
         // TODO: this belong to Firebase
 
-//        modelFirebase.editUser(u, listener);
+        modelFirebase.editUser(u, listener);
         // TODO: this belong to ROOM
 
-        MyApplication.executorService.execute(()->{
-            AppLocalDB.db.userDao().editUser(u);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete();
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            AppLocalDB.db.userDao().editUser(u);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete();
+//            });
+//        });
     }
 
 
@@ -124,14 +124,14 @@ public class Model {
     public void getReportsList(GetAllReportsListener listener){
         // TODO: this belong to Firebase
 
-//        modelFirebase.getReportsList(listener);
+        modelFirebase.getReportsList(listener);
         // TODO: this belong to ROOM
-        MyApplication.executorService.execute(()->{
-            List <Report> data = AppLocalDB.db.reportDao().getAll();
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete(data);
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            List <Report> data = AppLocalDB.db.reportDao().getAll();
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete(data);
+//            });
+//        });
     }
 
     public interface addNewReportListener{
@@ -141,16 +141,16 @@ public class Model {
     public void addNewReport(Report report,addNewReportListener listener){
         // TODO: this belong to Firebase
 
-//        modelFirebase.addNewReport(report, listener);
+        modelFirebase.addNewReport(report, listener);
         // TODO: this belong to ROOM
-        report.setReportID("1");
-        MyApplication.executorService.execute(()->{
-            AppLocalDB.db.reportDao().insertAll(report);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete();    // TODO: no need to return reportID in ROOM
-//                Report.addOneToIdCounter();   // TODO: need to delete
-            });
-        });
+//        report.setReportID("1");
+//        MyApplication.executorService.execute(()->{
+//            AppLocalDB.db.reportDao().insertAll(report);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete();    // TODO: no need to return reportID in ROOM
+////                Report.addOneToIdCounter();   // TODO: need to delete
+//            });
+//        });
     }
 
     public interface getReportByReportIDListener{
@@ -161,15 +161,15 @@ public class Model {
     {
         // TODO: this belong to Firebase
 
-//        modelFirebase.getReportByID(reportID, listener);
+        modelFirebase.getReportByID(reportID, listener);
         // TODO: this belong to ROOM
 
-        MyApplication.executorService.execute(()->{
-            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete(report);
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete(report);
+//            });
+//        });
     }
 
     public interface deleteReportListener{
@@ -198,15 +198,15 @@ public class Model {
     public void editReport(Report report,editReportListener listener){
         // TODO: this belong to Firebase
 
-//        modelFirebase.editReport(report, listener);
+        modelFirebase.editReport(report, listener);
         // TODO: this belong to ROOM
 
-        MyApplication.executorService.execute(()->{
-            AppLocalDB.db.reportDao().editReport(report);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete();
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            AppLocalDB.db.reportDao().editReport(report);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete();
+//            });
+//        });
     }
 
     //get only reports that belong to a specific user
@@ -215,12 +215,16 @@ public class Model {
     }
 
     public void getUserReportsList(String username, GetUserReportsListener listener){
-        MyApplication.executorService.execute(()->{
-            List <Report> data = AppLocalDB.db.reportDao().getMyReports(username);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete(data);
-            });
-        });
+        // TODO: this belong to Firebase
+        modelFirebase.getUserReportsList(username, listener);
+
+        // TODO: this belong to ROOM
+//        MyApplication.executorService.execute(()->{
+//            List <Report> data = AppLocalDB.db.reportDao().getMyReports(username);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete(data);
+//            });
+//        });
     }
 
 }
