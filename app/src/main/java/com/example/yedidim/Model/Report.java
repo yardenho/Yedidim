@@ -12,8 +12,10 @@ import androidx.room.PrimaryKey;
 import com.example.yedidim.MyApplication;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @Entity
 public class Report {
@@ -30,8 +32,8 @@ public class Report {
 
     public Report(){
     }
-    public Report(String problem, String notes, String u, ImageView iv, double longitude, double latitude){
-//        this.reportID= idCounter;
+    public Report(String id, String problem, String notes, String u, double longitude, double latitude){
+        this.reportID= id;
         this.problem=problem;
         this.notes=notes;
         this.userName=u;
@@ -82,4 +84,34 @@ public class Report {
     }
 //    static public long getIdCounter(){return idCounter;}
 
+    public Map<String, Object> toJson(){
+        Map<String, Object> json = new HashMap<>();
+//        json.put("reportID", report.getReportID());   the reportID comes from the document name
+        json.put("problem", getProblem());
+        json.put("notes",getNotes());
+        json.put("username",getUserName());
+        json.put("longitude",getLongitude());
+        json.put("latitude",getLatitude());
+        // TODO: need to add photo
+        // json.put("image", report.getImage());
+        return json;
+    }
+
+    static public Report fromJson(String reportId, Map<String, Object> json){
+        String id = reportId;
+        String problem = (String)json.get("problem");
+        if(problem == null)
+            return null;
+        String notes = (String)json.get("notes");
+        if(notes == null)
+            return null;
+        String userName = (String)json.get("username");
+        if(userName == null)
+            return null;
+        //TODO: add photo
+        double latitude = (double)json.get("latitude");
+        double longitude = (double)json.get("longitude");
+        Report report = new Report(id, problem, notes, userName, longitude, latitude);
+        return report;
+    }
 }

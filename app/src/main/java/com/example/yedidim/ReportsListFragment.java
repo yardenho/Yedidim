@@ -10,6 +10,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class ReportsListFragment extends Fragment {
     private ReportListViewModel viewModel;
     private View view;
     private MyAdapter adapter;
+    private SwipeRefreshLayout swipeRefresh;
 
     public ReportsListFragment() {
     }
@@ -53,13 +55,6 @@ public class ReportsListFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
 
-        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
-            @Override
-            public void onComplete(List<Report> d) {
-                viewModel.setReports(d);
-                adapter.notifyDataSetChanged();
-            }
-        });
 
         adapter = new ReportsListFragment.MyAdapter();
         list.setAdapter(adapter);
@@ -72,9 +67,30 @@ public class ReportsListFragment extends Fragment {
             }
         });
 
+        swipeRefresh = view.findViewById(R.id.reportsList_swipeRefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
 
         setHasOptionsMenu(true);
+        refreshData();
         return view;
+    }
+
+    private void refreshData() {
+        swipeRefresh.setRefreshing(true);
+        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
+            @Override
+            public void onComplete(List<Report> d) {
+                viewModel.setReports(d);
+                adapter.notifyDataSetChanged();
+                if(swipeRefresh.isRefreshing())
+                    swipeRefresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override

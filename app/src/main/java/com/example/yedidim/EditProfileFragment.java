@@ -43,13 +43,13 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
-        vehicleBrand = view.findViewById(R.id.editProfile_et_firstName);
-        manufactureYear = view.findViewById(R.id.editProfile_et_lastName);
+        vehicleBrand = view.findViewById(R.id.editProfile_et_vehicleBrand);
+        manufactureYear = view.findViewById(R.id.editProfile_et_manufYear);
         carNumber = view.findViewById(R.id.editProfile_et_carNumber);
-        fuelType = view.findViewById(R.id.editProfile_et_phoneNumber);
-        firstName = view.findViewById(R.id.editProfile_et_vehicleBrand);
-        lastName = view.findViewById(R.id.editProfile_et_manufYear);
-        phoneNumber = view.findViewById(R.id.editProfile_et_fuelType);
+        fuelType = view.findViewById(R.id.editProfile_et_fuelType);
+        firstName = view.findViewById(R.id.editProfile_et_firstName);
+        lastName = view.findViewById(R.id.editProfile_et_lastName);
+        phoneNumber = view.findViewById(R.id.editProfile_et_phoneNumber);
         viewModel.setUserName(EditProfileFragmentArgs.fromBundle(getArguments()).getUsername());
         Model.getInstance().getUserByUserName(viewModel.getUserName(), (u) ->
         {

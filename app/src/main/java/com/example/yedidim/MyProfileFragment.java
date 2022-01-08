@@ -45,12 +45,12 @@ public class MyProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
-        vehicleBrandTv = view.findViewById(R.id.myProfile_text_firstName);
-        manufactureYearTv = view.findViewById(R.id.myProfile_text_lastName);
-        fuelTypeTv = view.findViewById(R.id.myProfile_text_phoneNumber);
-        firstNameTv = view.findViewById(R.id.myProfile_text_vehicleBrand);
-        lastNameTv = view.findViewById(R.id.myProfile_text_manufactureYear);
-        phoneNumberTv = view.findViewById(R.id.myProfile_text_fuelType);
+        vehicleBrandTv = view.findViewById(R.id.myProfile_text_vehicleBrand);
+        manufactureYearTv = view.findViewById(R.id.myProfile_text_manufactureYear);
+        fuelTypeTv = view.findViewById(R.id.myProfile_text_fuelType);
+        firstNameTv = view.findViewById(R.id.myProfile_text_firstName);
+        lastNameTv = view.findViewById(R.id.myProfile_text_lastName);
+        phoneNumberTv = view.findViewById(R.id.myProfile_text_phoneNumber);
         carNumberTv = view.findViewById(R.id.myProfile_text_carNumber);
         editProfileBtn = view.findViewById(R.id.myProfile_btn_editProfile);
         deleteAccountBtn = view.findViewById(R.id.myProfile_btn_deleteAccount);

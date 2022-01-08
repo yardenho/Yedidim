@@ -95,15 +95,15 @@ public class Model {
     {
         // TODO: this belong to Firebase
 
-//        modelFirebase.deleteUser(user, listener);
+        modelFirebase.deleteUser(user, listener);
         // TODO: this belong to ROOM
-
-        MyApplication.executorService.execute(()->{
-            AppLocalDB.db.userDao().delete(user);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete();
-            });
-        });
+//
+//        MyApplication.executorService.execute(()->{
+//            AppLocalDB.db.userDao().delete(user);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete();
+//            });
+//        });
     }
 
     public interface editUserListener{
@@ -189,15 +189,15 @@ public class Model {
     {
         // TODO: this belong to Firebase
 
-//        modelFirebase.deleteReport(report, listener);
+        modelFirebase.deleteReport(report, listener);
         // TODO: this belong to ROOM
 
-        MyApplication.executorService.execute(()->{
-            AppLocalDB.db.reportDao().delete(report);
-            MyApplication.mainHandler.post(()->{
-                listener.onComplete();
-            });
-        });
+//        MyApplication.executorService.execute(()->{
+//            AppLocalDB.db.reportDao().delete(report);
+//            MyApplication.mainHandler.post(()->{
+//                listener.onComplete();
+//            });
+//        });
     }
 
     public interface editReportListener{

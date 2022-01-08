@@ -119,6 +119,21 @@ public class ModelFirebase {
     }
 
     public void deleteUser(User user, Model.deleteUserListener listener) {
+        //TODO: to think if we need that function
+        db.collection("users").document(user.getUserName())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        listener.onComplete(); // TODO:????
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document ", e);
+                    }
+                });
     }
 
     public void editUser(User user, Model.editUserListener listener) {
@@ -159,15 +174,18 @@ public class ModelFirebase {
                 {
                     for(QueryDocumentSnapshot doc:task.getResult())
                     {
-                        Map<String, Object> json = doc.getData();
-                        Report report = new Report();
-                        report.setReportID((String)doc.getId());
-                        report.setProblem((String)json.get("problem"));
-                        report.setNotes((String)json.get("notes"));
-                        report.setUserName((String)json.get("username"));
-                        report.setLatitude((double)json.get("latitude"));
-                        report.setLongitude((double)json.get("longitude"));
-                        reportsList.add(report);
+                        Report r = Report.fromJson(doc.getId(), doc.getData());
+                        if(r != null)
+                            reportsList.add(r);
+                        //TODO: moved to report class as fromJson
+//                        Map<String, Object> json = doc.getData();
+//                        Report report = new Report();
+//                        report.setReportID((String)doc.getId());
+//                        report.setProblem((String)json.get("problem"));
+//                        report.setNotes((String)json.get("notes"));
+//                        report.setUserName((String)json.get("username"));
+//                        report.setLatitude((double)json.get("latitude"));
+//                        report.setLongitude((double)json.get("longitude"));
                     }
                 }
                 else { }
@@ -178,32 +196,28 @@ public class ModelFirebase {
 
     public void addNewReport(Report report, Model.addNewReportListener listener) {
         // Create a new report
-        Map<String, Object> json = new HashMap<>();
-//        json.put("reportID", report.getReportID());   the reportID comes from the document name
-        json.put("problem", report.getProblem());
-        json.put("notes", report.getNotes());
-        json.put("username", report.getUserName());
-        json.put("longitude", report.getLongitude());
-        json.put("latitude", report.getLatitude());
-        // TODO: need to add photo
-        // json.put("image", report.getImage());
+        //TODO: note: moved to the report class - called toJson
+//        Map<String, Object> json = new HashMap<>();
+////        json.put("reportID", report.getReportID());   the reportID comes from the document name
+//        json.put("problem", report.getProblem());
+//        json.put("notes", report.getNotes());
+//        json.put("username", report.getUserName());
+//        json.put("longitude", report.getLongitude());
+//        json.put("latitude", report.getLatitude());
+//        // TODO: need to add photo
+//        // json.put("image", report.getImage());
 
         // Add a new document
 
         //TODO: check that value of method works
-        db.collection("reports").add(json)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        listener.onComplete();
-                        // TODO: get reportID with documentReference.getId()
-                    }
+        db.collection("reports").add(report.toJson())
+                .addOnSuccessListener((successListener)-> {
+                    listener.onComplete();
+                    // TODO: get reportID with documentReference.getId()
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("TAG", e.getMessage());
-                    }
+                .addOnFailureListener((e)-> {
+                    Log.d("TAG", e.getMessage());
+
                 });
     }
     
@@ -217,15 +231,18 @@ public class ModelFirebase {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Map<String, Object> json = document.getData();
-                        Report report = new Report();
-                        report.setReportID(document.getId());   // TODO: check if it works
-                        report.setUserName((String)json.get("username"));
-                        report.setProblem((String)json.get("problem"));
-                        report.setNotes((String)json.get("notes"));
-                        report.setLongitude((double)json.get("longitude"));  // TODO: check how to cast here
-                        report.setLatitude((double)json.get("latitude"));  // TODO: check how to cast here
-                        listener.onComplete(report);
+                        //TODO: moved to report class as fromJson
+//                        Map<String, Object> json = document.getData();
+//                        Report report = new Report();
+//                        report.setReportID(document.getId());   // TODO: check if it works
+//                        report.setUserName((String)json.get("username"));
+//                        report.setProblem((String)json.get("problem"));
+//                        report.setNotes((String)json.get("notes"));
+//                        report.setLongitude((double)json.get("longitude"));  // TODO: check how to cast here
+//                        report.setLatitude((double)json.get("latitude"));  // TODO: check how to cast here
+                        Report r = Report.fromJson(document.getId(), document.getData());
+                        if(r != null)
+                            listener.onComplete(r);
                     } else {
                         listener.onComplete(null);
                     }
@@ -238,22 +255,37 @@ public class ModelFirebase {
     }
 
     public void deleteReport(Report report, Model.deleteReportListener listener) {
+        db.collection("reports").document(report.getReportID())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        listener.onComplete(); //TODO: ????
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document ", e);
+                    }
+                });
     }
 
     public void editReport(Report report, Model.editReportListener listener) {
         // edit a report
-        Map<String, Object> json = new HashMap<>();
-        json.put("reportID", report.getReportID());
-        json.put("problem", report.getProblem());
-        json.put("notes", report.getNotes());
-        json.put("username", report.getUserName());
-        json.put("longitude", report.getLongitude());
-        json.put("latitude", report.getLatitude());
+        //TODO - moved to report class as toJson
+//        Map<String, Object> json = new HashMap<>();
+//        json.put("reportID", report.getReportID());
+//        json.put("problem", report.getProblem());
+//        json.put("notes", report.getNotes());
+//        json.put("username", report.getUserName());
+//        json.put("longitude", report.getLongitude());
+//        json.put("latitude", report.getLatitude());
         // TODO: need to add photo
         // json.put("image", report.getImage());
 
         // edit an existing document
-        db.collection("reports").document(report.getReportID()).set(json)
+        db.collection("reports").document(report.getReportID()).set(report.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
