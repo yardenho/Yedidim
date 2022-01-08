@@ -117,15 +117,15 @@ public class User {
 
     public Map<String, Object> toJson(){
         Map<String, Object> json = new HashMap<>();
-        json.put("username", getUserName());
-        json.put("firstName", getFirstName());
-        json.put("lastName", getLastName());
-        json.put("password", getPassword());
-        json.put("phoneNumber", getPhoneNumber());
-        json.put("carNumber", getCarNumber());
-        json.put("vehicleBrand", getVehicleBrand());
-        json.put("manufactureYear",getManufactureYear());
-        json.put("fuelType",getFuelType());
+        json.put("username", userName);
+        json.put("firstName", firstName);
+        json.put("lastName", lastName);
+        json.put("password", password);
+        json.put("phoneNumber", phoneNumber);
+        json.put("carNumber", carNumber);
+        json.put("vehicleBrand", vehicleBrand);
+        json.put("manufactureYear",manufactureYear);
+        json.put("fuelType",fuelType);
         return json;
     }
 

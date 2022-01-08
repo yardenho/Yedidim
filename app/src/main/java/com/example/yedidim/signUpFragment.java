@@ -33,7 +33,7 @@ public class signUpFragment extends Fragment {
         EditText userNameEt = view.findViewById(R.id.signUp_et_username);
         EditText passwordEt = view.findViewById(R.id.signUp_et_password);
         EditText vehicleBrandEt = view.findViewById(R.id.signUp_et_vehicleBrand);
-        EditText manufactureYearEt = view.findViewById(R.id.signUp_et_manufYear);
+        EditText manufactureYearEt = view.findViewById(R.id.signUp_et_manuYear);
         EditText fuelTypeEt = view.findViewById(R.id.signUp_et_fuelType);
         EditText firstNameEt = view.findViewById(R.id.signUp_et_firstName);
         EditText lastNameEt = view.findViewById(R.id.signUp_et_lastName);

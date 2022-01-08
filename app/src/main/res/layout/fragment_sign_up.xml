@@ -30,147 +30,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/signUp_tv_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="30dp"
-                    android:text="Username:"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_username"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_signUpMassege" />
-
-                <EditText
-                    android:id="@+id/signUp_et_username"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_username"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_username" />
-
-                <TextView
-                    android:id="@+id/signUp_tv_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="30dp"
-                    android:text="Password:"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_password"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_username" />
-
-                <EditText
-                    android:id="@+id/signUp_et_password"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_password"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_password" />
-
-                <TextView
-                    android:id="@+id/signUp_tv_vehicleBrand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="30dp"
-                    android:text="Vehicle Brand:"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_vehicleBrand"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_password" />
-
-                <EditText
-                    android:id="@+id/signUp_et_vehicleBrand"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_vehicleBrand"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_vehicleBrand" />
-
-                <TextView
-                    android:id="@+id/signUp_tv_manufYear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="30dp"
-                    android:text="Manufacture year:"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_manufYear"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_vehicleBrand" />
-
-                <EditText
-                    android:id="@+id/signUp_et_manufYear"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_manufYear"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_manufYear" />
-
-                <TextView
-                    android:id="@+id/signUp_tv_fuelType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="30dp"
-                    android:text="Fuel Type:"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_fuelType"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_manufYear" />
-
-                <EditText
-                    android:id="@+id/signUp_et_fuelType"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_fuelType"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_fuelType" />
-
-                <TextView
                     android:id="@+id/signUp_tv_firstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="30dp"
-                    android:text="First Name: "
+                    android:text="First Name:"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toStartOf="@+id/signUp_et_firstName"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_carNumber" />
+                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_signUpMassege" />
 
                 <EditText
                     android:id="@+id/signUp_et_firstName"
@@ -237,29 +107,109 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/signUp_tv_phoneNumber" />
 
-                <Button
-                    android:id="@+id/signUp_btn_signup"
+                <TextView
+                    android:id="@+id/signUp_tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:backgroundTint="#F07470"
-                    android:text="Sign Up"
+                    android:text="Username:"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_username"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/signUp_tv_phoneNumber" />
 
-                <ProgressBar
-                    android:id="@+id/signUp_progressBar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="71dp"
-                    android:layout_height="78dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <EditText
+                    android:id="@+id/signUp_et_username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_username"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_username" />
+
+                <TextView
+                    android:id="@+id/signUp_tv_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Password:"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_password"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_username" />
+
+                <EditText
+                    android:id="@+id/signUp_et_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_password"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_password" />
+
+                <TextView
+                    android:id="@+id/signUp_tv_manuYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Manufacture year:"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_manuYear"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_vehicleBrand" />
+
+                <EditText
+                    android:id="@+id/signUp_et_manuYear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_manuYear"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_manuYear" />
+
+                <TextView
+                    android:id="@+id/signUp_tv_fuelType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Fuel Type:"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_fuelType"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_manuYear" />
+
+                <EditText
+                    android:id="@+id/signUp_et_fuelType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_fuelType"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_fuelType" />
 
                 <TextView
                     android:id="@+id/signUp_tv_carNumber"
@@ -279,12 +229,62 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_carNumber"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/signUp_tv_carNumber" />
+
+                <Button
+                    android:id="@+id/signUp_btn_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:backgroundTint="#F07470"
+                    android:text="Sign Up"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_carNumber" />
+
+                <ProgressBar
+                    android:id="@+id/signUp_progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="71dp"
+                    android:layout_height="78dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/signUp_tv_vehicleBrand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Vehicle Brand:"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/signUp_et_vehicleBrand"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signUp_tv_password" />
+
+                <EditText
+                    android:id="@+id/signUp_et_vehicleBrand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/signUp_tv_vehicleBrand"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/signUp_tv_vehicleBrand" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

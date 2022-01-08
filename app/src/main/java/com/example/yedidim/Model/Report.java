@@ -94,11 +94,11 @@ public class Report {
     public Map<String, Object> toJson(){
         Map<String, Object> json = new HashMap<>();
 //        json.put("reportID", report.getReportID());   the reportID comes from the document name
-        json.put("problem", getProblem());
-        json.put("notes",getNotes());
-        json.put("username",getUserName());
-        json.put("longitude",getLongitude());
-        json.put("latitude",getLatitude());
+        json.put("problem", problem);
+        json.put("notes",notes);
+        json.put("username",userName);
+        json.put("longitude",longitude);
+        json.put("latitude",latitude);
         json.put("reportUrl", reportUrl);
         // TODO: need to add photo
         // json.put("image", report.getImage());

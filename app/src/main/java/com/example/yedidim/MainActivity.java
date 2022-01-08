@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case android.R.id.home:
                     //TODO: when we after the sign up maybe not allow to return there
-//                    int index = getSupportFragmentManager().getBackStackEntryCount()-1;
+//                    int index = getSupportFragmentManager().getBackStackEntryCount();
 //                    FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
 //                    if(backEntry.getId() != R.id.mainScreenFragment)
                         navctrl.navigateUp();
