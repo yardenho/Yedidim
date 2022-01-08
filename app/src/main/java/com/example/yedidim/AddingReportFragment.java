@@ -1,27 +1,35 @@
 package com.example.yedidim;
 
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
@@ -36,11 +44,15 @@ import com.google.android.gms.tasks.Task;
 
 
 public class AddingReportFragment extends Fragment {
+    static final int REQUEST_IMAGE_CAPTURE=1;
     private AddingReportViewModel viewModel;
+//    public Report report = new Report();
     private Button cancelBtn;
     private Button reportBtn;
     private EditText problemEt;
     private EditText noteEt;
+    private ImageView photo;
+    private ImageButton photoIBtn;
     // צריך להוסיף שדה של תמונה? - לצפות איך עושים הקלטה 11!!!!!!!!!!!!
     //****************************************
 
@@ -62,6 +74,8 @@ public class AddingReportFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_adding_report, container, false);
         problemEt = view.findViewById(R.id.addingReport_et_problem);
         noteEt = view.findViewById(R.id.addingReport_et_notes);
+        photoIBtn = view.findViewById(R.id.addingReport_ibtn_photo);
+        photo = view.findViewById(R.id.addingReport_iv_photo);
         //******************************************************************************************
         //// to add the photo adding implementation !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //******************************************************************************************
@@ -86,6 +100,15 @@ public class AddingReportFragment extends Fragment {
             }
         });
 
+        photoIBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+
+//            if(intent.resolveActivity(getActivity().getPackageManager()) != null){
+//                getActivity().startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+//            }
+        });
+
         reportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +125,17 @@ public class AddingReportFragment extends Fragment {
         });
         return view;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.get("data");
+            photo.setImageBitmap(bitmap);
+        }
+    }
+
     public void activateGPS(Report report, View v)
     {
         // check permission

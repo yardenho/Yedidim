@@ -76,17 +76,6 @@
             app:layout_constraintStart_toEndOf="@+id/addingReport_btn_cancel"
             app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_addPhoto" />
 
-        <Button
-            android:id="@+id/addingReport_bt_photo"
-            android:layout_width="70dp"
-            android:layout_height="82dp"
-            android:layout_marginStart="10dp"
-            android:background="@android:drawable/ic_input_add"
-            android:backgroundTint="@color/material_on_primary_disabled"
-            app:layout_constraintBottom_toBottomOf="@+id/addingReport_tv_addPhoto"
-            app:layout_constraintStart_toEndOf="@+id/addingReport_tv_addPhoto"
-            app:layout_constraintTop_toTopOf="@+id/addingReport_tv_addPhoto" />
-
         <EditText
             android:id="@+id/addingReport_et_notes"
             android:layout_width="0dp"
@@ -123,5 +112,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/addingReport_iv_photo"
+            android:layout_width="245dp"
+            android:layout_height="270dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/addingReport_tv_addPhoto"
+            app:layout_constraintStart_toEndOf="@+id/addingReport_tv_addPhoto"
+            app:layout_constraintTop_toTopOf="@+id/addingReport_tv_addPhoto"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <ImageButton
+            android:id="@+id/addingReport_ibtn_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/addingReport_iv_photo"
+            app:layout_constraintTop_toTopOf="@+id/addingReport_iv_photo"
+            app:srcCompat="@android:drawable/ic_input_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
