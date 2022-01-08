@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
+import com.squareup.picasso.Picasso;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -167,9 +169,9 @@ public class ReportsListFragment extends Fragment {
             location.setText(report.getLocation());
             String url = report.getReportUrl();
             if(url != null){
-                Picasso.get().load(url).placehplder(R.drawable.camera1).into(photo);
+                Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
             }
-            //TODO: IMAGE
+            //TODO: IMAGE  error(R.drawable.camera1)
         }
     }
 
