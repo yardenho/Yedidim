@@ -169,7 +169,7 @@ public class ReportsListFragment extends Fragment {
             location.setText(report.getLocation());
             String url = report.getReportUrl();
             if(url != null){
-                Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+//                Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
             }
             //TODO: IMAGE  error(R.drawable.camera1)
         }
