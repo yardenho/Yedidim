@@ -1,5 +1,7 @@
 package com.example.yedidim.Model;
 
+import android.graphics.Bitmap;
+
 import com.example.yedidim.MyApplication;
 
 import java.util.LinkedList;
@@ -20,6 +22,13 @@ public class Model {
 
     public static Model getInstance(){
         return instance;
+    }
+
+    public interface saveImageListener{
+        void OnComplete(String url);
+    }
+    public void saveImage(Bitmap bitmap, saveImageListener listener) {
+        modelFirebase.saveImage(bitmap, listener);
     }
 
     public interface GetAllUsersListener{

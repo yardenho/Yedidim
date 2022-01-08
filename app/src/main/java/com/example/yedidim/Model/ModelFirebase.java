@@ -1,5 +1,6 @@
 package com.example.yedidim.Model;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firebaseStorage.FirebaseStorage;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -287,5 +289,9 @@ public class ModelFirebase {
                 listener.onComplete(reportsList);
             }
         });
+    }
+    public void saveImage(Bitmap bitmap, Model.saveImageListener listener) {
+        FirebaseStorage storage= FirebaseStorage.getInstance();
+
     }
 }

@@ -53,6 +53,7 @@ public class AddingReportFragment extends Fragment {
     private EditText noteEt;
     private ImageView photo;
     private ImageButton photoIBtn;
+    Bitmap bitmap;
     // צריך להוסיף שדה של תמונה? - לצפות איך עושים הקלטה 11!!!!!!!!!!!!
     //****************************************
 
@@ -119,6 +120,9 @@ public class AddingReportFragment extends Fragment {
 //                report.setReportID(Report.getIdCounter());   // TODO: need to delete this line
                 report.setProblem(problemEt.getText().toString());
                 report.setNotes(noteEt.getText().toString());
+                Model.getInstance().saveImage(bitmap, url -> {
+
+                });
                 report.setUserName(viewModel.getUsername());
                 activateGPS(report, v);
             }
@@ -131,7 +135,7 @@ public class AddingReportFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
-            Bitmap bitmap = (Bitmap) bundle.get("data");
+            bitmap = (Bitmap) bundle.get("data");
             photo.setImageBitmap(bitmap);
         }
     }
