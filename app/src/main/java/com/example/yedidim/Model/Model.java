@@ -25,10 +25,10 @@ public class Model {
     }
 
     public interface saveImageListener{
-        void OnComplete(String url);
+        void onComplete(String url);
     }
-    public void saveImage(Bitmap bitmap, saveImageListener listener) {
-        modelFirebase.saveImage(bitmap, listener);
+    public void saveImage(Bitmap bitmap,String name, saveImageListener listener) {
+        modelFirebase.saveImage(bitmap,name, listener);
     }
 
     public interface GetAllUsersListener{
