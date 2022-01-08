@@ -26,13 +26,15 @@ public class Report {
     private String problem;
     private String notes;
     private String userName;
+    private String reportUrl="";
+
     //    private ImageView image; // כשנוסיף העלאת תמונה אולי נשנה את הסוג
     private double longitude;
     private double latitude;
 
     public Report(){
     }
-    public Report(String id, String problem, String notes, String u, double longitude, double latitude){
+    public Report(String id, String problem, String notes,String rUrl, String u, double longitude, double latitude){
         this.reportID= id;
         this.problem=problem;
         this.notes=notes;
@@ -40,6 +42,11 @@ public class Report {
 //        this.image=iv;
         this.longitude=longitude;
         this.latitude=latitude;
+        this.reportUrl=rUrl;
+    }
+    public String getReportUrl(){return reportUrl;}
+    public void setReportUrl(String rUrl){
+        reportUrl=rUrl;
     }
 
     // setters
@@ -92,6 +99,7 @@ public class Report {
         json.put("username",getUserName());
         json.put("longitude",getLongitude());
         json.put("latitude",getLatitude());
+        json.put("reportUrl", reportUrl);
         // TODO: need to add photo
         // json.put("image", report.getImage());
         return json;
@@ -108,10 +116,13 @@ public class Report {
         String userName = (String)json.get("username");
         if(userName == null)
             return null;
+        String reportUrl = (String)json.get("reportUrl");
+            if(reportUrl==null)
+                return null;
         //TODO: add photo
         double latitude = (double)json.get("latitude");
         double longitude = (double)json.get("longitude");
-        Report report = new Report(id, problem, notes, userName, longitude, latitude);
+        Report report = new Report(id, problem, notes,reportUrl, userName, longitude, latitude);
         return report;
     }
 }

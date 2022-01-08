@@ -120,11 +120,14 @@ public class AddingReportFragment extends Fragment {
 //                report.setReportID(Report.getIdCounter());   // TODO: need to delete this line
                 report.setProblem(problemEt.getText().toString());
                 report.setNotes(noteEt.getText().toString());
-                Model.getInstance().saveImage(bitmap, "image1",url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
-
-                });
                 report.setUserName(viewModel.getUsername());
-                activateGPS(report, v);
+                Model.getInstance().saveImage(bitmap, "image1",url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                    report.setReportUrl(url);
+                    activateGPS(report, v);
+                });
+//                report.setUserName(viewModel.getUsername());
+//                activateGPS(report, v);
+
             }
         });
         return view;
