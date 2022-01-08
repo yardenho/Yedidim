@@ -14,7 +14,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firebaseStorage.FirebaseStorage;
+import com.google.firebase.storage.FirebaseStorage;
+//import com.google.firebase.firebaseStorage.FirebaseStorage;
 
 import java.util.HashMap;
 import java.util.LinkedList;
