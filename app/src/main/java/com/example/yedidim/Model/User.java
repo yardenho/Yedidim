@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Entity
 
 public class User {
@@ -21,7 +24,7 @@ public class User {
 
     public User(){}
 
-    public User(String userName, String password, String vehicleBrand, String manufactureYear, String fuelType, String firstName, String lastName, String phoneNumber, String cerNumber){
+    public User(String userName, String password, String vehicleBrand, String manufactureYear, String fuelType, String firstName, String lastName, String phoneNumber, String carNumber){
         this.userName= userName;
         this.password= password;
         this.vehicleBrand= vehicleBrand;
@@ -30,7 +33,7 @@ public class User {
         this.firstName= firstName;
         this.lastName= lastName;
         this.phoneNumber=phoneNumber;
-        this.carNumber = cerNumber;
+        this.carNumber = carNumber;
     }
     public String getUserName(){
         return userName;
@@ -79,4 +82,51 @@ public class User {
     public void setUserName(String un) {this.userName = un;}
     public void setPassword(String password) {this.password = password;}
     public void setCarNumber(String carNumber){this.carNumber = carNumber;}
+
+    static public User fromJson(Map<String, Object> json){
+        String username = (String)json.get("username");
+        if(username == null)
+            return null;
+        String password = (String)json.get("password");
+        if(password == null)
+            return null;
+        String firstName = (String)json.get("firstName");
+        if(firstName == null)
+            return null;
+        String lastName = (String)json.get("lastName");
+        if(lastName == null)
+            return null;
+        String phoneNumber = (String)json.get("phoneNumber");
+        if(phoneNumber == null)
+            return null;
+        String carNumber = (String)json.get("carNumber");
+        if(carNumber == null)
+            return null;
+        String vehicleBrand = (String)json.get("vehicleBrand");
+        if(vehicleBrand == null)
+            return null;
+        String manufactureYear = (String)json.get("manufactureYear");
+        if(manufactureYear == null)
+            return null;
+        String fuelType = (String)json.get("fuelType");
+        if(fuelType == null)
+            return null;
+        User user = new User(username, password, vehicleBrand, manufactureYear, fuelType, firstName, lastName, phoneNumber, carNumber);
+        return user;
+    }
+
+    public Map<String, Object> toJson(){
+        Map<String, Object> json = new HashMap<>();
+        json.put("username", getUserName());
+        json.put("firstName", getFirstName());
+        json.put("lastName", getLastName());
+        json.put("password", getPassword());
+        json.put("phoneNumber", getPhoneNumber());
+        json.put("carNumber", getCarNumber());
+        json.put("vehicleBrand", getVehicleBrand());
+        json.put("manufactureYear",getManufactureYear());
+        json.put("fuelType",getFuelType());
+        return json;
+    }
+
 }

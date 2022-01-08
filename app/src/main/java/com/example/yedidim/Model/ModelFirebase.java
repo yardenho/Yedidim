@@ -37,18 +37,21 @@ public class ModelFirebase {
                 {
                     for(QueryDocumentSnapshot doc:task.getResult())
                     {
-                        Map<String, Object> json = doc.getData();
-                        User user = new User();
-                        user.setUserName((String)json.get("username"));
-                        user.setUserName((String)json.get("password"));
-                        user.setUserName((String)json.get("firstName"));
-                        user.setUserName((String)json.get("lastName"));
-                        user.setUserName((String)json.get("phoneNumber"));
-                        user.setUserName((String)json.get("carNumber"));
-                        user.setUserName((String)json.get("vehicleBrand"));
-                        user.setUserName((String)json.get("manufactureYear"));
-                        user.setUserName((String)json.get("fuelType"));
-                        usersList.add(user);
+                        //TODO: - NOTE: moved to user class as fromJson function
+//                        Map<String, Object> json = doc.getData();
+//                        User user = new User();
+//                        user.setUserName((String)json.get("username"));
+//                        user.setUserName((String)json.get("password"));
+//                        user.setUserName((String)json.get("firstName"));
+//                        user.setUserName((String)json.get("lastName"));
+//                        user.setUserName((String)json.get("phoneNumber"));
+//                        user.setUserName((String)json.get("carNumber"));
+//                        user.setUserName((String)json.get("vehicleBrand"));
+//                        user.setUserName((String)json.get("manufactureYear"));
+//                        user.setUserName((String)json.get("fuelType"));
+                        User user = User.fromJson(doc.getData());
+                        if(user != null)
+                            usersList.add(user);
                     }
                 }
                 else { }
@@ -59,30 +62,27 @@ public class ModelFirebase {
 
     public void addNewUser(User user, Model.addNewUserListener listener) {
         // Create a new user
-        Map<String, Object> json = new HashMap<>();
-        json.put("username", user.getUserName());
-        json.put("firstName", user.getFirstName());
-        json.put("lastName", user.getLastName());
-        json.put("password", user.getPassword());
-        json.put("phoneNumber", user.getPhoneNumber());
-        json.put("carNumber", user.getCarNumber());
-        json.put("vehicleBrand", user.getVehicleBrand());
-        json.put("manufactureYear", user.getManufactureYear());
-        json.put("fuelType", user.getFuelType());
+        //TODO: NOTE: moved to the user class as - toJson function
+//        Map<String, Object> json = new HashMap<>();
+//        json.put("username", user.getUserName());
+//        json.put("firstName", user.getFirstName());
+//        json.put("lastName", user.getLastName());
+//        json.put("password", user.getPassword());
+//        json.put("phoneNumber", user.getPhoneNumber());
+//        json.put("carNumber", user.getCarNumber());
+//        json.put("vehicleBrand", user.getVehicleBrand());
+//        json.put("manufactureYear", user.getManufactureYear());
+//        json.put("fuelType", user.getFuelType());
 
         // Add a new document with a username as the ID
-        db.collection("users").document(user.getUserName()).set(json)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        listener.onComplete();
-                    }
+        db.collection("users").document(user.getUserName()).set(user.toJson())
+                .addOnSuccessListener((successListener)-> {
+                    listener.onComplete();
+
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("TAG", e.getMessage());
-                    }
+                .addOnFailureListener((e)-> {
+                    Log.d("TAG", e.getMessage());
+
                 });
     }
 
@@ -95,18 +95,21 @@ public class ModelFirebase {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Map<String, Object> json = document.getData();
-                        User user = new User();
-                        user.setUserName((String)json.get("username"));
-                        user.setPassword((String)json.get("password"));
-                        user.setFirstName((String)json.get("firstName"));
-                        user.setLastName((String)json.get("lastName"));
-                        user.setPhoneNumber((String)json.get("phoneNumber"));
-                        user.setCarNumber((String)json.get("carNumber"));
-                        user.setVehicleBrand((String)json.get("vehicleBrand"));
-                        user.setManufactureYear((String)json.get("manufactureYear"));
-                        user.setFuelType((String)json.get("fuelType"));
-                        listener.onComplete(user);
+                        //TODO: NOTE - moved to the user class as fromJson function
+//                        Map<String, Object> json = document.getData();
+//                        User user = new User();
+//                        user.setUserName((String)json.get("username"));
+//                        user.setPassword((String)json.get("password"));
+//                        user.setFirstName((String)json.get("firstName"));
+//                        user.setLastName((String)json.get("lastName"));
+//                        user.setPhoneNumber((String)json.get("phoneNumber"));
+//                        user.setCarNumber((String)json.get("carNumber"));
+//                        user.setVehicleBrand((String)json.get("vehicleBrand"));
+//                        user.setManufactureYear((String)json.get("manufactureYear"));
+//                        user.setFuelType((String)json.get("fuelType"));
+                        User user = User.fromJson(document.getData());
+                        if(user != null)
+                            listener.onComplete(user);
                     } else {
                         listener.onComplete(null);
                     }
@@ -119,7 +122,7 @@ public class ModelFirebase {
     }
 
     public void deleteUser(User user, Model.deleteUserListener listener) {
-        //TODO: to think if we need that function
+        //TODO: when we delete the user - to delete all his reports too ?
         db.collection("users").document(user.getUserName())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -138,19 +141,21 @@ public class ModelFirebase {
 
     public void editUser(User user, Model.editUserListener listener) {
         // update user's details
-        Map<String, Object> json = new HashMap<>();
-        json.put("username", user.getUserName());
-        json.put("firstName", user.getFirstName());
-        json.put("lastName", user.getLastName());
-        json.put("password", user.getPassword());
-        json.put("phoneNumber", user.getPhoneNumber());
-        json.put("carNumber", user.getCarNumber());
-        json.put("vehicleBrand", user.getVehicleBrand());
-        json.put("manufactureYear", user.getManufactureYear());
-        json.put("fuelType", user.getFuelType());
+        //TODO: NOTE: moved to the user class as - toJson function
+
+//        Map<String, Object> json = new HashMap<>();
+//        json.put("username", user.getUserName());
+//        json.put("firstName", user.getFirstName());
+//        json.put("lastName", user.getLastName());
+//        json.put("password", user.getPassword());
+//        json.put("phoneNumber", user.getPhoneNumber());
+//        json.put("carNumber", user.getCarNumber());
+//        json.put("vehicleBrand", user.getVehicleBrand());
+//        json.put("manufactureYear", user.getManufactureYear());
+//        json.put("fuelType", user.getFuelType());
 
         // update an existing document document with a username as the ID
-        db.collection("users").document(user.getUserName()).set(json)
+        db.collection("users").document(user.getUserName()).set(user.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -311,14 +316,17 @@ public class ModelFirebase {
                     {
                         Map<String, Object> json = doc.getData();
                         if(((String)json.get("username")).equals(username)) {
-                            Report report = new Report();
-                            report.setReportID((String) doc.getId());
-                            report.setProblem((String) json.get("problem"));
-                            report.setNotes((String) json.get("notes"));
-                            report.setUserName((String) json.get("username"));
-                            report.setLatitude((double) json.get("latitude"));
-                            report.setLongitude((double) json.get("longitude"));
-                            reportsList.add(report);
+                            //TODO:note- moved to the report class as fromJson
+//                            Report report = new Report();
+//                            report.setReportID((String) doc.getId());
+//                            report.setProblem((String) json.get("problem"));
+//                            report.setNotes((String) json.get("notes"));
+//                            report.setUserName((String) json.get("username"));
+//                            report.setLatitude((double) json.get("latitude"));
+//                            report.setLongitude((double) json.get("longitude"));
+                            Report report = Report.fromJson(doc.getId(), doc.getData());
+                            if(report != null)
+                                reportsList.add(report);
                         }
                     }
                 }
