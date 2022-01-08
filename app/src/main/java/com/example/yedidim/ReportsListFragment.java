@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
@@ -140,12 +141,14 @@ public class ReportsListFragment extends Fragment {
         private final OnItemClickListener listener;
         TextView problem;
         TextView location;
+        ImageView photo;
         //TODO image
 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             problem = itemView.findViewById(R.id.reportListRow_problem);
             location = itemView.findViewById(R.id.reportListRow_location);
+            photo = itemView.findViewById(R.id.reportListRow_iv);
             // TODO image
             this.listener = listener;
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +165,10 @@ public class ReportsListFragment extends Fragment {
         public void bind(Report report) {
             problem.setText(report.getProblem());
             location.setText(report.getLocation());
+            String url = report.getReportUrl();
+            if(url != null){
+                Picasso.get().load(url).placehplder(R.drawable.camera1).into(photo);
+            }
             //TODO: IMAGE
         }
     }
