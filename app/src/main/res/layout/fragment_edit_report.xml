@@ -116,22 +116,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editReport_tv_lastName" />
 
-        <EditText
-            android:id="@+id/editReport_et_vehicleBrand"
+        <TextView
+            android:id="@+id/editReport_text_vehicleBrand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="none"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_vehicleBrand"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/editReport_tv_vehicleBrand" />
 
-        <EditText
-            android:id="@+id/editReport_et_manufactureYear"
+        <TextView
+            android:id="@+id/editReport_text_manufactureYear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -143,8 +143,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editReport_tv_manufactureYear" />
 
-        <EditText
-            android:id="@+id/editReport_et_fuelType"
+        <TextView
+            android:id="@+id/editReport_text_fuelType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -169,8 +169,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editReport_tv_problem" />
 
-        <EditText
-            android:id="@+id/editReport_et_firstName"
+        <TextView
+            android:id="@+id/editReport_text_firstName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -182,8 +182,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editReport_tv_firstName" />
 
-        <EditText
-            android:id="@+id/editReport_et_lastName"
+        <TextView
+            android:id="@+id/editReport_text_lastName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -195,8 +195,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editReport_tv_lastName" />
 
-        <EditText
-            android:id="@+id/editReport_et_phoneNumber"
+        <TextView
+            android:id="@+id/editReport_text_phoneNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

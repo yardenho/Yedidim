@@ -97,8 +97,8 @@ public class myReportsFragment extends Fragment {
                 refreshData();
             }
         });
-
-        refreshData();
+        if(viewModel.getMyReports().size() == 0)
+            refreshData();
         setHasOptionsMenu(true);
         return view;
     }

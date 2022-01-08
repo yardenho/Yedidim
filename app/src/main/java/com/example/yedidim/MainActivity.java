@@ -2,6 +2,7 @@ package com.example.yedidim;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -54,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case android.R.id.home:
                     //TODO: when we after the sign up maybe not allow to return there
-                    if(!(navctrl.getCurrentDestination().getId() == R.id.reportsListFragment))
+//                    int index = getSupportFragmentManager().getBackStackEntryCount()-1;
+//                    FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
+//                    if(backEntry.getId() != R.id.mainScreenFragment)
                         navctrl.navigateUp();
                     return true;
                 case R.id.baseMenu_aboutUs:

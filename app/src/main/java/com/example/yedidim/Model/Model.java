@@ -2,6 +2,8 @@ package com.example.yedidim.Model;
 
 import android.graphics.Bitmap;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.yedidim.MyApplication;
 
 import java.util.LinkedList;
@@ -141,6 +143,12 @@ public class Model {
 //                listener.onComplete(data);
 //            });
 //        });
+    }
+
+    //TODO: - NEW ! - using in the live data
+    public LiveData<List<Report>> getAllReports(){
+
+        return null;
     }
 
     public interface addNewReportListener{

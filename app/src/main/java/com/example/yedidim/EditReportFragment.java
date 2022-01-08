@@ -2,7 +2,6 @@ package com.example.yedidim;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -16,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
-import com.example.yedidim.Model.Report;
 import com.example.yedidim.Model.User;
 
 
@@ -24,12 +22,12 @@ public class EditReportFragment extends Fragment {
     private EditReportViewModel viewModel;
     private EditText problem;
     private EditText notes;
-    private EditText vehicleBrand;
-    private EditText manufactureYear;
-    private EditText fuelType;
-    private EditText firstName;
-    private EditText lastName;
-    private EditText phoneNumber;
+    private TextView vehicleBrand;
+    private TextView manufactureYear;
+    private TextView fuelType;
+    private TextView firstName;
+    private TextView lastName;
+    private TextView phoneNumber;
     private Button cancelBtn;
     private Button saveBtn;
     View view;
@@ -54,12 +52,12 @@ public class EditReportFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_edit_report, container, false);
         problem = view.findViewById(R.id.editReport_et_problem);
         notes = view.findViewById(R.id.editReport_et_notes);
-        vehicleBrand = view.findViewById(R.id.editReport_et_vehicleBrand);
-        manufactureYear = view.findViewById(R.id.editReport_et_manufactureYear);
-        fuelType = view.findViewById(R.id.editReport_et_fuelType);
-        firstName = view.findViewById(R.id.editReport_et_firstName);
-        lastName = view.findViewById(R.id.editReport_et_lastName);
-        phoneNumber = view.findViewById(R.id.editReport_et_phoneNumber);
+        vehicleBrand = view.findViewById(R.id.editReport_text_vehicleBrand);
+        manufactureYear = view.findViewById(R.id.editReport_text_manufactureYear);
+        fuelType = view.findViewById(R.id.editReport_text_fuelType);
+        firstName = view.findViewById(R.id.editReport_text_firstName);
+        lastName = view.findViewById(R.id.editReport_text_lastName);
+        phoneNumber = view.findViewById(R.id.editReport_text_phoneNumber);
 
 
         Model.getInstance().getReportByID(reportId, (r) -> {
