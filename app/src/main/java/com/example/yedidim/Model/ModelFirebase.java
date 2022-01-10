@@ -179,20 +179,9 @@ public class ModelFirebase {
                 {
                     for(QueryDocumentSnapshot doc:task.getResult())
                     {
-//                        Report r = Report.fromJson(doc.getId(), doc.getData());
-//                        if(r != null)
-//                            reportsList.add(r);
-//                        //TODO: moved to report class as fromJson
-                        Map<String, Object> json = doc.getData();
-                        Report report = new Report();
-                        report.setReportID((String)doc.getId());
-                        report.setProblem((String)json.get("problem"));
-                        report.setNotes((String)json.get("notes"));
-                        report.setUserName((String)json.get("username"));
-                        report.setLatitude((double)json.get("latitude"));
-                        report.setLongitude((double)json.get("longitude"));
-                        reportsList.add(report);
-
+                        Report r = Report.fromJson(doc.getId(), doc.getData());
+                        if(r != null)
+                            reportsList.add(r);
                     }
                 }
                 else { }

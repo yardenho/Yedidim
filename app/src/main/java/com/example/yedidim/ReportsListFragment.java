@@ -22,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -163,8 +164,8 @@ public class ReportsListFragment extends Fragment {
             problem.setText(report.getProblem());
             location.setText(report.getLocation());
             String url = report.getReportUrl();
-            if(url != null){
-//                Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+            if(url != null && !url.equals("")){
+                Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
             }
             //TODO: IMAGE  error(R.drawable.camera1)
         }

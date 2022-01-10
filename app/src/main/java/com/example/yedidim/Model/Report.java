@@ -34,11 +34,11 @@ public class Report {
 
     public Report(){
     }
-    public Report(String id, String problem, String notes,String rUrl, String u, double longitude, double latitude){
+    public Report(String id, String problem, String notes,String rUrl, String user, double longitude, double latitude){
         this.reportID= id;
         this.problem=problem;
         this.notes=notes;
-        this.userName=u;
+        this.userName=user;
 //        this.image=iv;
         this.longitude=longitude;
         this.latitude=latitude;
