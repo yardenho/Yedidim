@@ -1,6 +1,8 @@
 package com.example.yedidim;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,11 +19,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 import com.example.yedidim.Model.User;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class ViewReportFragment extends Fragment {
@@ -37,6 +44,7 @@ public class ViewReportFragment extends Fragment {
     TextView firstNameTv;
     TextView lastNameTv;
     TextView phoneNumberTv;
+    ImageView photo;
     ImageButton mapBtn;
 
 
@@ -60,10 +68,7 @@ public class ViewReportFragment extends Fragment {
         lastNameTv = view.findViewById(R.id.viewReport_text_lastName);
         phoneNumberTv = view.findViewById(R.id.viewReport_text_phoneNumber);
         mapBtn = view.findViewById(R.id.viewReport_imageBtn_map);
-        //*****************************************************
-        //TODO: to add image references
-        //*****************************************************
-
+        photo = view.findViewById(R.id.viewReport_iv_image);
         viewModel.setUsername(ViewReportFragmentArgs.fromBundle(getArguments()).getUsername());
         viewModel.setReportId(ViewReportFragmentArgs.fromBundle(getArguments()).getReportID());
         Log.d("TAG", "username: " + viewModel.getUsername());
@@ -115,7 +120,19 @@ public class ViewReportFragment extends Fragment {
     {
         problemTv.setText(r.getProblem());
         notesTv.setText(r.getNotes());
-        //*****************************************************
+//        try {
+//            URL urlConnection = new URL(r.getReportUrl());
+//            HttpURLConnection connection = (HttpURLConnection) urlConnection
+//                    .openConnection();
+//            connection.setDoInput(true);
+//            connection.connect();
+//            InputStream input = connection.getInputStream();
+//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+//            photo.setImageBitmap(myBitmap);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    //*****************************************************
         //TODO: to add image assignment
         //*****************************************************
     }
