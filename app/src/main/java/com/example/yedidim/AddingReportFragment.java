@@ -127,6 +127,10 @@ public class AddingReportFragment extends Fragment {
                         activateGPS(report, v);
                     });
                 }
+                else{
+                    report.setReportUrl(null);
+                    activateGPS(report, v);
+                }
 //                report.setUserName(viewModel.getUsername());
 //                activateGPS(report, v);
 
