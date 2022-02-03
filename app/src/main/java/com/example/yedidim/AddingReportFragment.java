@@ -122,7 +122,7 @@ public class AddingReportFragment extends Fragment {
                 report.setNotes(noteEt.getText().toString());
                 report.setUserName(viewModel.getUsername());
                 if(bitmap != null) {
-                    Model.getInstance().saveImage(bitmap, "image1", url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                    Model.getInstance().saveImage(bitmap, report.getReportID(), url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
                         report.setReportUrl(url);
                         activateGPS(report, v);
                     });
