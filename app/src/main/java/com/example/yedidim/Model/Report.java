@@ -117,8 +117,6 @@ public class Report {
         if(userName == null)
             return null;
         String reportUrl = (String)json.get("reportUrl");
-            if(reportUrl==null)
-                return null;
         //TODO: add photo
         double latitude = (double)json.get("latitude");
         double longitude = (double)json.get("longitude");
