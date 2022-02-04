@@ -2,6 +2,7 @@ package com.example.yedidim;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -165,7 +166,11 @@ public class ReportsListFragment extends Fragment {
             location.setText(report.getLocation());
             String url = report.getReportUrl();
             if(url != null && !url.equals("")){
+                Log.d("TAG", "url = " + url);
                 Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+            }
+            else{
+                photo.setImageResource(R.drawable.camera1);
             }
             //TODO: IMAGE  error(R.drawable.camera1)
         }
