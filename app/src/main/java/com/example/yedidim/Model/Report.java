@@ -44,10 +44,6 @@ public class Report {
         this.latitude=latitude;
         this.reportUrl=rUrl;
     }
-    public String getReportUrl(){return reportUrl;}
-    public void setReportUrl(String rUrl){
-        reportUrl=rUrl;
-    }
 
     // setters
     public void setReportID(String reportID) {this.reportID = reportID;}
@@ -63,6 +59,9 @@ public class Report {
     public void setLongitude(double lo) {this.longitude = lo;}
     public void setLatitude(double la) {this.latitude = la;}
     public void setUserName(String userName) {this.userName = userName;}
+    public void setReportUrl(String rUrl){
+        reportUrl=rUrl;
+    }
 //    static public void addOneToIdCounter(){ idCounter +=1;}
 
 
@@ -71,7 +70,7 @@ public class Report {
     public String getProblem() {return problem;}
     public String getNotes() {return notes;}
     public String getReportID() {return reportID;}
-    //    public ImageView getImage() {return image;}   // TODO: need to add get for image
+    public String getReportUrl(){return reportUrl;}
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
     public String getLocation() {
@@ -86,7 +85,6 @@ public class Report {
         }
 //        String cityName = addresses.get(0).getAddressLine(0);
         String cityName = addresses.get(0).getAddressLine(0);
-        Log.d("TAG", "city:" + cityName);
         return addresses.get(0).getAddressLine(0);
     }
 //    static public long getIdCounter(){return idCounter;}
@@ -100,8 +98,6 @@ public class Report {
         json.put("longitude",longitude);
         json.put("latitude",latitude);
         json.put("reportUrl", reportUrl);
-        // TODO: need to add photo
-        // json.put("image", report.getImage());
         return json;
     }
 
@@ -111,13 +107,10 @@ public class Report {
         if(problem == null)
             return null;
         String notes = (String)json.get("notes");
-        if(notes == null)
-            return null;
         String userName = (String)json.get("username");
         if(userName == null)
             return null;
         String reportUrl = (String)json.get("reportUrl");
-        //TODO: add photo
         double latitude = (double)json.get("latitude");
         double longitude = (double)json.get("longitude");
         Report report = new Report(id, problem, notes,reportUrl, userName, longitude, latitude);
