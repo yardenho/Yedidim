@@ -329,7 +329,7 @@ public class ModelFirebase {
     public void saveImage(Bitmap bitmap,String name, Model.saveImageListener listener) {
         FirebaseStorage storage= FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference imageRef = storageRef.child("report"+ name+".jpg");
+        StorageReference imageRef = storageRef.child("report/"+ name+".jpg");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
