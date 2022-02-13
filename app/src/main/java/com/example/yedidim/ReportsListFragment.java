@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -61,7 +63,7 @@ public class ReportsListFragment extends Fragment {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Report r = viewModel.getReports().get(position);
+                Report r = viewModel.getReports().getValue().get(position);
                 ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(viewModel.getUserName(), r.getReportID());
                 Navigation.findNavController(v).navigate(action);
             }
@@ -76,21 +78,28 @@ public class ReportsListFragment extends Fragment {
         });
 
         setHasOptionsMenu(true);
-        refreshData();
+        if(viewModel.getReports() == null)
+            refreshData();
+        viewModel.getReports().observe(getViewLifecycleOwner(), (reportsList)-> {
+            adapter.notifyDataSetChanged();
+
+        });
         return view;
     }
 
     private void refreshData() {
-        swipeRefresh.setRefreshing(true);
-        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
-            @Override
-            public void onComplete(List<Report> d) {
-                viewModel.setReports(d);
-                adapter.notifyDataSetChanged();
-                if(swipeRefresh.isRefreshing())
-                    swipeRefresh.setRefreshing(false);
-            }
-        });
+//        swipeRefresh.setRefreshing(true);
+
+
+//        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
+//            @Override
+//            public void onComplete(List<Report> d) {
+//                viewModel.setReports(d);
+//                adapter.notifyDataSetChanged();
+//                if(swipeRefresh.isRefreshing())
+//                    swipeRefresh.setRefreshing(false);
+//            }
+//        });
     }
 
     @Override
@@ -201,13 +210,15 @@ public class ReportsListFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             //תחבר לי את הview עם הdata של אותה שורה
-            Report report = viewModel.getReports().get(position);
+            Report report = viewModel.getReports().getValue().get(position);
             holder.bind(report);
         }
 
         @Override
         public int getItemCount() {
-            return viewModel.getReports().size();
+            if(viewModel.getReports().getValue() == null)
+                return 0;
+            return viewModel.getReports().getValue().size();
         }
     }
 }

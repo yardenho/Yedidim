@@ -1,8 +1,12 @@
 package com.example.yedidim.Model;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.yedidim.MyApplication;
 
@@ -20,7 +24,10 @@ public class Model {
 
 
 
-    private Model(){}
+    private Model(){
+        reloadReportsList();
+    }
+
 
     public static Model getInstance(){
         return instance;
@@ -135,7 +142,7 @@ public class Model {
     public void getReportsList(GetAllReportsListener listener){
         // TODO: this belong to Firebase
 
-        modelFirebase.getReportsList(listener);
+//        modelFirebase.getReportsList(listener);
         // TODO: this belong to ROOM
 //        MyApplication.executorService.execute(()->{
 //            List <Report> data = AppLocalDB.db.reportDao().getAll();
@@ -146,9 +153,34 @@ public class Model {
     }
 
     //TODO: - NEW ! - using in the live data
-    public LiveData<List<Report>> getAllReports(){
+    MutableLiveData<List<Report>> reportsListLd = new MutableLiveData<List<Report>>();
+    private void reloadReportsList(){
+        //get local last update
+        Long localLastUpdate = Report.getLocalLastUpdated();
+        //get all reports records since local last update from firebase
+        modelFirebase.getReportsList(localLastUpdate,(list)->{
 
-        return null;
+            MyApplication.executorService.execute(()->{
+                //update local last update date
+                //add new record to the local db
+                Long lLastUpdate = new Long(0);
+                for(Report r : list) {
+                    AppLocalDB.db.reportDao().insertAll(r);
+                    if(r.getLastUpdated() > lLastUpdate){
+                        lLastUpdate = r.getLastUpdated();
+                    }
+                }
+                Report.setLocalLastUpdated(lLastUpdate);
+                //return all records to the caller
+                List<Report> repList = AppLocalDB.db.reportDao().getAll();
+                reportsListLd.postValue(repList);
+            });
+
+        });
+    }
+
+    public LiveData<List<Report>> getAllReports(){
+        return reportsListLd;
     }
 
     public interface addNewReportListener{
@@ -158,7 +190,13 @@ public class Model {
     public void addNewReport(Report report,addNewReportListener listener){
         // TODO: this belong to Firebase
 
-        modelFirebase.addNewReport(report, listener);
+//        modelFirebase.addNewReport(report, listener);
+        //TODO: related to live data, used: when there is a new report this will let know the list to refresh
+        modelFirebase.addNewReport(report, ()->{
+            reloadReportsList();
+            listener.onComplete();
+        });
+
         // TODO: this belong to ROOM
 //        report.setReportID("1");
 //        MyApplication.executorService.execute(()->{

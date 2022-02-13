@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,10 +27,13 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class ModelFirebase {
+    final static String REPORTS = "reports";
+    final static String USERS = "users";
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void getUsersList(Model.GetAllUsersListener listener) {
-        db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection(USERS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 LinkedList<User> usersList = new LinkedList<User>();
@@ -75,7 +79,7 @@ public class ModelFirebase {
 //        json.put("fuelType", user.getFuelType());
 
         // Add a new document with a username as the ID
-        db.collection("users").document(user.getUserName()).set(user.toJson())
+        db.collection(USERS).document(user.getUserName()).set(user.toJson())
                 .addOnSuccessListener((successListener)-> {
                     listener.onComplete();
 
@@ -87,7 +91,7 @@ public class ModelFirebase {
     }
 
     public void getUserByUserName(String userName, Model.getUserByUserNameListener listener) {
-        DocumentReference docRef = db.collection("users").document(userName);
+        DocumentReference docRef = db.collection(USERS).document(userName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             // TODO: need to handle cases were student returns as null
@@ -123,7 +127,7 @@ public class ModelFirebase {
 
     public void deleteUser(User user, Model.deleteUserListener listener) {
         //TODO: when we delete the user - to delete all his reports too ?
-        db.collection("users").document(user.getUserName())
+        db.collection(USERS).document(user.getUserName())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -155,7 +159,7 @@ public class ModelFirebase {
 //        json.put("fuelType", user.getFuelType());
 
         // update an existing document document with a username as the ID
-        db.collection("users").document(user.getUserName()).set(user.toJson())
+        db.collection(USERS).document(user.getUserName()).set(user.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -170,8 +174,9 @@ public class ModelFirebase {
                 });
     }
 
-    public void getReportsList(Model.GetAllReportsListener listener) {
-        db.collection("reports").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void getReportsList(Long since, Model.GetAllReportsListener listener) {
+        db.collection(REPORTS).whereGreaterThanOrEqualTo(Report.LAST_UPDATED,new Timestamp(since, 0))
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 LinkedList<Report> reportsList = new LinkedList<Report>();
@@ -206,7 +211,7 @@ public class ModelFirebase {
         // Add a new document
 
         //TODO: check that value of method works
-        db.collection("reports").add(report.toJson())
+        db.collection(REPORTS).add(report.toJson())
                 .addOnSuccessListener((successListener)-> {
                     listener.onComplete();
                     // TODO: get reportID with documentReference.getId()
@@ -219,7 +224,7 @@ public class ModelFirebase {
     
 
     public void getReportByID(String reportID, Model.getReportByReportIDListener listener) {
-        DocumentReference docRef = db.collection("reports").document(reportID);
+        DocumentReference docRef = db.collection(REPORTS).document(reportID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             // TODO: need to handle cases were student returns as null
@@ -251,7 +256,7 @@ public class ModelFirebase {
     }
 
     public void deleteReport(Report report, Model.deleteReportListener listener) {
-        db.collection("reports").document(report.getReportID())
+        db.collection(REPORTS).document(report.getReportID())
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -281,7 +286,7 @@ public class ModelFirebase {
         // json.put("image", report.getImage());
 
         // edit an existing document
-        db.collection("reports").document(report.getReportID()).set(report.toJson())
+        db.collection(REPORTS).document(report.getReportID()).set(report.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -297,7 +302,7 @@ public class ModelFirebase {
     }
 
     public void getUserReportsList(String username, Model.GetUserReportsListener listener) {
-        db.collection("reports").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection(REPORTS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 LinkedList<Report> reportsList = new LinkedList<Report>();
