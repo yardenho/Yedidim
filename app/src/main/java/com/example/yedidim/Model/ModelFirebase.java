@@ -211,6 +211,18 @@ public class ModelFirebase {
         // Add a new document
 
         //TODO: check that value of method works
+        Task<DocumentReference> ref = db.collection(REPORTS).add(report.toJson());
+        ref.addOnSuccessListener((successListener)-> {
+            listener.onComplete();
+            Log.d( "TAGs", ref.getResult().getId());
+            // TODO: get reportID with documentReference.getId()
+        })
+                .addOnFailureListener((e)-> {
+                    Log.d("TAG", e.getMessage());
+
+                });
+
+        /*  try
         db.collection(REPORTS).add(report.toJson())
                 .addOnSuccessListener((successListener)-> {
                     listener.onComplete();
@@ -220,6 +232,8 @@ public class ModelFirebase {
                     Log.d("TAG", e.getMessage());
 
                 });
+
+         */
     }
     
 

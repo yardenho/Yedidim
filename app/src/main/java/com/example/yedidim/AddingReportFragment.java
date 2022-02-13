@@ -41,22 +41,24 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class AddingReportFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE=1;
     private AddingReportViewModel viewModel;
-//    public Report report = new Report();
     private Button cancelBtn;
     private Button reportBtn;
     private EditText problemEt;
     private EditText noteEt;
     private ImageView photo;
     private ImageButton photoIBtn;
-    Bitmap bitmap;
-    // צריך להוסיף שדה של תמונה? - לצפות איך עושים הקלטה 11!!!!!!!!!!!!
-    //****************************************
-
+    Bitmap bitmap;    // maybe we need to put it in view model??
     FusedLocationProviderClient fusedLocationProviderClient;
 
     public AddingReportFragment() {
@@ -77,10 +79,6 @@ public class AddingReportFragment extends Fragment {
         noteEt = view.findViewById(R.id.addingReport_et_notes);
         photoIBtn = view.findViewById(R.id.addingReport_ibtn_photo);
         photo = view.findViewById(R.id.addingReport_iv_photo);
-        //******************************************************************************************
-        //// to add the photo adding implementation !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //******************************************************************************************
-
         cancelBtn = view.findViewById(R.id.addingReport_btn_cancel);
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
         ProgressBar pb = view.findViewById(R.id.addingReport_progressBar);
@@ -122,7 +120,8 @@ public class AddingReportFragment extends Fragment {
                 report.setNotes(noteEt.getText().toString());
                 report.setUserName(viewModel.getUsername());
                 if(bitmap != null) {
-                    Model.getInstance().saveImage(bitmap, report.getReportID(), url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                    Model.getInstance().saveImage(bitmap, report.getUserName()+ currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
                         report.setReportUrl(url);
                         activateGPS(report, v);
                     });
