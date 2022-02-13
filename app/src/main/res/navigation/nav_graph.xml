@@ -120,11 +120,6 @@
             app:nullable="true" />
     </fragment>
     <fragment
-        android:id="@+id/testFrag"
-        android:name="com.example.yedidim.testFrag"
-        android:label="testFrag"
-        tools:layout="@layout/fragment_test" />
-    <fragment
         android:id="@+id/reportsListFragment"
         android:name="com.example.yedidim.ReportsListFragment"
         android:label="Reports List"
