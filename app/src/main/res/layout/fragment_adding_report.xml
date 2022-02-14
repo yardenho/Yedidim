@@ -117,19 +117,36 @@
             android:id="@+id/addingReport_iv_photo"
             android:layout_width="245dp"
             android:layout_height="270dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/addingReport_tv_addPhoto"
-            app:layout_constraintStart_toEndOf="@+id/addingReport_tv_addPhoto"
-            app:layout_constraintTop_toTopOf="@+id/addingReport_tv_addPhoto"
-            app:layout_constraintVertical_bias="0.0"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addingReport_ibtn_photo"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <ImageButton
             android:id="@+id/addingReport_ibtn_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/addingReport_iv_photo"
-            app:layout_constraintTop_toTopOf="@+id/addingReport_iv_photo"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/addingReport_tv_addPhoto"
+            app:layout_constraintStart_toEndOf="@+id/addingReport_tv_addPhoto"
+            app:layout_constraintTop_toTopOf="@+id/addingReport_tv_addPhoto"
             app:srcCompat="@android:drawable/ic_input_add" />
+
+        <ImageButton
+            android:id="@+id/addingReport_ib_gallery"
+            android:layout_width="60dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="1dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/addingReport_ibtn_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.013"
+            app:layout_constraintStart_toEndOf="@+id/addingReport_ibtn_photo"
+            app:layout_constraintTop_toTopOf="@+id/addingReport_ibtn_photo"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/gallery_icon_new" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

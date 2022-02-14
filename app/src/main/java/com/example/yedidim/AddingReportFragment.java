@@ -4,12 +4,14 @@ package com.example.yedidim;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -44,6 +46,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -51,6 +55,7 @@ import java.util.Locale;
 
 public class AddingReportFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE=1;
+    static final int GET_FROM_GALLERY=2;
     private AddingReportViewModel viewModel;
     private Button cancelBtn;
     private Button reportBtn;
@@ -58,6 +63,7 @@ public class AddingReportFragment extends Fragment {
     private EditText noteEt;
     private ImageView photo;
     private ImageButton photoIBtn;
+    private ImageButton galleryBtn;
     Bitmap bitmap;    // maybe we need to put it in view model??
     FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -78,6 +84,7 @@ public class AddingReportFragment extends Fragment {
         problemEt = view.findViewById(R.id.addingReport_et_problem);
         noteEt = view.findViewById(R.id.addingReport_et_notes);
         photoIBtn = view.findViewById(R.id.addingReport_ibtn_photo);
+        galleryBtn = view.findViewById(R.id.addingReport_ib_gallery);
         photo = view.findViewById(R.id.addingReport_iv_photo);
         cancelBtn = view.findViewById(R.id.addingReport_btn_cancel);
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
@@ -106,6 +113,11 @@ public class AddingReportFragment extends Fragment {
 //            if(intent.resolveActivity(getActivity().getPackageManager()) != null){
 //                getActivity().startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
 //            }
+        });
+
+        galleryBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            startActivityForResult(intent, GET_FROM_GALLERY);
         });
 
         reportBtn.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +157,19 @@ public class AddingReportFragment extends Fragment {
             Bundle bundle = data.getExtras();
             bitmap = (Bitmap) bundle.get("data");
             photo.setImageBitmap(bitmap);
+        }
+        else if(requestCode==GET_FROM_GALLERY && resultCode == RESULT_OK) {
+            Uri selectedImage = data.getData();
+            bitmap = null;
+            try {
+                bitmap = (Bitmap)MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                photo.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                Log.d("TAGS", "file not found");
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

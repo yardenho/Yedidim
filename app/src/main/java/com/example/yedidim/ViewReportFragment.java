@@ -71,14 +71,14 @@ public class ViewReportFragment extends Fragment {
         photo = view.findViewById(R.id.viewReport_iv_image);
         viewModel.setUsername(ViewReportFragmentArgs.fromBundle(getArguments()).getUsername());
         viewModel.setReportId(ViewReportFragmentArgs.fromBundle(getArguments()).getReportID());
-        Log.d("TAG", "username: " + viewModel.getUsername());
-        Log.d("TAG", "reportID: " + viewModel.getReportId());
+
 
 
         Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
             @Override
             public void onComplete(User user) {
                 u=user;
+                //TODO: need to decide what to if user is null
                 if(u == null)
                     Log.d("TAG", "user is null");
                 updateUserDetailsDisplay(u);
