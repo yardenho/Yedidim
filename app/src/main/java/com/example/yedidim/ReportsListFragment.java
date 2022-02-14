@@ -150,14 +150,12 @@ public class ReportsListFragment extends Fragment {
         TextView problem;
         TextView location;
         ImageView photo;
-        //TODO image
 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             problem = itemView.findViewById(R.id.reportListRow_problem);
             location = itemView.findViewById(R.id.reportListRow_location);
             photo = itemView.findViewById(R.id.reportListRow_iv);
-            // TODO image
             this.listener = listener;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

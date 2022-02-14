@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 import com.example.yedidim.Model.User;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -73,18 +74,6 @@ public class ViewReportFragment extends Fragment {
         viewModel.setReportId(ViewReportFragmentArgs.fromBundle(getArguments()).getReportID());
 
 
-
-//        Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
-//            @Override
-//            public void onComplete(User user) {
-//                u=user;
-//                //TODO: need to decide what to if user is null
-//                if(u == null)
-//                    Log.d("TAG", "user is null");
-//                updateUserDetailsDisplay(u);
-//            }
-//        });
-
         Model.getInstance().getReportByID(viewModel.getReportId(), new Model.getReportByReportIDListener() {
             @Override
             public void onComplete(Report report) {
@@ -116,37 +105,27 @@ public class ViewReportFragment extends Fragment {
         phoneNumberTv.setText(u.getPhoneNumber());
     }
 
-    public void updateReportDetailsDisplay(Report r)
-    {
+    public void updateReportDetailsDisplay(Report r) {
         Model.getInstance().getUserByUserName(r.getUserName(), new Model.getUserByUserNameListener() {
             @Override
             public void onComplete(User user) {
-                u=user;
+                u = user;
                 //TODO: need to decide what to if user is null
-                if(u == null)
+                if (u == null)
                     Log.d("TAG", "user is null");
                 updateUserDetailsDisplay(u);
             }
         });
         problemTv.setText(r.getProblem());
         notesTv.setText(r.getNotes());
-//        try {
-//            URL urlConnection = new URL(r.getReportUrl());
-//            HttpURLConnection connection = (HttpURLConnection) urlConnection
-//                    .openConnection();
-//            connection.setDoInput(true);
-//            connection.connect();
-//            InputStream input = connection.getInputStream();
-//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-//            photo.setImageBitmap(myBitmap);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    //*****************************************************
-        //TODO: to add image assignment
-        //*****************************************************
+        String url = r.getReportUrl();
+        if (url != null && !url.equals("")) {
+            Log.d("TAG", "url = " + url);
+            Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+        } else {
+            photo.setImageResource(R.drawable.camera1);
+        }
     }
-
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

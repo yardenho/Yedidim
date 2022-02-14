@@ -212,14 +212,16 @@
 
         <ImageView
             android:id="@+id/viewReport_iv_image"
-            android:layout_width="144dp"
-            android:layout_height="113dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="196dp"
+            android:layout_height="165dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="5dp"
             android:src="@android:drawable/ic_menu_camera"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewReport_tv_phoneNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/viewReport_tv_phoneNumber"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/viewReport_imageBtn_map"
