@@ -270,8 +270,9 @@ public class ModelFirebase {
     }
 
     public void deleteReport(Report report, Model.deleteReportListener listener) {
+        report.setIsDeleted(true);
         db.collection(REPORTS).document(report.getReportID())
-                .delete()
+                .set(report.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -284,6 +285,20 @@ public class ModelFirebase {
                         Log.w("TAG", "Error deleting document ", e);
                     }
                 });
+//        db.collection(REPORTS).document(report.getReportID())
+//                .delete()
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        listener.onComplete(); //TODO: ????
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("TAG", "Error deleting document ", e);
+//                    }
+//                });
     }
 
     public void editReport(Report report, Model.editReportListener listener) {

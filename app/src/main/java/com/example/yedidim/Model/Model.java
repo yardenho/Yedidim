@@ -166,6 +166,8 @@ public class Model {
                 Long lLastUpdate = new Long(0);
                 for(Report r : list) {
                     AppLocalDB.db.reportDao().insertAll(r);
+                    if(r.getIsDeleted())// if the report is deleted in the firebase, delete hom from the cache
+                        AppLocalDB.db.reportDao().delete(r);
                     if(r.getLastUpdated() > lLastUpdate){
                         lLastUpdate = r.getLastUpdated();
                     }
@@ -194,7 +196,6 @@ public class Model {
         //TODO: related to live data, used: when there is a new report this will let know the list to refresh
         modelFirebase.addNewReport(report, ()->{
             reloadReportsList();
-            //I added this
             listener.onComplete();
         });
 
@@ -234,9 +235,15 @@ public class Model {
 
     public void deleteReport(Report report,deleteReportListener listener )
     {
-        // TODO: this belong to Firebase
+        modelFirebase.deleteReport(report,()->{
+            reloadReportsList();
+            listener.onComplete();
+        });
 
-        modelFirebase.deleteReport(report, listener);
+
+        // TODO: this belong to Firebase
+        //זה מה שהיה לפני ששיניתי- להחזיר את שורה מתחת אם מה שני מנסה לא עובד לי
+//        modelFirebase.deleteReport(report, listener);
         // TODO: this belong to ROOM
 
 //        MyApplication.executorService.execute(()->{
@@ -252,9 +259,15 @@ public class Model {
     }
 
     public void editReport(Report report,editReportListener listener){
-        // TODO: this belong to Firebase
+        modelFirebase.editReport(report, ()->{
+            reloadReportsList();
+            listener.onComplete();
+        });
 
-        modelFirebase.editReport(report, listener);
+
+        // TODO: this belong to Firebase
+        //זה מה שהיה לפני ששיניתי- להחזיר את השורה מתחת  אם מה שני מנסה לא עובד לי
+//        modelFirebase.editReport(report, listener);
         // TODO: this belong to ROOM
 
 //        MyApplication.executorService.execute(()->{
@@ -284,7 +297,6 @@ public class Model {
 ////        });
 //    }
 
-    //TODO: NEWWWWWWWWWWWWWWWW
     MutableLiveData<List<Report>> userReportsListLd = new MutableLiveData<List<Report>>();
 
     public LiveData<List<Report>> getAllUserReports(){
@@ -302,7 +314,10 @@ public class Model {
                 //add new record to the local db
                 Long lLastUpdate = new Long(0);
                 for(Report r : list) {
+
                     AppLocalDB.db.reportDao().insertAll(r);
+                    if(r.getIsDeleted()) // if the report is deleted in the firebase, delete hom from the cache
+                        AppLocalDB.db.reportDao().delete(r);
                     if(r.getLastUpdated() > lLastUpdate){
                         lLastUpdate = r.getLastUpdated();
                     }

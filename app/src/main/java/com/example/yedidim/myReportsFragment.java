@@ -78,7 +78,8 @@ public class myReportsFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         //TODO: refresh list
-                        refreshData();
+                        Model.getInstance().reloadUserReportsList(viewModel.getUsername());//for updating the list of the user reports
+//                        refreshData(); // זה מה שהיה ועבד לפני שהוספתי את השורה למעלה
                     }
                 });
             }

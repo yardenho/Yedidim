@@ -83,6 +83,7 @@ public class EditReportFragment extends Fragment {
                 Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {
                     @Override
                     public void onComplete() {
+                        Model.getInstance().reloadUserReportsList(viewModel.getUserName());//for updating the list of the user reports
                         Navigation.findNavController(view).navigateUp();
                     }
                 });
