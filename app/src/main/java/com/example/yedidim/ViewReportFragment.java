@@ -78,9 +78,8 @@ public class ViewReportFragment extends Fragment {
             @Override
             public void onComplete(Report report) {
                 r=report;
-                if(r == null)
-                    Log.d("TAG", "report is null");
-                updateReportDetailsDisplay(r);
+                if(r != null)
+                    updateReportDetailsDisplay(r);
             }
         });
 
@@ -111,9 +110,8 @@ public class ViewReportFragment extends Fragment {
             public void onComplete(User user) {
                 u = user;
                 //TODO: need to decide what to if user is null
-                if (u == null)
-                    Log.d("TAG", "user is null");
-                updateUserDetailsDisplay(u);
+                if (u != null)
+                    updateUserDetailsDisplay(u);
             }
         });
         problemTv.setText(r.getProblem());

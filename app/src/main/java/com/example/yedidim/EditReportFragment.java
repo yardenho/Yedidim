@@ -7,15 +7,18 @@ import androidx.navigation.Navigation;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
+import com.squareup.picasso.Picasso;
 
 
 public class EditReportFragment extends Fragment {
@@ -30,6 +33,7 @@ public class EditReportFragment extends Fragment {
     private TextView phoneNumber;
     private Button cancelBtn;
     private Button saveBtn;
+    private ImageView photo;
     View view;
 
 
@@ -58,6 +62,7 @@ public class EditReportFragment extends Fragment {
         firstName = view.findViewById(R.id.editReport_text_firstName);
         lastName = view.findViewById(R.id.editReport_text_lastName);
         phoneNumber = view.findViewById(R.id.editReport_text_phoneNumber);
+        photo = view.findViewById(R.id.editReport_iv_photo);
 
 
         Model.getInstance().getReportByID(reportId, (r) -> {
@@ -104,19 +109,23 @@ public class EditReportFragment extends Fragment {
     private void showReportDetails() {
         problem.setText(viewModel.getReport().getProblem());
         notes.setText(viewModel.getReport().getNotes());
-        //TODO: add image
         Model.getInstance().getUserByUserName(viewModel.getReport().getUserName(), (u) ->
         {
             showUserDetails(u);
         });
-
-
+        String url = viewModel.getReport().getReportUrl();
+        if (url != null && !url.equals("")) {
+            Log.d("TAG", "url = " + url);
+            Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+        } else {
+            photo.setImageResource(R.drawable.camera1);
+        }
     }
 
     private void setDetails() {
         viewModel.getReport().setProblem(problem.getText().toString());
         viewModel.getReport().setNotes(notes.getText().toString());
-        //TODO set picture
+        //TODO do we want to add picture here
     }
 
 }
