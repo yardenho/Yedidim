@@ -125,7 +125,7 @@ public class EditReportFragment extends Fragment {
     private void setDetails() {
         viewModel.getReport().setProblem(problem.getText().toString());
         viewModel.getReport().setNotes(notes.getText().toString());
-        //TODO do we want to add picture here
+        //TODO do we want to add picture here?
     }
 
 }
