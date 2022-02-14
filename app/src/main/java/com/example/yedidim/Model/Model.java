@@ -194,6 +194,7 @@ public class Model {
         //TODO: related to live data, used: when there is a new report this will let know the list to refresh
         modelFirebase.addNewReport(report, ()->{
             reloadReportsList();
+            //I added this
             listener.onComplete();
         });
 
@@ -269,18 +270,52 @@ public class Model {
         void onComplete(List<Report> data);
     }
 
-    public void getUserReportsList(String username, GetUserReportsListener listener){
-        // TODO: this belong to Firebase
-        modelFirebase.getUserReportsList(username, listener);
 
-        // TODO: this belong to ROOM
-//        MyApplication.executorService.execute(()->{
-//            List <Report> data = AppLocalDB.db.reportDao().getMyReports(username);
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete(data);
-//            });
-//        });
+//    public void getUserReportsList(String username, GetUserReportsListener listener){
+//        // TODO: this belong to Firebase
+//        modelFirebase.getUserReportsList(username, listener);
+//
+//        // TODO: this belong to ROOM
+////        MyApplication.executorService.execute(()->{
+////            List <Report> data = AppLocalDB.db.reportDao().getMyReports(username);
+////            MyApplication.mainHandler.post(()->{
+////                listener.onComplete(data);
+////            });
+////        });
+//    }
+
+    //TODO: NEWWWWWWWWWWWWWWWW
+    MutableLiveData<List<Report>> userReportsListLd = new MutableLiveData<List<Report>>();
+
+    public LiveData<List<Report>> getAllUserReports(){
+        return userReportsListLd;
     }
+
+    public void reloadUserReportsList(String userName){
+        //get local last update
+        Long localLastUpdate = Report.getLocalLastUpdated();
+        //get all reports records since local last update from firebase
+        modelFirebase.getUserReportsList(userName, localLastUpdate,(list)->{
+
+            MyApplication.executorService.execute(()->{
+                //update local last update date
+                //add new record to the local db
+                Long lLastUpdate = new Long(0);
+                for(Report r : list) {
+                    AppLocalDB.db.reportDao().insertAll(r);
+                    if(r.getLastUpdated() > lLastUpdate){
+                        lLastUpdate = r.getLastUpdated();
+                    }
+                }
+                Report.setLocalLastUpdated(lLastUpdate);
+                //return all records to the caller
+                List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userName);
+                userReportsListLd.postValue(userRepList);
+            });
+
+        });
+    }
+
 
 }
 

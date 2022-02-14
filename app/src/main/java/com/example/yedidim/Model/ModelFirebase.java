@@ -315,8 +315,9 @@ public class ModelFirebase {
                 });
     }
 
-    public void getUserReportsList(String username, Model.GetUserReportsListener listener) {
-        db.collection(REPORTS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void getUserReportsList(String username, Long since, Model.GetUserReportsListener listener) {
+        db.collection(REPORTS).whereGreaterThanOrEqualTo(Report.LAST_UPDATED,new Timestamp(since, 0))
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 LinkedList<Report> reportsList = new LinkedList<Report>();

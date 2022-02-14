@@ -50,6 +50,10 @@ public class myReportsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_reports, container, false);
         viewModel.setUsername(MyProfileFragmentArgs.fromBundle(getArguments()).getUsername());
+
+        Model.getInstance().reloadUserReportsList(viewModel.getUsername());
+        viewModel.setMyReports(Model.getInstance().getAllUserReports());
+
         RecyclerView list = view.findViewById(R.id.myReports_recycler);
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -60,7 +64,7 @@ public class myReportsFragment extends Fragment {
         adapter.setOnItemClickListener(new myReportsFragment.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Report r = viewModel.getMyReports().get(position);
+                Report r = viewModel.getMyReports().getValue().get(position);
                 myReportsFragmentDirections.ActionMyReportsFragmentToViewReportFragment action = myReportsFragmentDirections.actionMyReportsFragmentToViewReportFragment(viewModel.getUsername(), r.getReportID());
                 Navigation.findNavController(v).navigate(action);
             }
@@ -69,7 +73,7 @@ public class myReportsFragment extends Fragment {
         adapter.setOnDeleteClickListener(new OnDeleteClickListener() {
             @Override
             public void OnDeleteClick(int position) {
-                Report r = viewModel.getMyReports().get(position);
+                Report r = viewModel.getMyReports().getValue().get(position);
                 Model.getInstance().deleteReport(r, new Model.deleteReportListener() {
                     @Override
                     public void onComplete() {
@@ -83,7 +87,7 @@ public class myReportsFragment extends Fragment {
         adapter.setOnEditClickListener(new OnEditClickListener() {
             @Override
             public void OnEditClick(int position) {
-                Report r = viewModel.getMyReports().get(position);
+                Report r = viewModel.getMyReports().getValue().get(position);
                 Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionMyReportsFragmentToEditReportFragment(viewModel.getUsername(), r.getReportID()));
                 //TODO: refresh data
 
@@ -97,24 +101,29 @@ public class myReportsFragment extends Fragment {
                 refreshData();
             }
         });
-        if(viewModel.getMyReports().size() == 0)
-            refreshData();
         setHasOptionsMenu(true);
+
+        if(viewModel.getMyReports().getValue() == null)
+            refreshData();
+        viewModel.getMyReports().observe(getViewLifecycleOwner(), (reportsList)-> {
+            adapter.notifyDataSetChanged();
+
+        });
         return view;
     }
 
     public void refreshData(){
-        swipeRefresh.setRefreshing(true);
-
-        Model.getInstance().getUserReportsList(viewModel.getUsername(), new Model.GetUserReportsListener() {
-            @Override
-            public void onComplete(List<Report> data) {
-                viewModel.setMyReports(data);
-                adapter.notifyDataSetChanged();
-                if(swipeRefresh.isRefreshing())
-                    swipeRefresh.setRefreshing(false);
-            }
-        });
+//        swipeRefresh.setRefreshing(true);
+//
+//        Model.getInstance().getUserReportsList(viewModel.getUsername(), new Model.GetUserReportsListener() {
+//            @Override
+//            public void onComplete(List<Report> data) {
+////                viewModel.setMyReports(data); // אני הורדתי לבדוק מול אליאב, הורדתי כי זה העלה הערה
+//                adapter.notifyDataSetChanged();
+//                if(swipeRefresh.isRefreshing())
+//                    swipeRefresh.setRefreshing(false);
+//            }
+//        });
     }
 
     @Override
@@ -230,13 +239,15 @@ public class myReportsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            Report report = viewModel.getMyReports().get(position);
+            Report report = viewModel.getMyReports().getValue().get(position);
             holder.bind(report);
         }
 
         @Override
         public int getItemCount() {
-            return viewModel.getMyReports().size();
+            if(viewModel.getMyReports().getValue() == null)
+                return 0;
+            return viewModel.getMyReports().getValue().size();
         }
     }
 }

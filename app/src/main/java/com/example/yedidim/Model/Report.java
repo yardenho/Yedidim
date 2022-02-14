@@ -23,7 +23,6 @@ import java.util.Map;
 
 @Entity
 public class Report {
-//    static private long idCounter = 0;  //TODO: אולי אין בזה צורך (לבדוק אם למחוק)
     final static String PROBLEM = "problem";
     final static String NOTES = "notes";
     final static String USERNAME = "username";
@@ -32,10 +31,7 @@ public class Report {
     final static String LONGITUDE = "longitude";
     public final static String LAST_UPDATED = "lastUpdated";
     final static String REPORTS_LAST_UPDATE = "REPORTS_LAST_UPDATE";
-
-
-
-
+    final static String IS_DELETED = "isDeleted";
     @PrimaryKey
     @NonNull
     private String reportID;
@@ -44,10 +40,9 @@ public class Report {
     private String userName;
     private String reportUrl="";
     private Long lastUpdated = new Long(0);
-
-    //    private ImageView image; // כשנוסיף העלאת תמונה אולי נשנה את הסוג
     private double longitude;
     private double latitude;
+    private boolean isDeleted;
 
     public Report(){
     }
@@ -61,6 +56,7 @@ public class Report {
         this.latitude=latitude;
         this.reportUrl=rUrl;
         this.lastUpdated = lastUpdated;
+        this.isDeleted = false;
     }
 
     // setters
@@ -84,6 +80,7 @@ public class Report {
     public void setLastUpdated(Long lastUpdated){
         this.lastUpdated = lastUpdated;
     }
+    public void setIsDeleted(boolean state){this.isDeleted = state;}
 
     //getters
     public String getUserName() {return userName;}
@@ -112,6 +109,7 @@ public class Report {
     public Long getLastUpdated(){
         return lastUpdated;
     }
+    public boolean getIsDeleted(){return isDeleted;}
 
     public Map<String, Object> toJson(){
         Map<String, Object> json = new HashMap<>();
@@ -123,6 +121,7 @@ public class Report {
         json.put(LATITUDE,latitude);
         json.put(REPORT_URL, reportUrl);
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
+        json.put(IS_DELETED, isDeleted);
         return json;
     }
 
@@ -140,7 +139,9 @@ public class Report {
         double longitude = (double)json.get(LONGITUDE);
         Timestamp ts = (Timestamp) json.get(LAST_UPDATED);
         Long lastUpdated = new Long(ts.getSeconds());
+        boolean state = (boolean) json.get(IS_DELETED);
         Report report = new Report(id, problem, notes,reportUrl, userName, longitude, latitude, lastUpdated);
+        report.setIsDeleted(state);
         return report;
     }
 
