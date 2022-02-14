@@ -74,16 +74,16 @@ public class ViewReportFragment extends Fragment {
 
 
 
-        Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
-            @Override
-            public void onComplete(User user) {
-                u=user;
-                //TODO: need to decide what to if user is null
-                if(u == null)
-                    Log.d("TAG", "user is null");
-                updateUserDetailsDisplay(u);
-            }
-        });
+//        Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
+//            @Override
+//            public void onComplete(User user) {
+//                u=user;
+//                //TODO: need to decide what to if user is null
+//                if(u == null)
+//                    Log.d("TAG", "user is null");
+//                updateUserDetailsDisplay(u);
+//            }
+//        });
 
         Model.getInstance().getReportByID(viewModel.getReportId(), new Model.getReportByReportIDListener() {
             @Override
@@ -118,6 +118,16 @@ public class ViewReportFragment extends Fragment {
 
     public void updateReportDetailsDisplay(Report r)
     {
+        Model.getInstance().getUserByUserName(r.getUserName(), new Model.getUserByUserNameListener() {
+            @Override
+            public void onComplete(User user) {
+                u=user;
+                //TODO: need to decide what to if user is null
+                if(u == null)
+                    Log.d("TAG", "user is null");
+                updateUserDetailsDisplay(u);
+            }
+        });
         problemTv.setText(r.getProblem());
         notesTv.setText(r.getNotes());
 //        try {
