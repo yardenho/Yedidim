@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,8 @@ public class ReportsListFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_reports_list, container, false);
         viewModel.setUserName(ReportsListFragmentArgs.fromBundle(getArguments()).getUsername());
-
+        ProgressBar pb = view.findViewById(R.id.reportList_progressBar);
+        pb.setVisibility(View.VISIBLE);
         RecyclerView list = view.findViewById(R.id.reportsList_recycler);
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -89,7 +91,7 @@ public class ReportsListFragment extends Fragment {
         Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
         });
-
+        pb.setVisibility(View.GONE);
         return view;
     }
 

@@ -61,7 +61,7 @@ public class MapFragment extends Fragment {
                         googleMap.addMarker(new MarkerOptions().position(new LatLng(r.getLatitude(), r.getLongitude())).title("Marker in " + r.getLocation())).setTag(r.getReportID());
                     //TODO: thy to set the camera on israel, not working to fix!
                     LatLng Israel = new LatLng(31.3555, 34.3565);
-                    float zoomLevel = 5.0f;
+                    float zoomLevel = 7.0f;
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Israel, zoomLevel));
                 }
 
@@ -71,7 +71,7 @@ public class MapFragment extends Fragment {
                         public void onComplete(Report report) {
                             LatLng loc = new LatLng(report.getLatitude(), report.getLongitude());
                             googleMap.addMarker(new MarkerOptions().position(loc).title("Marker in " + report.getLocation())).setTag(report.getReportID());
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 10.0f));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 11.0f));
                         }
                     });
                 }

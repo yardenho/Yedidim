@@ -1,5 +1,7 @@
 package com.example.yedidim;
 
+import static java.lang.Thread.sleep;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
@@ -53,7 +56,8 @@ public class myReportsFragment extends Fragment {
 
         Model.getInstance().reloadUserReportsList(viewModel.getUsername());
         viewModel.setMyReports(Model.getInstance().getAllUserReports());
-
+        ProgressBar pb = view.findViewById(R.id.myReports_progressBar);
+        pb.setVisibility(View.VISIBLE);
         RecyclerView list = view.findViewById(R.id.myReports_recycler);
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -116,6 +120,7 @@ public class myReportsFragment extends Fragment {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
         });
 
+        pb.setVisibility(View.GONE);
         return view;
     }
 

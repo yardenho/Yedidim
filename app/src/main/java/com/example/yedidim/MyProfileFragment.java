@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
@@ -32,6 +33,7 @@ public class MyProfileFragment extends Fragment {
     Button editProfileBtn;
     Button deleteAccountBtn;
     View view;
+    ProgressBar pb;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -54,6 +56,8 @@ public class MyProfileFragment extends Fragment {
         carNumberTv = view.findViewById(R.id.myProfile_text_carNumber);
         editProfileBtn = view.findViewById(R.id.myProfile_btn_editProfile);
         deleteAccountBtn = view.findViewById(R.id.myProfile_btn_deleteAccount);
+        pb = view.findViewById(R.id.myProfile_progressBar);
+        pb.setVisibility(View.VISIBLE);
 
         viewModel.setUsername(MyProfileFragmentArgs.fromBundle(getArguments()).getUsername());
         Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
@@ -104,6 +108,7 @@ public class MyProfileFragment extends Fragment {
         lastNameTv.setText(u.getLastName());
         phoneNumberTv.setText(u.getPhoneNumber());
         carNumberTv.setText(u.getCarNumber());
+        pb.setVisibility(View.GONE);
     }
 
 
