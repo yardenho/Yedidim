@@ -57,16 +57,12 @@ public class MapFragment extends Fragment {
             public void onMapReady(GoogleMap googleMap) {
                 gMap = googleMap;
                 if(viewModel.getReportID() == null) {
-                    Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
-                        @Override
-                        public void onComplete(List<Report> data) {
-                            for(Report r: data){
-                                googleMap.addMarker(new MarkerOptions().position(new LatLng(r.getLatitude(), r.getLongitude())).title("Marker in " + r.getLocation())).setTag(r.getReportID());
-                            }
-                            //TODO: thy to set the camera on israel, not working to fix!
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(31.3555, 34.3565)));
-                        }
-                    });
+                    for(Report r : Model.getInstance().getAllReports().getValue())
+                        googleMap.addMarker(new MarkerOptions().position(new LatLng(r.getLatitude(), r.getLongitude())).title("Marker in " + r.getLocation())).setTag(r.getReportID());
+                    //TODO: thy to set the camera on israel, not working to fix!
+                    LatLng Israel = new LatLng(31.3555, 34.3565);
+                    float zoomLevel = 5.0f;
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Israel, zoomLevel));
                 }
 
                 else{
@@ -75,7 +71,7 @@ public class MapFragment extends Fragment {
                         public void onComplete(Report report) {
                             LatLng loc = new LatLng(report.getLatitude(), report.getLongitude());
                             googleMap.addMarker(new MarkerOptions().position(loc).title("Marker in " + report.getLocation())).setTag(report.getReportID());
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 10.0f));
                         }
                     });
                 }

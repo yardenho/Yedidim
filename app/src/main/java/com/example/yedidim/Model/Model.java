@@ -150,18 +150,18 @@ public class Model {
         void onComplete(List<Report> data);
     }
 
-    public void getReportsList(GetAllReportsListener listener){
-        // TODO: this belong to Firebase
-
-//        modelFirebase.getReportsList(listener);
-        // TODO: this belong to ROOM
-//        MyApplication.executorService.execute(()->{
-//            List <Report> data = AppLocalDB.db.reportDao().getAll();
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete(data);
-//            });
-//        });
-    }
+//    public void getReportsList(GetAllReportsListener listener){
+//        // TODO: this belong to Firebase
+//
+////        modelFirebase.getReportsList(listener);
+//        // TODO: this belong to ROOM
+////        MyApplication.executorService.execute(()->{
+////            List <Report> data = AppLocalDB.db.reportDao().getAll();
+////            MyApplication.mainHandler.post(()->{
+////                listener.onComplete(data);
+////            });
+////        });
+//    }
 
     //TODO: - NEW ! - using in the live data
     MutableLiveData<List<Report>> reportsListLd = new MutableLiveData<List<Report>>();
