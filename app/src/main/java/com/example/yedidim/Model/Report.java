@@ -100,8 +100,6 @@ public class Report {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        String cityName = addresses.get(0).getAddressLine(0);
-        String cityName = addresses.get(0).getAddressLine(0);
         return addresses.get(0).getAddressLine(0);
     }
 //    static public long getIdCounter(){return idCounter;}
@@ -113,7 +111,6 @@ public class Report {
 
     public Map<String, Object> toJson(){
         Map<String, Object> json = new HashMap<>();
-//        json.put("reportID", report.getReportID());   the reportID comes from the document name
         json.put(PROBLEM, problem);
         json.put(NOTES,notes);
         json.put(USERNAME,userName);

@@ -4,7 +4,6 @@ package com.example.yedidim;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -33,6 +32,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 import com.example.yedidim.Model.Model;
@@ -43,8 +43,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.FieldValue;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -90,6 +88,7 @@ public class AddingReportFragment extends Fragment {
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
         ProgressBar pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
+        TextView problemError = view.findViewById(R.id.addingReport_problemErrorMessage);
         viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
         // TODO: צריך להחזיר את השורה הזאת כנסיים לממש את ה- GPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -123,28 +122,28 @@ public class AddingReportFragment extends Fragment {
         reportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pb.setVisibility(View.VISIBLE);
-                reportBtn.setEnabled(false);
-                cancelBtn.setEnabled(false);
-                Report report = new Report();
-//                report.setReportID(Report.getIdCounter());   // TODO: need to delete this line
-                report.setProblem(problemEt.getText().toString());
-                report.setNotes(noteEt.getText().toString());
-                report.setUserName(viewModel.getUsername());
-                if(bitmap != null) {
-                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                    Model.getInstance().saveImage(bitmap, report.getUserName()+ currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
-                        report.setReportUrl(url);
-                        activateGPS(report, v);
-                    });
+                if (problemEt.getText().toString().equals("")) {
+                    problemError.setVisibility(View.VISIBLE);
                 }
                 else{
-                    report.setReportUrl(null);
-                    activateGPS(report, v);
+                    pb.setVisibility(View.VISIBLE);
+                    reportBtn.setEnabled(false);
+                    cancelBtn.setEnabled(false);
+                    Report report = new Report();
+                    report.setProblem(problemEt.getText().toString());
+                    report.setNotes(noteEt.getText().toString());
+                    report.setUserName(viewModel.getUsername());
+                    if (bitmap != null) {
+                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                        Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                            report.setReportUrl(url);
+                            activateGPS(report, v);
+                        });
+                    } else {
+                        report.setReportUrl(null);
+                        activateGPS(report, v);
+                    }
                 }
-//                report.setUserName(viewModel.getUsername());
-//                activateGPS(report, v);
-
             }
         });
         return view;

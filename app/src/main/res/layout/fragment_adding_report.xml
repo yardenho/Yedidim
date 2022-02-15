@@ -147,6 +147,20 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/gallery_icon_new" />
 
+        <TextView
+            android:id="@+id/addingReport_problemErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="* Report must have problem discription"
+            android:textColor="#F44336"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/addingReport_tv_notes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.746"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addingReport_et_problem"
+            app:layout_constraintVertical_bias="0.0" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

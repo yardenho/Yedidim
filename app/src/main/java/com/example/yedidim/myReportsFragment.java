@@ -57,7 +57,7 @@ public class myReportsFragment extends Fragment {
         Model.getInstance().reloadUserReportsList(viewModel.getUsername());
         viewModel.setMyReports(Model.getInstance().getAllUserReports());
         ProgressBar pb = view.findViewById(R.id.myReports_progressBar);
-        pb.setVisibility(View.VISIBLE);
+        pb.setVisibility(View.GONE);
         RecyclerView list = view.findViewById(R.id.myReports_recycler);
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -77,13 +77,13 @@ public class myReportsFragment extends Fragment {
         adapter.setOnDeleteClickListener(new OnDeleteClickListener() {
             @Override
             public void OnDeleteClick(int position) {
+                pb.setVisibility(View.VISIBLE);
                 Report r = viewModel.getMyReports().getValue().get(position);
                 Model.getInstance().deleteReport(r, new Model.deleteReportListener() {
                     @Override
                     public void onComplete() {
-                        //TODO: refresh list
                         Model.getInstance().reloadUserReportsList(viewModel.getUsername());//for updating the list of the user reports
-//                        refreshData(); // זה מה שהיה ועבד לפני שהוספתי את השורה למעלה
+                        pb.setVisibility(View.GONE);
                     }
                 });
             }
@@ -120,7 +120,6 @@ public class myReportsFragment extends Fragment {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
         });
 
-        pb.setVisibility(View.GONE);
         return view;
     }
 
