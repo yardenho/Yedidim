@@ -25,8 +25,19 @@ public class Model {
 
 
     private Model(){
+        reportsListLoadingState.setValue(LoadingState.loaded);
         reloadReportsList();
     }
+
+    public enum LoadingState{
+        loading,
+        loaded
+    }
+
+    //האובייקט שכולם יאזינו אליו
+    MutableLiveData<LoadingState> reportsListLoadingState = new MutableLiveData<LoadingState>();
+    //לא יהיה SET כי אף אחד לא נוגע בוף המודל יהיה זה שאחראי לתקשורת אז הוא זה שישלוט בו, ניתן לתת אפשרות לעידכון דאטא אבל כרגע היחיד שמשנה הוא המודל
+    public LiveData<LoadingState> getReportsListLoadingState(){ return reportsListLoadingState;}
 
 
     public static Model getInstance(){
@@ -154,7 +165,8 @@ public class Model {
 
     //TODO: - NEW ! - using in the live data
     MutableLiveData<List<Report>> reportsListLd = new MutableLiveData<List<Report>>();
-    private void reloadReportsList(){
+    public void reloadReportsList(){
+        reportsListLoadingState.setValue(LoadingState.loading); //התחלת הטעינה
         //get local last update
         Long localLastUpdate = Report.getLocalLastUpdated();
         //get all reports records since local last update from firebase
@@ -176,6 +188,7 @@ public class Model {
                 //return all records to the caller
                 List<Report> repList = AppLocalDB.db.reportDao().getAll();
                 reportsListLd.postValue(repList);
+                reportsListLoadingState.postValue(LoadingState.loaded);// סיום הטעינה
             });
 
         });
@@ -304,6 +317,8 @@ public class Model {
     }
 
     public void reloadUserReportsList(String userName){
+        reportsListLoadingState.setValue(LoadingState.loading);//התחלת הטעינה - אני הוספתי לחשוב אם צריך
+
         //get local last update
         Long localLastUpdate = Report.getLocalLastUpdated();
         //get all reports records since local last update from firebase
@@ -326,6 +341,8 @@ public class Model {
                 //return all records to the caller
                 List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userName);
                 userReportsListLd.postValue(userRepList);
+                reportsListLoadingState.postValue(LoadingState.loaded); // סיום הטעינה - אני הוספתי לחשוב אם צריך
+
             });
 
         });

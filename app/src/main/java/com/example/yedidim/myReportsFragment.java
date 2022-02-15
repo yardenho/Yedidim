@@ -99,7 +99,7 @@ public class myReportsFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshData();
+                Model.getInstance().reloadUserReportsList(viewModel.getUsername());
             }
         });
         setHasOptionsMenu(true);
@@ -110,6 +110,12 @@ public class myReportsFragment extends Fragment {
             adapter.notifyDataSetChanged();
 
         });
+
+        swipeRefresh.setRefreshing(Model.getInstance().getReportsListLoadingState().getValue() == Model.LoadingState.loading);
+        Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
+            swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
+        });
+
         return view;
     }
 
