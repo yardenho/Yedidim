@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
@@ -35,6 +36,8 @@ public class logInFragment extends Fragment {
         passwordError = view.findViewById(R.id.logIn_tv_passwordError);
         usernameError.setVisibility(View.GONE);
         passwordError.setVisibility(View.GONE);
+        ProgressBar pb = view.findViewById(R.id.logIn_progressBar);
+        pb.setVisibility(View.GONE);
 
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +51,7 @@ public class logInFragment extends Fragment {
                         }
                         else{
                             if(user.getPassword().equals(passwordEt.getText().toString())){
+                                pb.setVisibility(View.VISIBLE);
                                 logInFragmentDirections.ActionLogInFragmentToReportsListFragment action = logInFragmentDirections.actionLogInFragmentToReportsListFragment(usernameEt.getText().toString());
                                 Navigation.findNavController(v).navigate(action);
                             }

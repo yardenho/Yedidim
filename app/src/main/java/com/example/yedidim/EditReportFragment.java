@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
@@ -63,7 +64,8 @@ public class EditReportFragment extends Fragment {
         lastName = view.findViewById(R.id.editReport_text_lastName);
         phoneNumber = view.findViewById(R.id.editReport_text_phoneNumber);
         photo = view.findViewById(R.id.editReport_iv_photo);
-
+        ProgressBar pb = view.findViewById(R.id.editReport_progressBar);
+        pb.setVisibility(View.GONE);
 
         Model.getInstance().getReportByID(reportId, (r) -> {
             viewModel.setReport(r);
@@ -83,6 +85,7 @@ public class EditReportFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 setDetails();
                 //TODO: to add here edit the report
                 Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {

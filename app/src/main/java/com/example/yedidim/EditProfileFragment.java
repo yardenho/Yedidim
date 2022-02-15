@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
@@ -50,6 +51,8 @@ public class EditProfileFragment extends Fragment {
         firstName = view.findViewById(R.id.editProfile_et_firstName);
         lastName = view.findViewById(R.id.editProfile_et_lastName);
         phoneNumber = view.findViewById(R.id.editProfile_et_phoneNumber);
+        ProgressBar pb = view.findViewById(R.id.editProfile_progressBar);
+        pb.setVisibility(View.GONE);
         viewModel.setUserName(EditProfileFragmentArgs.fromBundle(getArguments()).getUsername());
         Model.getInstance().getUserByUserName(viewModel.getUserName(), (u) ->
         {
@@ -69,6 +72,7 @@ public class EditProfileFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 setDetails();
             }
         });
