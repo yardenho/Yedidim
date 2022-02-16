@@ -26,12 +26,6 @@ public class EditReportFragment extends Fragment {
     private EditReportViewModel viewModel;
     private EditText problem;
     private EditText notes;
-    private TextView vehicleBrand;
-    private TextView manufactureYear;
-    private TextView fuelType;
-    private TextView firstName;
-    private TextView lastName;
-    private TextView phoneNumber;
     private Button cancelBtn;
     private Button saveBtn;
     private ImageView photo;
@@ -57,12 +51,6 @@ public class EditReportFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_edit_report, container, false);
         problem = view.findViewById(R.id.editReport_et_problem);
         notes = view.findViewById(R.id.editReport_et_notes);
-//        vehicleBrand = view.findViewById(R.id.editReport_text_vehicleBrand);
-//        manufactureYear = view.findViewById(R.id.editReport_text_manufactureYear);
-//        fuelType = view.findViewById(R.id.editReport_text_fuelType);
-//        firstName = view.findViewById(R.id.editReport_text_firstName);
-//        lastName = view.findViewById(R.id.editReport_text_lastName);
-//        phoneNumber = view.findViewById(R.id.editReport_text_phoneNumber);
         photo = view.findViewById(R.id.editReport_iv_photo);
         ProgressBar pb = view.findViewById(R.id.editReport_progressBar);
         pb.setVisibility(View.GONE);
@@ -109,22 +97,10 @@ public class EditReportFragment extends Fragment {
         return view;
     }
 
-//    private void showUserDetails(User user) {
-//        vehicleBrand.setText(user.getVehicleBrand());
-//        manufactureYear.setText(user.getManufactureYear());
-//        fuelType.setText(user.getFuelType());
-//        firstName.setText(user.getFirstName());
-//        lastName.setText(user.getLastName());
-//        phoneNumber.setText(user.getPhoneNumber());
-//    }
 
     private void showReportDetails() {
         problem.setText(viewModel.getReport().getProblem());
         notes.setText(viewModel.getReport().getNotes());
-//        Model.getInstance().getUserByUserName(viewModel.getReport().getUserName(), (u) ->
-//        {
-//            showUserDetails(u);
-//        });
         String url = viewModel.getReport().getReportUrl();
         if (url != null && !url.equals("")) {
             Log.d("TAG", "url = " + url);
