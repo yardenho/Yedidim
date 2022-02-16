@@ -72,10 +72,10 @@ public class Model {
         void onComplete();
     }
 
-    public void addNewUser(User user,addNewUserListener listener){
+    public void addNewUser(User user,String password, addNewUserListener listener){
         // TODO: this belong to Firebase
 
-        modelFirebase.addNewUser(user, listener);
+        modelFirebase.addNewUser(user, password, listener);
         // TODO: this belong to ROOM
 
 //            MyApplication.executorService.execute(() -> {
@@ -279,7 +279,7 @@ public class Model {
 
 
         // TODO: this belong to Firebase
-        //זה מה שהיה לפני ששיניתי- להחזיר את השורה מתחת  אם מה שני מנסה לא עובד לי
+        //זה מה שהיה לפני ששיניתי- להחזיר את השורה מתחת  אם מה שאני מנסה לא עובד לי
 //        modelFirebase.editReport(report, listener);
         // TODO: this belong to ROOM
 

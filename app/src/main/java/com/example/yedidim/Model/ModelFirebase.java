@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,9 +21,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 //import com.google.firebase.firebaseStorage.FirebaseStorage;
+import com.google.firebase.auth.FirebaseAuth; // for authentication with firebase
+
 
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -31,6 +33,7 @@ public class ModelFirebase {
     final static String USERS = "users";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public void getUsersList(Model.GetAllUsersListener listener) {
         db.collection(USERS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -64,29 +67,28 @@ public class ModelFirebase {
         });
     }
 
-    public void addNewUser(User user, Model.addNewUserListener listener) {
+    public void addNewUser(User user, String password, Model.addNewUserListener listener) {
         // Create a new user
-        //TODO: NOTE: moved to the user class as - toJson function
-//        Map<String, Object> json = new HashMap<>();
-//        json.put("username", user.getUserName());
-//        json.put("firstName", user.getFirstName());
-//        json.put("lastName", user.getLastName());
-//        json.put("password", user.getPassword());
-//        json.put("phoneNumber", user.getPhoneNumber());
-//        json.put("carNumber", user.getCarNumber());
-//        json.put("vehicleBrand", user.getVehicleBrand());
-//        json.put("manufactureYear", user.getManufactureYear());
-//        json.put("fuelType", user.getFuelType());
+        mAuth.createUserWithEmailAndPassword(user.getUserName(), password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            // Add a new document with a username as the ID
+                            db.collection(USERS).document(user.getUserName()).set(user.toJson())
+                                    .addOnSuccessListener((successListener)-> {
+                                        listener.onComplete();
 
-        // Add a new document with a username as the ID
-        db.collection(USERS).document(user.getUserName()).set(user.toJson())
-                .addOnSuccessListener((successListener)-> {
-                    listener.onComplete();
+                                    })
+                                    .addOnFailureListener((e)-> {
+                                        Log.d("TAG", e.getMessage());
 
-                })
-                .addOnFailureListener((e)-> {
-                    Log.d("TAG", e.getMessage());
-
+                                    });
+                        }
+                        else {
+                            Log.d("TAG", "failed to register user");
+                        }
+                    }
                 });
     }
 
@@ -99,18 +101,6 @@ public class ModelFirebase {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        //TODO: NOTE - moved to the user class as fromJson function
-//                        Map<String, Object> json = document.getData();
-//                        User user = new User();
-//                        user.setUserName((String)json.get("username"));
-//                        user.setPassword((String)json.get("password"));
-//                        user.setFirstName((String)json.get("firstName"));
-//                        user.setLastName((String)json.get("lastName"));
-//                        user.setPhoneNumber((String)json.get("phoneNumber"));
-//                        user.setCarNumber((String)json.get("carNumber"));
-//                        user.setVehicleBrand((String)json.get("vehicleBrand"));
-//                        user.setManufactureYear((String)json.get("manufactureYear"));
-//                        user.setFuelType((String)json.get("fuelType"));
                         User user = User.fromJson(document.getData());
                         if(user != null)
                             listener.onComplete(user);
