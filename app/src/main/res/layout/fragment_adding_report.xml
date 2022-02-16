@@ -36,7 +36,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +51,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="20sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -64,35 +66,6 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
-
-        <!--        <Button-->
-<!--            android:id="@+id/addingReport_btn_cancel"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="5dp"-->
-<!--            android:layout_marginTop="340dp"-->
-<!--            android:backgroundTint="#F07470"-->
-<!--            android:text="CANCEL"-->
-<!--            android:textSize="24sp"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/addingReport_btn_report"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_addPhoto" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/addingReport_btn_report"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginTop="340dp"-->
-<!--            android:layout_marginEnd="5dp"-->
-<!--            android:backgroundTint="#F07470"-->
-<!--            android:text="REPORT"-->
-<!--            android:textSize="24sp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/addingReport_btn_cancel"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_addPhoto" />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/addingReport_btn_report"

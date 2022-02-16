@@ -51,6 +51,7 @@ public class signUpFragment extends Fragment {
         lastNameEt = view.findViewById(R.id.signUp_et_lastName);
         phoneNumberEt = view.findViewById(R.id.signUp_et_phoneNumber);
         carNumberEt = view.findViewById(R.id.signUp_et_carNumber);
+        Button backBtn = view.findViewById(R.id.signUp_btn_back);
         pb = view.findViewById(R.id.signUp_progressBar);
         pb.setVisibility(View.GONE);
 
@@ -66,6 +67,13 @@ public class signUpFragment extends Fragment {
                     pb.setVisibility(View.GONE);
                     signUpBtn.setEnabled(true);
                 }
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
             }
         });
         return view;

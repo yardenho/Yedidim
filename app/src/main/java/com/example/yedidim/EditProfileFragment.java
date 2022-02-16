@@ -72,9 +72,15 @@ public class EditProfileFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveBtn.setEnabled(false);
+                cancelBtn.setEnabled(false);
                 if(!checkConditions()) {
                     pb.setVisibility(View.VISIBLE);
                     setDetails();
+                }
+                else {
+                    saveBtn.setEnabled(true);
+                    cancelBtn.setEnabled(true);
                 }
             }
         });
@@ -120,6 +126,11 @@ public class EditProfileFragment extends Fragment {
             phoneNumber.requestFocus();
             return true;
         }
+        if(carNumber.getText().toString().equals("")){
+            carNumber.setError("Car number is required");
+            carNumber.requestFocus();
+            return true;
+        }
         if(vehicleBrand.getText().toString().equals("")){
             vehicleBrand.setError("Vehicle brand is required");
             vehicleBrand.requestFocus();
@@ -130,11 +141,7 @@ public class EditProfileFragment extends Fragment {
             manufactureYear.requestFocus();
             return true;
         }
-        if(carNumber.getText().toString().equals("")){
-            carNumber.setError("Car number is required");
-            carNumber.requestFocus();
-            return true;
-        }
+
         return false;
     }
 

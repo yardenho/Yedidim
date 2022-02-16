@@ -57,12 +57,12 @@ public class EditReportFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_edit_report, container, false);
         problem = view.findViewById(R.id.editReport_et_problem);
         notes = view.findViewById(R.id.editReport_et_notes);
-        vehicleBrand = view.findViewById(R.id.editReport_text_vehicleBrand);
-        manufactureYear = view.findViewById(R.id.editReport_text_manufactureYear);
-        fuelType = view.findViewById(R.id.editReport_text_fuelType);
-        firstName = view.findViewById(R.id.editReport_text_firstName);
-        lastName = view.findViewById(R.id.editReport_text_lastName);
-        phoneNumber = view.findViewById(R.id.editReport_text_phoneNumber);
+//        vehicleBrand = view.findViewById(R.id.editReport_text_vehicleBrand);
+//        manufactureYear = view.findViewById(R.id.editReport_text_manufactureYear);
+//        fuelType = view.findViewById(R.id.editReport_text_fuelType);
+//        firstName = view.findViewById(R.id.editReport_text_firstName);
+//        lastName = view.findViewById(R.id.editReport_text_lastName);
+//        phoneNumber = view.findViewById(R.id.editReport_text_phoneNumber);
         photo = view.findViewById(R.id.editReport_iv_photo);
         ProgressBar pb = view.findViewById(R.id.editReport_progressBar);
         pb.setVisibility(View.GONE);
@@ -86,36 +86,45 @@ public class EditReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 pb.setVisibility(View.VISIBLE);
-                setDetails();
-                //TODO: to add here edit the report
-                Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {
-                    @Override
-                    public void onComplete() {
-                        Model.getInstance().reloadUserReportsList(viewModel.getUserName());//for updating the list of the user reports
-                        Navigation.findNavController(view).navigateUp();
-                    }
-                });
+                saveBtn.setEnabled(false);
+                cancelBtn.setEnabled(false);
+                if(!checkCondition()) {
+                    setDetails();
+                    //TODO: to add here edit the report
+                    Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {
+                        @Override
+                        public void onComplete() {
+                            Model.getInstance().reloadUserReportsList(viewModel.getUserName());//for updating the list of the user reports
+                            Navigation.findNavController(view).navigateUp();
+                        }
+                    });
+                }
+                else{
+                    pb.setVisibility(View.GONE);
+                    saveBtn.setEnabled(true);
+                    cancelBtn.setEnabled(true);
+                }
             }
         });
         return view;
     }
 
-    private void showUserDetails(User user) {
-        vehicleBrand.setText(user.getVehicleBrand());
-        manufactureYear.setText(user.getManufactureYear());
-        fuelType.setText(user.getFuelType());
-        firstName.setText(user.getFirstName());
-        lastName.setText(user.getLastName());
-        phoneNumber.setText(user.getPhoneNumber());
-    }
+//    private void showUserDetails(User user) {
+//        vehicleBrand.setText(user.getVehicleBrand());
+//        manufactureYear.setText(user.getManufactureYear());
+//        fuelType.setText(user.getFuelType());
+//        firstName.setText(user.getFirstName());
+//        lastName.setText(user.getLastName());
+//        phoneNumber.setText(user.getPhoneNumber());
+//    }
 
     private void showReportDetails() {
         problem.setText(viewModel.getReport().getProblem());
         notes.setText(viewModel.getReport().getNotes());
-        Model.getInstance().getUserByUserName(viewModel.getReport().getUserName(), (u) ->
-        {
-            showUserDetails(u);
-        });
+//        Model.getInstance().getUserByUserName(viewModel.getReport().getUserName(), (u) ->
+//        {
+//            showUserDetails(u);
+//        });
         String url = viewModel.getReport().getReportUrl();
         if (url != null && !url.equals("")) {
             Log.d("TAG", "url = " + url);
@@ -129,6 +138,16 @@ public class EditReportFragment extends Fragment {
         viewModel.getReport().setProblem(problem.getText().toString());
         viewModel.getReport().setNotes(notes.getText().toString());
         //TODO do we want to add picture here?
+
+    }
+
+    private boolean checkCondition(){
+        if(problem.getText().toString().equals("")){
+            problem.setError("problem is required");
+            problem.requestFocus();
+            return true;
+        }
+        return false;
     }
 
 }

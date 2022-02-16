@@ -14,249 +14,100 @@
         android:paddingBottom="30dp"
         tools:context=".scrollViewEditReport">
 
-        <EditText
-            android:id="@+id/editReport_et_notes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_notes"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_notes" />
-
-        <TextView
-            android:id="@+id/editReport_tv_notes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Notes:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_problem" />
-
-        <TextView
-            android:id="@+id/editReport_tv_vehicleBrand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Vehicle Brand:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_notes" />
-
-        <TextView
-            android:id="@+id/editReport_tv_manufactureYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Manufacture year:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_vehicleBrand" />
-
-        <TextView
-            android:id="@+id/editReport_tv_fuelType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Fuel type:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_manufactureYear" />
-
-        <TextView
-            android:id="@+id/editReport_tv_problem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            android:text="Problem:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/editReport_tv_firstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="First Name:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_fuelType" />
-
-        <TextView
-            android:id="@+id/editReport_tv_lastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Last Name:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_firstName" />
-
-        <TextView
-            android:id="@+id/editReport_tv_phoneNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:text="Phone Number:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_lastName" />
-
-        <TextView
-            android:id="@+id/editReport_text_vehicleBrand"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="none"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_vehicleBrand"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_vehicleBrand" />
-
-        <TextView
-            android:id="@+id/editReport_text_manufactureYear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_manufactureYear"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_manufactureYear" />
-
-        <TextView
-            android:id="@+id/editReport_text_fuelType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_fuelType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_fuelType" />
-
-        <EditText
-            android:id="@+id/editReport_et_problem"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_problem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_problem" />
-
-        <TextView
-            android:id="@+id/editReport_text_firstName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_firstName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_firstName" />
-
-        <TextView
-            android:id="@+id/editReport_text_lastName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_lastName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_lastName" />
-
-        <TextView
-            android:id="@+id/editReport_text_phoneNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_tv_phoneNumber"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editReport_tv_phoneNumber" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="40dp">
 
-        <ImageView
-            android:id="@+id/editReport_iv_photo"
-            android:layout_width="144dp"
-            android:layout_height="113dp"
-            android:layout_marginTop="30dp"
-            android:src="@android:drawable/ic_menu_camera"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_tv_phoneNumber" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="Problem">
 
-        <Button
-            android:id="@+id/editReport_btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="40dp"
-            android:backgroundTint="#F07470"
-            android:text="CANCEL"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editReport_btn_save"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_iv_photo" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editReport_et_problem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="20sp" />
 
-        <Button
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="Notes">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editReport_et_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/editReport_btn_save"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:backgroundTint="#F07470"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="8dp"
             android:text="SAVE"
-            android:textSize="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/editReport_btn_cancel"
-            app:layout_constraintTop_toTopOf="@+id/editReport_btn_cancel" />
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editReport_btn_cancel"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!--        <Button-->
+<!--            android:id="@+id/editReport_btn_cancel"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="15dp"-->
+<!--            android:layout_marginBottom="40dp"-->
+<!--            android:backgroundTint="#F07470"-->
+<!--            android:text="CANCEL"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/editReport_btn_save"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/editReport_iv_photo" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/editReport_btn_save"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            android:backgroundTint="#F07470"-->
+<!--            android:text="SAVE"-->
+<!--            android:textSize="24dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/editReport_btn_cancel"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/editReport_btn_cancel" />-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/editReport_btn_cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="CANCEL"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/editReport_btn_save"
+            app:layout_constraintTop_toBottomOf="@+id/editReport_iv_photo" />
 
         <ProgressBar
             android:id="@+id/editReport_progressBar"
@@ -267,6 +118,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/editReport_iv_photo"
+            android:layout_width="168dp"
+            android:layout_height="190dp"
+            android:layout_marginTop="48dp"
+            android:src="@android:drawable/ic_menu_camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
