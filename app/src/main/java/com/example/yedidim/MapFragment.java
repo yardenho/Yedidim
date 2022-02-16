@@ -98,28 +98,24 @@ public class MapFragment extends Fragment {
         inflater.inflate(R.menu.log_out_menu, menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.addMenu_addReport:
-//                //TODO: when we after the sign up maybe not allow to return there
-//                MapFragmentDirections.ActionMapFragmentToAddingReportFragment action = MapFragmentDirections.actionMapFragmentToAddingReportFragment(username);
-//                Navigation.findNavController(view).navigate(action);
-//                return true;
-//            case R.id.log_out_menu_LogOut:
-//                //TODO
-//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMainScreenFragment());
-//                return true;
-//            case R.id.myProfileMenu_myProfile:
-//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment(username));
-//                return true;
-//            case R.id.myReportsmenu_myReport:
-//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment(username));
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addMenu_addReport:
+                //TODO: when we after the sign up maybe not allow to return there
+                MapFragmentDirections.ActionMapFragmentToAddingReportFragment action = MapFragmentDirections.actionMapFragmentToAddingReportFragment(username);
+                Navigation.findNavController(view).navigate(action);
+                return true;
+            case R.id.myProfileMenu_myProfile:
+                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment(username));
+                return true;
+            case R.id.myReportsmenu_myReport:
+                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment(username));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 //    LatLng sydney = new LatLng(31.7683, 35.2137);
 //                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Jerusalem"));

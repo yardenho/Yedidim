@@ -138,10 +138,6 @@ public class ViewReportFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //TODO: קוד כפול ???
         switch (item.getItemId()) {
-            case R.id.log_out_menu_LogOut:
-                //TODO
-                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMainScreenFragment());
-                return true;
             case R.id.myProfileMenu_myProfile:
                 Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUsername()));
                 return true;

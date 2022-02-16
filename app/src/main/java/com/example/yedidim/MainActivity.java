@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.baseMenu_aboutUs:
                     navctrl.navigate(aboutUsFragmentDirections.actionGlobalAboutUsFragment());
                     return true;
+                case R.id.log_out_menu_LogOut:
+                    navctrl.navigate(myReportsFragmentDirections.actionGlobalMainScreenFragment());
+                    return true;
+
 
                 default:
                     return super.onOptionsItemSelected(item);

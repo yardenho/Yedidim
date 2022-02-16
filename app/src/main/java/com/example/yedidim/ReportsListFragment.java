@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.SupportActionModeWrapper;
+import androidx.appcompat.widget.ActionBarContextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -92,6 +94,7 @@ public class ReportsListFragment extends Fragment {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
         });
         pb.setVisibility(View.GONE);
+
         return view;
     }
 
@@ -137,11 +140,6 @@ public class ReportsListFragment extends Fragment {
                 //TODO: check why the first line dos not working
 //                ReportsListFragmentDirections.ActionGlobalMyReportsFragment action2 = ReportsListFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUserName());
                 Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUserName()));
-                return true;
-            case R.id.log_out_menu_LogOut:
-                //TODO
-                NavDirections action3 = ReportsListFragmentDirections.actionGlobalMainScreenFragment();
-                Navigation.findNavController(view).navigate(action3);
                 return true;
             case R.id.mapMenu_MoveToMap:
                 Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(viewModel.getUserName(), null));

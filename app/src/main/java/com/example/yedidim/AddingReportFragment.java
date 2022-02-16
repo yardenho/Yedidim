@@ -183,8 +183,6 @@ public class AddingReportFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
                     Location location = task.getResult();
-                    Log.d("TAG", "latitude" + location.getLatitude());
-                    Log.d("TAG", "latitude" + location.getLongitude());
                     report.setLatitude(location.getLatitude());
                     report.setLongitude(location.getLongitude());
                     Model.getInstance().addNewReport(report,()->{
