@@ -62,6 +62,7 @@ public class AddingReportFragment extends Fragment {
     private ImageView photo;
     private ImageButton photoIBtn;
     private ImageButton galleryBtn;
+    private ProgressBar pb;
     Bitmap bitmap;    // maybe we need to put it in view model??
     FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -86,9 +87,8 @@ public class AddingReportFragment extends Fragment {
         photo = view.findViewById(R.id.addingReport_iv_photo);
         cancelBtn = view.findViewById(R.id.addingReport_btn_cancel);
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
-        ProgressBar pb = view.findViewById(R.id.addingReport_progressBar);
+        pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
-        TextView problemError = view.findViewById(R.id.addingReport_problemErrorMessage);
         viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
         // TODO: צריך להחזיר את השורה הזאת כנסיים לממש את ה- GPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -96,7 +96,6 @@ public class AddingReportFragment extends Fragment {
 
         // initialize fusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,26 +122,11 @@ public class AddingReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (problemEt.getText().toString().equals("")) {
-                    problemError.setVisibility(View.VISIBLE);
+                    problemEt.setError("Problem is required");
+                    problemEt.requestFocus();
                 }
                 else{
-                    pb.setVisibility(View.VISIBLE);
-                    reportBtn.setEnabled(false);
-                    cancelBtn.setEnabled(false);
-                    Report report = new Report();
-                    report.setProblem(problemEt.getText().toString());
-                    report.setNotes(noteEt.getText().toString());
-                    report.setUserName(viewModel.getUsername());
-                    if (bitmap != null) {
-                        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                        Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
-                            report.setReportUrl(url);
-                            activateGPS(report, v);
-                        });
-                    } else {
-                        report.setReportUrl(null);
-                        activateGPS(report, v);
-                    }
+                   save(v);
                 }
             }
         });
@@ -183,8 +167,6 @@ public class AddingReportFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
                     Location location = task.getResult();
-                    Log.d("TAG", "latitude" + location.getLatitude());
-                    Log.d("TAG", "latitude" + location.getLongitude());
                     report.setLatitude(location.getLatitude());
                     report.setLongitude(location.getLongitude());
                     Model.getInstance().addNewReport(report,()->{
@@ -202,5 +184,25 @@ public class AddingReportFragment extends Fragment {
         }
     }
 
-
+    public void save(View v){
+        pb.setVisibility(View.VISIBLE);
+        reportBtn.setEnabled(false);
+        cancelBtn.setEnabled(false);
+        Report report = new Report();
+        report.setProblem(problemEt.getText().toString());
+        report.setNotes(noteEt.getText().toString());
+        report.setUserName(viewModel.getUsername());
+        if (bitmap != null) {
+            String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+            Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                report.setReportUrl(url);
+                activateGPS(report, v);
+            });
+        } else {
+            report.setReportUrl(null);
+            activateGPS(report, v);
+        }
     }
+
+
+}

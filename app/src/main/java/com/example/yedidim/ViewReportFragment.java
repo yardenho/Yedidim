@@ -34,8 +34,6 @@ import java.net.URL;
 
 public class ViewReportFragment extends Fragment {
     private viewReportViewModel viewModel;
-    private User u; // dose it need to be here
-    private Report r;
     View view;
     TextView problemTv;
     TextView notesTv;
@@ -70,18 +68,23 @@ public class ViewReportFragment extends Fragment {
         phoneNumberTv = view.findViewById(R.id.viewReport_text_phoneNumber);
         mapBtn = view.findViewById(R.id.viewReport_imageBtn_map);
         photo = view.findViewById(R.id.viewReport_iv_image);
+
         viewModel.setUsername(ViewReportFragmentArgs.fromBundle(getArguments()).getUsername());
         viewModel.setReportId(ViewReportFragmentArgs.fromBundle(getArguments()).getReportID());
 
 
-        Model.getInstance().getReportByID(viewModel.getReportId(), new Model.getReportByReportIDListener() {
+        //yarden//
+        String reportId = ViewReportFragmentArgs.fromBundle(getArguments()).getReportID();
+        Model.getInstance().getReportByID(reportId, new Model.getReportByReportIDListener() {
             @Override
             public void onComplete(Report report) {
-                r=report;
-                if(r != null)
-                    updateReportDetailsDisplay(r);
+                if(report != null) {
+                    updateReportDetailsDisplay(report);
+                }
             }
         });
+
+        //yarden//
 
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,17 +111,15 @@ public class ViewReportFragment extends Fragment {
         Model.getInstance().getUserByUserName(r.getUserName(), new Model.getUserByUserNameListener() {
             @Override
             public void onComplete(User user) {
-                u = user;
                 //TODO: need to decide what to if user is null
-                if (u != null)
-                    updateUserDetailsDisplay(u);
+                if (user != null)
+                    updateUserDetailsDisplay(user);
             }
         });
         problemTv.setText(r.getProblem());
         notesTv.setText(r.getNotes());
         String url = r.getReportUrl();
         if (url != null && !url.equals("")) {
-            Log.d("TAG", "url = " + url);
             Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
         } else {
             photo.setImageResource(R.drawable.camera1);
@@ -138,10 +139,6 @@ public class ViewReportFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //TODO: קוד כפול ???
         switch (item.getItemId()) {
-            case R.id.log_out_menu_LogOut:
-                //TODO
-                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMainScreenFragment());
-                return true;
             case R.id.myProfileMenu_myProfile:
                 Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUsername()));
                 return true;

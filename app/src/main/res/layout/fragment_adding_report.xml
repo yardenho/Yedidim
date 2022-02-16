@@ -14,94 +14,109 @@
         android:paddingBottom="40dp"
         tools:context=".scrollViewTest">
 
-        <TextView
-            android:id="@+id/addingReport_tv_problem"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:text="Problem:"
-            android:textSize="24sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/addingReport_tv_notes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="30dp"
-            android:text="Notes:"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_problem" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="Problem">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addingReport_et_problem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="Notes">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addingReport_et_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TextView
             android:id="@+id/addingReport_tv_addPhoto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:text="Add photo:"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_notes" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 
-        <Button
-            android:id="@+id/addingReport_btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="340dp"
-            android:backgroundTint="#F07470"
-            android:text="CANCEL"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/addingReport_btn_report"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_addPhoto" />
+        <!--        <Button-->
+<!--            android:id="@+id/addingReport_btn_cancel"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:layout_marginTop="340dp"-->
+<!--            android:backgroundTint="#F07470"-->
+<!--            android:text="CANCEL"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/addingReport_btn_report"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_addPhoto" />-->
 
-        <Button
+<!--        <Button-->
+<!--            android:id="@+id/addingReport_btn_report"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginTop="340dp"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            android:backgroundTint="#F07470"-->
+<!--            android:text="REPORT"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/addingReport_btn_cancel"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_addPhoto" />-->
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/addingReport_btn_report"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="340dp"
-            android:layout_marginEnd="5dp"
-            android:backgroundTint="#F07470"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="8dp"
             android:text="REPORT"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/addingReport_btn_cancel"
-            app:layout_constraintTop_toBottomOf="@+id/addingReport_tv_addPhoto" />
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/addingReport_btn_cancel"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <EditText
-            android:id="@+id/addingReport_et_notes"
-            android:layout_width="0dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addingReport_btn_cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/addingReport_tv_notes"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/addingReport_tv_notes" />
-
-        <EditText
-            android:id="@+id/addingReport_et_problem"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/addingReport_tv_problem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/addingReport_tv_problem" />
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="CANCEL"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/addingReport_btn_report"
+            app:layout_constraintTop_toBottomOf="@+id/addingReport_iv_photo" />
 
         <ProgressBar
             android:id="@+id/addingReport_progressBar"
@@ -146,20 +161,6 @@
             app:layout_constraintTop_toTopOf="@+id/addingReport_ibtn_photo"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/gallery_icon_new" />
-
-        <TextView
-            android:id="@+id/addingReport_problemErrorMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="* Report must have problem discription"
-            android:textColor="#F44336"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/addingReport_tv_notes"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.746"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addingReport_et_problem"
-            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

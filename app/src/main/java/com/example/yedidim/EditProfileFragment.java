@@ -72,13 +72,12 @@ public class EditProfileFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pb.setVisibility(View.VISIBLE);
-                setDetails();
+                if(!checkConditions()) {
+                    pb.setVisibility(View.VISIBLE);
+                    setDetails();
+                }
             }
         });
-
-
-
 
         return view;
     }
@@ -103,6 +102,40 @@ public class EditProfileFragment extends Fragment {
         Model.getInstance().editUser(user, ()->{
             Navigation.findNavController(view).navigateUp();
         });
+    }
+
+    private boolean checkConditions(){
+        if(firstName.getText().toString().equals("")){
+            firstName.setError("First name is required");
+            firstName.requestFocus();
+            return true;
+        }
+        if(lastName.getText().toString().equals("")){
+            lastName.setError("Last name is required");
+            lastName.requestFocus();
+            return true;
+        }
+        if(phoneNumber.getText().toString().equals("")){
+            phoneNumber.setError("Phone number is required");
+            phoneNumber.requestFocus();
+            return true;
+        }
+        if(vehicleBrand.getText().toString().equals("")){
+            vehicleBrand.setError("Vehicle brand is required");
+            vehicleBrand.requestFocus();
+            return true;
+        }
+        if(manufactureYear.getText().toString().equals("")){
+            manufactureYear.setError("Manufacture year is required");
+            manufactureYear.requestFocus();
+            return true;
+        }
+        if(carNumber.getText().toString().equals("")){
+            carNumber.setError("Car number is required");
+            carNumber.requestFocus();
+            return true;
+        }
+        return false;
     }
 
 
