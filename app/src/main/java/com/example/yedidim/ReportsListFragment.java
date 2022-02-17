@@ -61,6 +61,11 @@ public class ReportsListFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
 
+//        TextView noReportsMessage = view.findViewById(R.id.reportsList_tv_noReportsMessage);
+//        noReportsMessage.setVisibility(View.GONE);
+//        if(viewModel.getReports().getValue()==null){
+//            noReportsMessage.setVisibility(View.VISIBLE);
+//        }
 
         adapter = new ReportsListFragment.MyAdapter();
         list.setAdapter(adapter);
@@ -86,12 +91,18 @@ public class ReportsListFragment extends Fragment {
             refreshData();
         viewModel.getReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
-
         });
 
         swipeRefresh.setRefreshing(Model.getInstance().getReportsListLoadingState().getValue() == Model.LoadingState.loading);
         Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
+            //try
+//            if(viewModel.getReports().getValue()==null){
+//                noReportsMessage.setVisibility(View.VISIBLE);
+//            }
+//            else
+//                noReportsMessage.setVisibility(View.GONE);
+
         });
         pb.setVisibility(View.GONE);
 

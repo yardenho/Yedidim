@@ -19,15 +19,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
-
-import java.util.List;
 
 
 public class myReportsFragment extends Fragment {
@@ -63,8 +60,14 @@ public class myReportsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
         adapter = new myReportsFragment.MyAdapter();
-
         list.setAdapter(adapter);
+
+//        TextView noReportsMessage = view.findViewById(R.id.myReportsList_tv_noReportsMessage);
+//        noReportsMessage.setVisibility(View.GONE);
+//        if(viewModel.getMyReports().getValue()==null){
+//            noReportsMessage.setVisibility(View.VISIBLE);
+//        }
+
         adapter.setOnItemClickListener(new myReportsFragment.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View v) {
@@ -112,12 +115,17 @@ public class myReportsFragment extends Fragment {
             refreshData();
         viewModel.getMyReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
-
         });
 
         swipeRefresh.setRefreshing(Model.getInstance().getReportsListLoadingState().getValue() == Model.LoadingState.loading);
         Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
+            //try
+//            if(viewModel.getMyReports().getValue()==null){
+//                noReportsMessage.setVisibility(View.VISIBLE);
+//            }
+//            else
+//                noReportsMessage.setVisibility(View.GONE);
         });
 
         return view;
