@@ -107,9 +107,12 @@ public class ModelFirebase {
             @Override
             // TODO: need to handle cases were student returns as null
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Log.d("TAGs", "in firebase model get user ");
                 if (task.isSuccessful()) {
+                    Log.d("TAGs", "in firebase model get user - successful");
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
+                        Log.d("TAGs", "in firebase model get user - exists");
                         User user = User.fromJson(document.getData());
                         if(user != null)
                             listener.onComplete(user);

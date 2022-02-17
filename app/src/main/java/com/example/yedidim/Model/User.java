@@ -1,5 +1,7 @@
 package com.example.yedidim.Model;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -78,12 +80,15 @@ public class User {
     public void setCarNumber(String carNumber){this.carNumber = carNumber;}
 
     static public User fromJson(Map<String, Object> json){
+        Log.d("TAGs", "user from json");
         String username = (String)json.get("username");
+        Log.d("TAGs", "email= " + username);
         if(username == null)
             return null;
         String password = (String)json.get("password");
         if(password == null)
             return null;
+        // TODO: need to delete
         String firstName = (String)json.get("firstName");
         if(firstName == null)
             return null;
@@ -104,7 +109,8 @@ public class User {
             return null;
         String fuelType = (String)json.get("fuelType");
         if(fuelType == null)
-            return null;
+            fuelType = "";
+        Log.d("TAGs", "nothing is null");
         User user = new User(username, vehicleBrand, manufactureYear, fuelType, firstName, lastName, phoneNumber, carNumber);
         return user;
     }

@@ -41,6 +41,7 @@ public class logInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkDetails()) {
+                    logInBtn.setEnabled(false);
                     Model.getInstance().loginUser(usernameEt.getText().toString().trim(),
                             passwordEt.getText().toString().trim(), new Model.loginUserListener() {
                                 @Override
@@ -54,6 +55,8 @@ public class logInFragment extends Fragment {
                                     else
                                     {
                                         Toast.makeText(getActivity(), "failed to login, please check your credentials", Toast.LENGTH_LONG).show();
+                                        pb.setVisibility(View.GONE);
+                                        logInBtn.setEnabled(true);
                                     }
                                 }
                             });
