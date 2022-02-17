@@ -18,9 +18,13 @@
             android:id="@+id/linearLayoutCompat3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="40dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -72,22 +76,12 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:text="CANCEL"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/editReport_btn_save"
-            app:layout_constraintTop_toBottomOf="@+id/editReport_btn" />
-
-        <ProgressBar
-            android:id="@+id/editReport_progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="127dp"
-            android:layout_height="123dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/editReport_btn_camera" />
 
         <ImageView
             android:id="@+id/editReport_iv_photo"
@@ -101,37 +95,47 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat3" />
 
         <ImageButton
-            android:id="@+id/editReport_btn"
+            android:id="@+id/editReport_btn_camera"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+            app:layout_constraintEnd_toStartOf="@+id/editReport_btn_gallery"
             app:layout_constraintTop_toBottomOf="@+id/editReport_iv_photo"
             app:srcCompat="@drawable/camera1" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/editReport_btn_gallery"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/editReport_btn_camera"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editReport_btn"
+            app:layout_constraintTop_toTopOf="@+id/editReport_btn_camera"
             app:srcCompat="@drawable/gallery_icon_new" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/editReport_btn_delete"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/editReport_btn"
-            app:layout_constraintEnd_toStartOf="@+id/editReport_btn"
-            app:layout_constraintTop_toTopOf="@+id/editReport_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/editReport_btn_camera"
+            app:layout_constraintEnd_toStartOf="@+id/editReport_btn_camera"
+            app:layout_constraintTop_toTopOf="@+id/editReport_btn_camera"
             app:srcCompat="@drawable/delete" />
+
+        <ProgressBar
+            android:id="@+id/editReport_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="139dp"
+            android:layout_height="124dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
