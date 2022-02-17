@@ -101,8 +101,8 @@ public class Model {
     public void getUserByUserName(String userName, getUserByUserNameListener listener)
     {
         // TODO: this belong to Firebase
-        Log.d("TAGs", "in model get user");
         modelFirebase.getUserByUserName(userName, listener);
+
         // TODO: this belong to ROOM
 
 //        MyApplication.executorService.execute(()->{

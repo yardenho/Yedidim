@@ -99,8 +99,6 @@ public class ViewReportFragment extends Fragment {
 
     public void updateUserDetailsDisplay(User u)
     {
-        Log.d("TAGs", "in user update display");
-        Log.d("TAGs", "user email: " + u.getUserName());
         vehicleBrandTv.setText(u.getVehicleBrand());
         manufactureYearTv.setText(u.getManufactureYear());
         fuelTypeTv.setText(u.getFuelType());
@@ -110,19 +108,13 @@ public class ViewReportFragment extends Fragment {
     }
 
     public void updateReportDetailsDisplay(Report r) {
-        Log.d("TAGs", "in report update display");
-        Log.d("TAGs", "r-user email: " + r.getUserName());
         Model.getInstance().getUserByUserName(r.getUserName(), new Model.getUserByUserNameListener() {
             @Override
             public void onComplete(User user) {
                 //TODO: need to decide what to if user is null
-
                 if (user != null) {
-                    Log.d("TAGs", "in report update display user != null");
                     updateUserDetailsDisplay(user);
                 }
-                else
-                    Log.d("TAGs", "in report update display user = null");
             }
         });
         problemTv.setText(r.getProblem());
