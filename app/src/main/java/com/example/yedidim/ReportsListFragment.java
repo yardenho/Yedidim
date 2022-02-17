@@ -180,10 +180,10 @@ public class ReportsListFragment extends Fragment {
             String url = report.getReportUrl();
             if(url != null && !url.equals("")){
                 Log.d("TAG", "url = " + url);
-                Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+                Picasso.get().load(url).placeholder(R.drawable.car).into(photo);
             }
             else{
-                photo.setImageResource(R.drawable.camera1);
+                photo.setImageResource(R.drawable.car);
             }
             //TODO: IMAGE  error(R.drawable.camera1)
         }

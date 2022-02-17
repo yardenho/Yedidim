@@ -109,17 +109,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addingReport_ibtn_photo"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:srcCompat="@drawable/car" />
 
         <ImageButton
             android:id="@+id/addingReport_ibtn_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="52dp"
             android:layout_marginStart="5dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/addingReport_tv_addPhoto"
             app:layout_constraintStart_toEndOf="@+id/addingReport_tv_addPhoto"
             app:layout_constraintTop_toTopOf="@+id/addingReport_tv_addPhoto"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@drawable/camera1" />
 
         <ImageButton
             android:id="@+id/addingReport_ib_gallery"

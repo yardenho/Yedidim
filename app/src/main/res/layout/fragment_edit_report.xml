@@ -93,12 +93,48 @@
             android:id="@+id/editReport_iv_photo"
             android:layout_width="168dp"
             android:layout_height="190dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="80dp"
             android:src="@android:drawable/ic_menu_camera"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat3" />
+
+        <ImageButton
+            android:id="@+id/editReport_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/editReport_iv_photo"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat3"
+            app:layout_constraintVertical_bias="0.181"
+            app:srcCompat="@drawable/camera1" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/editReport_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editReport_btn"
+            app:srcCompat="@drawable/gallery_icon_new" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/editReport_btn"
+            app:layout_constraintEnd_toStartOf="@+id/editReport_btn"
+            app:layout_constraintTop_toTopOf="@+id/editReport_btn"
+            app:srcCompat="@drawable/delete" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
