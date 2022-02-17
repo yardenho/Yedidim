@@ -74,8 +74,8 @@ public class Model {
 
     public void addNewUser(User user,String password, addNewUserListener listener){
         // TODO: this belong to Firebase
-
         modelFirebase.addNewUser(user, password, listener);
+
         // TODO: this belong to ROOM
 
 //            MyApplication.executorService.execute(() -> {
@@ -84,7 +84,14 @@ public class Model {
 //                    listener.onComplete();
 //                });
 //            });
+    }
 
+    public interface loginUserListener{
+        void onComplete(boolean success);
+    }
+
+    public void loginUser(String email, String password, loginUserListener listener) {
+        modelFirebase.loginUser(email, password, listener);
     }
 
     public interface getUserByUserNameListener{

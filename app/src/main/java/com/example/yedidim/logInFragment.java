@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
@@ -20,8 +23,7 @@ import com.example.yedidim.Model.User;
 public class logInFragment extends Fragment {
     EditText usernameEt;
     EditText passwordEt;
-    TextView usernameError;
-    TextView passwordError;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,43 +34,59 @@ public class logInFragment extends Fragment {
         usernameEt = view.findViewById(R.id.logIn_et_username);
         passwordEt = view.findViewById(R.id.logIn_et_password);
         Button logInBtn = view.findViewById(R.id.logIn_btn_logIn);
-        usernameError = view.findViewById(R.id.logIn_tv_usernameError);
-        passwordError = view.findViewById(R.id.logIn_tv_passwordError);
-        usernameError.setVisibility(View.GONE);
-        passwordError.setVisibility(View.GONE);
         ProgressBar pb = view.findViewById(R.id.logIn_progressBar);
         pb.setVisibility(View.GONE);
 
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Model.getInstance().getUserByUserName(usernameEt.getText().toString(), new Model.getUserByUserNameListener() {
-                    @Override
-                    public void onComplete(User user) {
-                        if(user == null){
-                            passwordError.setVisibility(View.GONE);
-                            usernameError.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            if(user.getPassword().equals(passwordEt.getText().toString())){
-                                pb.setVisibility(View.VISIBLE);
-                                logInFragmentDirections.ActionLogInFragmentToReportsListFragment action = logInFragmentDirections.actionLogInFragmentToReportsListFragment(usernameEt.getText().toString());
-                                Navigation.findNavController(v).navigate(action);
-                            }
-                            else{
-                                passwordError.setVisibility(View.VISIBLE);
-                                usernameError.setVisibility(View.GONE);
-
-                            }
-
-                        }
-                    }
-                });
+                if (checkDetails()) {
+                    Model.getInstance().loginUser(usernameEt.getText().toString().trim(),
+                            passwordEt.getText().toString().trim(), new Model.loginUserListener() {
+                                @Override
+                                public void onComplete(boolean success) {
+                                    if(success)
+                                    {
+                                        pb.setVisibility(View.VISIBLE);
+                                        logInFragmentDirections.ActionLogInFragmentToReportsListFragment action = logInFragmentDirections.actionLogInFragmentToReportsListFragment(usernameEt.getText().toString());
+                                        Navigation.findNavController(v).navigate(action);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getActivity(), "failed to login, please check your credentials", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                }
             }
         });
-
-
-
         return view;
+    }
+
+    private boolean checkDetails() {
+        String email = usernameEt.getText().toString().trim();
+        String password = passwordEt.getText().toString().trim();
+        if (email.isEmpty()) {
+            usernameEt.setError("email is required");
+            usernameEt.requestFocus();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            usernameEt.setError("Please provide valid email");
+            usernameEt.requestFocus();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            passwordEt.setError("password is required");
+            passwordEt.requestFocus();
+            return false;
+        }
+        if (password.length() < 6) {
+            passwordEt.setError("password should be at least 6 characters");
+            passwordEt.requestFocus();
+            return false;
+        }
+        return true;
     }
 }

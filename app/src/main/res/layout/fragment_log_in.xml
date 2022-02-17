@@ -63,20 +63,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:text="Password: "
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/logIn_btn_logIn"
         app:layout_constraintEnd_toStartOf="@+id/logIn_et_password"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logIn_tv_username"
-        app:layout_constraintVertical_bias="0.179" />
+        app:layout_constraintTop_toBottomOf="@+id/logIn_tv_username" />
 
     <Button
         android:id="@+id/logIn_btn_logIn"
         android:layout_width="170dp"
         android:layout_height="60dp"
+        android:layout_marginTop="95dp"
         android:layout_marginBottom="128dp"
         android:backgroundTint="#F07470"
         android:text="Log In"
@@ -84,35 +83,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/logIn_tv_usernameError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="* The username does not exist, pleast try again "
-        android:textColor="#F44336"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/logIn_btn_logIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logIn_et_password"
-        app:layout_constraintVertical_bias="0.173" />
-
-    <TextView
-        android:id="@+id/logIn_tv_passwordError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="* Password is incorrect, please try again"
-        android:textColor="#F44336"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/logIn_btn_logIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.406"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logIn_et_password"
-        app:layout_constraintVertical_bias="0.173" />
+        app:layout_constraintTop_toBottomOf="@+id/logIn_et_password" />
 
     <ProgressBar
         android:id="@+id/logIn_progressBar"

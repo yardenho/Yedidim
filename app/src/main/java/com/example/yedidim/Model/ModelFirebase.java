@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,6 +35,7 @@ public class ModelFirebase {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public void getUsersList(Model.GetAllUsersListener listener) {
         db.collection(USERS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -44,18 +46,6 @@ public class ModelFirebase {
                 {
                     for(QueryDocumentSnapshot doc:task.getResult())
                     {
-                        //TODO: - NOTE: moved to user class as fromJson function
-//                        Map<String, Object> json = doc.getData();
-//                        User user = new User();
-//                        user.setUserName((String)json.get("username"));
-//                        user.setUserName((String)json.get("password"));
-//                        user.setUserName((String)json.get("firstName"));
-//                        user.setUserName((String)json.get("lastName"));
-//                        user.setUserName((String)json.get("phoneNumber"));
-//                        user.setUserName((String)json.get("carNumber"));
-//                        user.setUserName((String)json.get("vehicleBrand"));
-//                        user.setUserName((String)json.get("manufactureYear"));
-//                        user.setUserName((String)json.get("fuelType"));
                         User user = User.fromJson(doc.getData());
                         if(user != null)
                             usersList.add(user);
@@ -78,7 +68,6 @@ public class ModelFirebase {
                             db.collection(USERS).document(user.getUserName()).set(user.toJson())
                                     .addOnSuccessListener((successListener)-> {
                                         listener.onComplete();
-
                                     })
                                     .addOnFailureListener((e)-> {
                                         Log.d("TAG", e.getMessage());
@@ -87,6 +76,26 @@ public class ModelFirebase {
                         }
                         else {
                             Log.d("TAG", "failed to register user");
+                        }
+                    }
+                });
+    }
+
+    public void loginUser(String email, String password, Model.loginUserListener listener)
+    {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful())
+                        {
+                            // TODO: check how get current user work
+                            currUser = FirebaseAuth.getInstance().getCurrentUser();
+                            listener.onComplete(true);
+                        }
+                        else
+                        {
+                            listener.onComplete(false);
                         }
                     }
                 });
