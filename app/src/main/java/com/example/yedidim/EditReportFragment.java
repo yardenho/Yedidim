@@ -104,9 +104,9 @@ public class EditReportFragment extends Fragment {
         String url = viewModel.getReport().getReportUrl();
         if (url != null && !url.equals("")) {
             Log.d("TAG", "url = " + url);
-            Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+            Picasso.get().load(url).placeholder(R.drawable.car).into(photo);
         } else {
-            photo.setImageResource(R.drawable.camera1);
+            photo.setImageResource(R.drawable.car);
         }
     }
 

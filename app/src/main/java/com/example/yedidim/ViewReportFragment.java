@@ -120,9 +120,9 @@ public class ViewReportFragment extends Fragment {
         notesTv.setText(r.getNotes());
         String url = r.getReportUrl();
         if (url != null && !url.equals("")) {
-            Picasso.get().load(url).placeholder(R.drawable.camera1).into(photo);
+            Picasso.get().load(url).placeholder(R.drawable.car).into(photo);
         } else {
-            photo.setImageResource(R.drawable.camera1);
+            photo.setImageResource(R.drawable.car);
         }
     }
 
