@@ -83,6 +83,7 @@ public class ModelFirebase {
 
     public void loginUser(String email, String password, Model.loginUserListener listener)
     {
+        //Log.d("TAG", "current user before login is: " + )
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -99,6 +100,12 @@ public class ModelFirebase {
                         }
                     }
                 });
+    }
+
+    public void logOutUser(Model.logOutUserListener listener) {
+        FirebaseAuth.getInstance().signOut();
+        currUser = FirebaseAuth.getInstance().getCurrentUser();
+        listener.onComplete();
     }
 
     public void getUserByUserName(String userName, Model.getUserByUserNameListener listener) {

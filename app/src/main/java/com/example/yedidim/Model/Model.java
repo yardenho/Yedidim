@@ -94,6 +94,15 @@ public class Model {
         modelFirebase.loginUser(email, password, listener);
     }
 
+    public interface logOutUserListener{
+        void onComplete();
+    }
+
+    public void logOutUser(logOutUserListener listener)
+    {
+        modelFirebase.logOutUser(listener);
+    }
+
     public interface getUserByUserNameListener{
         void onComplete(User user);
     }

@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.yedidim.Model.Model;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -64,9 +66,13 @@ public class MainActivity extends AppCompatActivity {
                     navctrl.navigate(aboutUsFragmentDirections.actionGlobalAboutUsFragment());
                     return true;
                 case R.id.log_out_menu_LogOut:
-                    navctrl.navigate(myReportsFragmentDirections.actionGlobalMainScreenFragment());
+                    Model.getInstance().logOutUser(new Model.logOutUserListener() {
+                        @Override
+                        public void onComplete() {
+                            navctrl.navigate(myReportsFragmentDirections.actionGlobalMainScreenFragment());
+                        }
+                    });
                     return true;
-
 
                 default:
                     return super.onOptionsItemSelected(item);
