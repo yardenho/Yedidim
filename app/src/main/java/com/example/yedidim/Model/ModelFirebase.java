@@ -57,6 +57,16 @@ public class ModelFirebase {
         });
     }
 
+    public void getCurrentUser(Model.getCurrentUserListener listener)
+    {
+        currUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currUser == null)
+            listener.onComplete(null);
+        else {
+            listener.onComplete(currUser.getEmail());
+        }
+    }
+
     public void addNewUser(User user, String password, Model.addNewUserListener listener) {
         // Create a new user
         mAuth.createUserWithEmailAndPassword(user.getUserName(), password)

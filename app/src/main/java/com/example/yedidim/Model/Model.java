@@ -126,6 +126,14 @@ public class Model {
         void onComplete();
     }
 
+    public interface getCurrentUserListener{
+        void onComplete(String userEmail);
+    }
+
+    public void getCurrentUser(getCurrentUserListener listener)
+    {
+        modelFirebase.getCurrentUser(listener);
+    }
 
     public void deleteUser(User user,deleteUserListener listener )
     {
