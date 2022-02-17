@@ -34,21 +34,29 @@ public class logInFragment extends Fragment {
         usernameEt = view.findViewById(R.id.logIn_et_username);
         passwordEt = view.findViewById(R.id.logIn_et_password);
         Button logInBtn = view.findViewById(R.id.logIn_btn_logIn);
+        Button cancelBtn = view.findViewById(R.id.logIn_btn_cancel);
         ProgressBar pb = view.findViewById(R.id.logIn_progressBar);
         pb.setVisibility(View.GONE);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
 
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkDetails()) {
                     logInBtn.setEnabled(false);
+                    cancelBtn.setEnabled(false);
                     Model.getInstance().loginUser(usernameEt.getText().toString().trim(),
                             passwordEt.getText().toString().trim(), new Model.loginUserListener() {
                                 @Override
                                 public void onComplete(boolean success) {
+                                    pb.setVisibility(View.VISIBLE);
                                     if(success)
                                     {
-                                        pb.setVisibility(View.VISIBLE);
                                         logInFragmentDirections.ActionLogInFragmentToReportsListFragment action = logInFragmentDirections.actionLogInFragmentToReportsListFragment(usernameEt.getText().toString());
                                         Navigation.findNavController(v).navigate(action);
                                     }
