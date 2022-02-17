@@ -86,7 +86,6 @@ public class signUpFragment extends Fragment {
         user.setFirstName(firstNameEt.getText().toString().trim());
         user.setLastName(lastNameEt.getText().toString().trim());
         user.setUserName(userNameEt.getText().toString().trim());
-        user.setPassword(passwordEt.getText().toString().trim());  // need to remove
         user.setVehicleBrand(vehicleBrandEt.getText().toString().trim());
         user.setManufactureYear(manufactureYearEt.getText().toString().trim());
         user.setFuelType(fuelTypeEt.getText().toString().trim());

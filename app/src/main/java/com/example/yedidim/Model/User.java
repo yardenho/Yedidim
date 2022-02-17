@@ -13,7 +13,6 @@ public class User {
     @PrimaryKey
     @NonNull
     private String userName;
-    private String password;
     private String vehicleBrand;
     private String manufactureYear;
     private String fuelType;
@@ -24,9 +23,8 @@ public class User {
 
     public User(){}
 
-    public User(String userName, String password, String vehicleBrand, String manufactureYear, String fuelType, String firstName, String lastName, String phoneNumber, String carNumber){
+    public User(String userName, String vehicleBrand, String manufactureYear, String fuelType, String firstName, String lastName, String phoneNumber, String carNumber){
         this.userName= userName;
-        this.password= password;
         this.vehicleBrand= vehicleBrand;
         this.manufactureYear= manufactureYear;
         this.fuelType = fuelType;
@@ -37,9 +35,6 @@ public class User {
     }
     public String getUserName(){
         return userName;
-    }
-    public String getPassword(){
-        return password;
     }
     public String getVehicleBrand(){
         return vehicleBrand;
@@ -80,7 +75,6 @@ public class User {
         this.phoneNumber = pn;
     }
     public void setUserName(String un) {this.userName = un;}
-    public void setPassword(String password) {this.password = password;}
     public void setCarNumber(String carNumber){this.carNumber = carNumber;}
 
     static public User fromJson(Map<String, Object> json){
@@ -111,7 +105,7 @@ public class User {
         String fuelType = (String)json.get("fuelType");
         if(fuelType == null)
             return null;
-        User user = new User(username, password, vehicleBrand, manufactureYear, fuelType, firstName, lastName, phoneNumber, carNumber);
+        User user = new User(username, vehicleBrand, manufactureYear, fuelType, firstName, lastName, phoneNumber, carNumber);
         return user;
     }
 
@@ -120,7 +114,6 @@ public class User {
         json.put("username", userName);
         json.put("firstName", firstName);
         json.put("lastName", lastName);
-        json.put("password", password);
         json.put("phoneNumber", phoneNumber);
         json.put("carNumber", carNumber);
         json.put("vehicleBrand", vehicleBrand);

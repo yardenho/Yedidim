@@ -144,19 +144,6 @@ public class ModelFirebase {
 
     public void editUser(User user, Model.editUserListener listener) {
         // update user's details
-        //TODO: NOTE: moved to the user class as - toJson function
-
-//        Map<String, Object> json = new HashMap<>();
-//        json.put("username", user.getUserName());
-//        json.put("firstName", user.getFirstName());
-//        json.put("lastName", user.getLastName());
-//        json.put("password", user.getPassword());
-//        json.put("phoneNumber", user.getPhoneNumber());
-//        json.put("carNumber", user.getCarNumber());
-//        json.put("vehicleBrand", user.getVehicleBrand());
-//        json.put("manufactureYear", user.getManufactureYear());
-//        json.put("fuelType", user.getFuelType());
-
         // update an existing document document with a username as the ID
         db.collection(USERS).document(user.getUserName()).set(user.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
