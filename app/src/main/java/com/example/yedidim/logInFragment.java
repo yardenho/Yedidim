@@ -40,15 +40,15 @@ public class logInFragment extends Fragment {
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
+                logInBtn.setEnabled(false);
                 if (checkDetails()) {
-                    logInBtn.setEnabled(false);
                     Model.getInstance().loginUser(usernameEt.getText().toString().trim(),
                             passwordEt.getText().toString().trim(), new Model.loginUserListener() {
                                 @Override
                                 public void onComplete(boolean success) {
                                     if(success)
                                     {
-                                        pb.setVisibility(View.VISIBLE);
                                         logInFragmentDirections.ActionLogInFragmentToReportsListFragment action = logInFragmentDirections.actionLogInFragmentToReportsListFragment(usernameEt.getText().toString());
                                         Navigation.findNavController(v).navigate(action);
                                     }
@@ -60,6 +60,11 @@ public class logInFragment extends Fragment {
                                     }
                                 }
                             });
+                }
+                else
+                {
+                    pb.setVisibility(View.GONE);
+                    logInBtn.setEnabled(true);
                 }
             }
         });
