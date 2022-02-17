@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
 
-    app:startDestination="@id/mainScreenFragment">
+    app:startDestination="@id/firstFragment">
     app:startDestination="@id/viewReportFragment">
     app:startDestination="@id/myProfileFragment">
 
@@ -157,4 +157,14 @@
     <action android:id="@+id/action_global_aboutUsFragment" app:destination="@id/aboutUsFragment" />
     <action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment" />
     <action android:id="@+id/action_global_myReportsFragment" app:destination="@id/myReportsFragment" />
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.yedidim.firstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_first" >
+        <action
+            android:id="@+id/action_firstFragment_to_reportsListFragment"
+            app:destination="@id/reportsListFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_firstFragment" app:destination="@id/firstFragment" />
 </navigation>
