@@ -132,21 +132,4 @@ public class ViewReportFragment extends Fragment {
         inflater.inflate(R.menu.log_out_menu, menu);
 
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        //TODO: קוד כפול ???
-//        switch (item.getItemId()) {
-////            case R.id.myProfileMenu_myProfile:
-////                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyProfileFragment());
-////                return true;
-////            case R.id.myReportsmenu_myReport:
-////                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyReportsFragment());
-////                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-
 }

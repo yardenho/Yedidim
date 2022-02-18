@@ -103,12 +103,6 @@ public class MapFragment extends Fragment {
                 @NonNull NavDirections action = MapFragmentDirections.actionMapFragmentToAddingReportFragment();
                 Navigation.findNavController(view).navigate(action);
                 return true;
-//            case R.id.myProfileMenu_myProfile:
-//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment());
-//                return true;
-//            case R.id.myReportsmenu_myReport:
-//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment());
-//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

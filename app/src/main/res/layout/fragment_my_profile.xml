@@ -21,28 +21,13 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
             android:backgroundTint="#F07470"
             android:text="Edit Profile"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/myProfile_btn_deleteAccount"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/myProfile_tv_fuelType" />
-
-        <Button
-            android:id="@+id/myProfile_btn_deleteAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="50dp"
-            android:backgroundTint="#F07470"
-            android:text="Delete Account "
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/myProfile_tv_firstName"

@@ -149,7 +149,6 @@ public class ReportsListFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
-        //        return true;
     }
 
 

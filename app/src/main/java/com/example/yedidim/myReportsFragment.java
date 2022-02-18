@@ -150,17 +150,6 @@ public class myReportsFragment extends Fragment {
         inflater.inflate(R.menu.log_out_menu, menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        //TODO: קוד כפול ???
-//        switch (item.getItemId()) {
-////            case R.id.myProfileMenu_myProfile:
-////                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyProfileFragment());
-////                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         private final myReportsFragment.OnItemClickListener listener;

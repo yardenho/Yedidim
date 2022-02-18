@@ -62,12 +62,14 @@ public class signUpFragment extends Fragment {
             public void onClick(View v) {
                 pb.setVisibility(View.VISIBLE);
                 signUpBtn.setEnabled(false);
+                backBtn.setEnabled(false);
                 if (checkDetails()) {
                     registerUser(v);
                 }
                 else {
                     pb.setVisibility(View.GONE);
                     signUpBtn.setEnabled(true);
+                    backBtn.setEnabled(true);
                 }
             }
         });
