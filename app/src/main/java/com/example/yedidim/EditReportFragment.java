@@ -160,7 +160,6 @@ public class EditReportFragment extends Fragment {
         viewModel.getReport().setNotes(notes.getText().toString());
         if(deleteFlag) {
             viewModel.getReport().setReportUrl(null);
-            editReport();
         }
         else {
             if (bitmap != null) {
@@ -171,14 +170,13 @@ public class EditReportFragment extends Fragment {
                 });
             }
         }
-
+        editReport();
     }
 
     private void editReport(){
         Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {
             @Override
             public void onComplete() {
-                Model.getInstance().reloadUserReportsList();//for updating the list of the user reports
                 Navigation.findNavController(view).navigateUp();
             }
         });

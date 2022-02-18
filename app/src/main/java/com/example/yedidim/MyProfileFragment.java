@@ -124,15 +124,15 @@ public class MyProfileFragment extends Fragment {
         inflater.inflate(R.menu.log_out_menu, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //TODO: קוד כפול ???
-        switch (item.getItemId()) {
-            case R.id.myReportsmenu_myReport:
-                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyReportsFragment());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        //TODO: קוד כפול ???
+//        switch (item.getItemId()) {
+////            case R.id.myReportsmenu_myReport:
+////                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyReportsFragment());
+////                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 }

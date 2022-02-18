@@ -100,16 +100,15 @@ public class MapFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addMenu_addReport:
-                //TODO: when we after the sign up maybe not allow to return there
                 @NonNull NavDirections action = MapFragmentDirections.actionMapFragmentToAddingReportFragment();
                 Navigation.findNavController(view).navigate(action);
                 return true;
-            case R.id.myProfileMenu_myProfile:
-                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment());
-                return true;
-            case R.id.myReportsmenu_myReport:
-                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment());
-                return true;
+//            case R.id.myProfileMenu_myProfile:
+//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment());
+//                return true;
+//            case R.id.myReportsmenu_myReport:
+//                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment());
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -48,8 +48,6 @@ public class myReportsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_reports, container, false);
-        // TODO: need to move to another place
-        Model.getInstance().reloadUserReportsList();
         viewModel.setMyReports(Model.getInstance().getAllUserReports());
         ProgressBar pb = view.findViewById(R.id.myReports_progressBar);
         pb.setVisibility(View.GONE);
@@ -81,7 +79,6 @@ public class myReportsFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         //TODO: need to move
-                        Model.getInstance().reloadUserReportsList();//for updating the list of the user reports
                         pb.setVisibility(View.GONE);
                     }
                 });
@@ -93,7 +90,6 @@ public class myReportsFragment extends Fragment {
             public void OnEditClick(int position) {
                 Report r = viewModel.getMyReports().getValue().get(position);
                 Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionMyReportsFragmentToEditReportFragment(r.getReportID()));
-                //TODO: refresh data
             }
         });
 
@@ -101,7 +97,6 @@ public class myReportsFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //TODO: need to move maybe?
                 Model.getInstance().reloadUserReportsList();
 
             }
@@ -110,6 +105,7 @@ public class myReportsFragment extends Fragment {
 
         if(viewModel.getMyReports().getValue() == null)
             refreshData();
+
         viewModel.getMyReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
             noReportMessage();
@@ -154,17 +150,17 @@ public class myReportsFragment extends Fragment {
         inflater.inflate(R.menu.log_out_menu, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //TODO: קוד כפול ???
-        switch (item.getItemId()) {
-            case R.id.myProfileMenu_myProfile:
-                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyProfileFragment());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        //TODO: קוד כפול ???
+//        switch (item.getItemId()) {
+////            case R.id.myProfileMenu_myProfile:
+////                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyProfileFragment());
+////                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         private final myReportsFragment.OnItemClickListener listener;

@@ -140,19 +140,8 @@ public class ReportsListFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addMenu_addReport:
-                //TODO: when we after the sign up maybe not allow to return there
                 @NonNull NavDirections action = ReportsListFragmentDirections.actionReportsListFragmentToAddingReportFragment();
                 Navigation.findNavController(view).navigate(action);
-                return true;
-            case R.id.myProfileMenu_myProfile:
-                //TODO
-//                ReportsListFragmentDirections.ActionGlobalMyProfileFragment action1 = ReportsListFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUserName());
-                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyProfileFragment());
-                return true;
-            case R.id.myReportsmenu_myReport:
-                //TODO: check why the first line dos not working
-//                ReportsListFragmentDirections.ActionGlobalMyReportsFragment action2 = ReportsListFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUserName());
-                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyReportsFragment());
                 return true;
             case R.id.mapMenu_MoveToMap:
                 Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(null));

@@ -2,8 +2,11 @@ package com.example.yedidim;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -56,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         if(!super.onOptionsItemSelected(item)) {
             switch (item.getItemId()) {
                 case android.R.id.home:
-                    //TODO: when we after the sign up maybe not allow to return there
-//                    int index = getSupportFragmentManager().getBackStackEntryCount();
-//                    FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(index);
-//                    if(backEntry.getId() != R.id.mainScreenFragment)
-                        navctrl.navigateUp();
+                    NavDestination myFragment = navctrl.getCurrentDestination();
+                    if (myFragment.getId() == R.id.reportsListFragment) {
+                        finish();
+                        return true;
+                    }
+                    navctrl.navigateUp();
                     return true;
                 case R.id.baseMenu_aboutUs:
                     navctrl.navigate(aboutUsFragmentDirections.actionGlobalAboutUsFragment());
@@ -73,7 +77,12 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     return true;
-
+                case R.id.myProfileMenu_myProfile:
+                    navctrl.navigate(MapFragmentDirections.actionGlobalMyProfileFragment());
+                    return true;
+                case R.id.myReportsmenu_myReport:
+                    navctrl.navigate(MapFragmentDirections.actionGlobalMyReportsFragment());
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }

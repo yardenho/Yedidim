@@ -27,6 +27,7 @@ public class Model {
     private Model(){
         reportsListLoadingState.setValue(LoadingState.loaded);
         reloadReportsList();
+        reloadUserReportsList();
     }
 
     public enum LoadingState{
@@ -233,6 +234,7 @@ public class Model {
         //TODO: related to live data, used: when there is a new report this will let know the list to refresh
         modelFirebase.addNewReport(report, ()->{
             reloadReportsList();
+            reloadUserReportsList();
             listener.onComplete();
         });
 
@@ -274,6 +276,7 @@ public class Model {
     {
         modelFirebase.deleteReport(report,()->{
             reloadReportsList();
+            reloadUserReportsList();//for updating the list of the user reports
             listener.onComplete();
         });
 
@@ -298,6 +301,7 @@ public class Model {
     public void editReport(Report report,editReportListener listener){
         modelFirebase.editReport(report, ()->{
             reloadReportsList();
+            reloadUserReportsList();
             listener.onComplete();
         });
 
