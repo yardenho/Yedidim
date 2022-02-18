@@ -32,6 +32,7 @@ public class myReportsFragment extends Fragment {
     private View view;
     private SwipeRefreshLayout swipeRefresh;
     private myReportsFragment.MyAdapter adapter;
+    private TextView noReportsMessage;
 
     public myReportsFragment() {
     }
@@ -62,11 +63,8 @@ public class myReportsFragment extends Fragment {
         adapter = new myReportsFragment.MyAdapter();
         list.setAdapter(adapter);
 
-//        TextView noReportsMessage = view.findViewById(R.id.myReportsList_tv_noReportsMessage);
-//        noReportsMessage.setVisibility(View.GONE);
-//        if(viewModel.getMyReports().getValue()==null){
-//            noReportsMessage.setVisibility(View.VISIBLE);
-//        }
+        noReportsMessage = view.findViewById(R.id.myReportsList_tv_noReportsMessage);
+        noReportsMessage.setVisibility(View.GONE);
 
         adapter.setOnItemClickListener(new myReportsFragment.OnItemClickListener() {
             @Override
@@ -98,7 +96,6 @@ public class myReportsFragment extends Fragment {
                 Report r = viewModel.getMyReports().getValue().get(position);
                 Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionMyReportsFragmentToEditReportFragment(viewModel.getUsername(), r.getReportID()));
                 //TODO: refresh data
-
             }
         });
 
@@ -107,6 +104,7 @@ public class myReportsFragment extends Fragment {
             @Override
             public void onRefresh() {
                 Model.getInstance().reloadUserReportsList(viewModel.getUsername());
+
             }
         });
         setHasOptionsMenu(true);
@@ -115,19 +113,13 @@ public class myReportsFragment extends Fragment {
             refreshData();
         viewModel.getMyReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
+            noReportMessage();
         });
 
         swipeRefresh.setRefreshing(Model.getInstance().getReportsListLoadingState().getValue() == Model.LoadingState.loading);
         Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
-            //try
-//            if(viewModel.getMyReports().getValue()==null){
-//                noReportsMessage.setVisibility(View.VISIBLE);
-//            }
-//            else
-//                noReportsMessage.setVisibility(View.GONE);
         });
-
         return view;
     }
 
@@ -143,6 +135,18 @@ public class myReportsFragment extends Fragment {
 //                    swipeRefresh.setRefreshing(false);
 //            }
 //        });
+    }
+
+    private void noReportMessage(){
+        //try
+        if(viewModel.getMyReports().getValue()!=null){
+            if(viewModel.getMyReports().getValue().size() == 0)
+                noReportsMessage.setVisibility(View.VISIBLE);
+            else
+                noReportsMessage.setVisibility(View.GONE);
+        }
+        else
+            noReportsMessage.setVisibility(View.VISIBLE);
     }
 
     @Override

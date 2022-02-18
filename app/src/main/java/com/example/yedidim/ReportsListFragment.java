@@ -38,6 +38,7 @@ public class ReportsListFragment extends Fragment {
     private View view;
     private MyAdapter adapter;
     private SwipeRefreshLayout swipeRefresh;
+    private TextView noReportsMessage;
 
     public ReportsListFragment() {
     }
@@ -61,11 +62,8 @@ public class ReportsListFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
 
-//        TextView noReportsMessage = view.findViewById(R.id.reportsList_tv_noReportsMessage);
-//        noReportsMessage.setVisibility(View.GONE);
-//        if(viewModel.getReports().getValue()==null){
-//            noReportsMessage.setVisibility(View.VISIBLE);
-//        }
+        noReportsMessage = view.findViewById(R.id.reportsList_tv_noReportsMessage);
+        noReportsMessage.setVisibility(View.GONE);
 
         adapter = new ReportsListFragment.MyAdapter();
         list.setAdapter(adapter);
@@ -91,18 +89,12 @@ public class ReportsListFragment extends Fragment {
             refreshData();
         viewModel.getReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
+            noReportMessage();
         });
 
         swipeRefresh.setRefreshing(Model.getInstance().getReportsListLoadingState().getValue() == Model.LoadingState.loading);
         Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
-            //try
-//            if(viewModel.getReports().getValue()==null){
-//                noReportsMessage.setVisibility(View.VISIBLE);
-//            }
-//            else
-//                noReportsMessage.setVisibility(View.GONE);
-
         });
         pb.setVisibility(View.GONE);
 
@@ -122,6 +114,18 @@ public class ReportsListFragment extends Fragment {
 //                    swipeRefresh.setRefreshing(false);
 //            }
 //        });
+    }
+
+    private void noReportMessage(){
+        //try
+        if(viewModel.getReports().getValue()!=null){
+            if(viewModel.getReports().getValue().size() == 0)
+                noReportsMessage.setVisibility(View.VISIBLE);
+            else
+                noReportsMessage.setVisibility(View.GONE);
+        }
+        else
+            noReportsMessage.setVisibility(View.VISIBLE);
     }
 
     @Override
