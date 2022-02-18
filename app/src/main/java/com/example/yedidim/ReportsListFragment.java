@@ -54,7 +54,6 @@ public class ReportsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_reports_list, container, false);
-        viewModel.setUserName(ReportsListFragmentArgs.fromBundle(getArguments()).getUsername());
         ProgressBar pb = view.findViewById(R.id.reportList_progressBar);
         pb.setVisibility(View.VISIBLE);
         RecyclerView list = view.findViewById(R.id.reportsList_recycler);
@@ -71,7 +70,7 @@ public class ReportsListFragment extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Report r = viewModel.getReports().getValue().get(position);
-                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(viewModel.getUserName(), r.getReportID());
+                ReportsListFragmentDirections.ActionReportsListFragmentToViewReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToViewReportFragment(r.getReportID());
                 Navigation.findNavController(v).navigate(action);
             }
         });
@@ -117,7 +116,6 @@ public class ReportsListFragment extends Fragment {
     }
 
     private void noReportMessage(){
-        //try
         if(viewModel.getReports().getValue()!=null){
             if(viewModel.getReports().getValue().size() == 0)
                 noReportsMessage.setVisibility(View.VISIBLE);
@@ -143,21 +141,21 @@ public class ReportsListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.addMenu_addReport:
                 //TODO: when we after the sign up maybe not allow to return there
-                ReportsListFragmentDirections.ActionReportsListFragmentToAddingReportFragment action = ReportsListFragmentDirections.actionReportsListFragmentToAddingReportFragment(viewModel.getUserName());
+                @NonNull NavDirections action = ReportsListFragmentDirections.actionReportsListFragmentToAddingReportFragment();
                 Navigation.findNavController(view).navigate(action);
                 return true;
             case R.id.myProfileMenu_myProfile:
                 //TODO
 //                ReportsListFragmentDirections.ActionGlobalMyProfileFragment action1 = ReportsListFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUserName());
-                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUserName()));
+                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyProfileFragment());
                 return true;
             case R.id.myReportsmenu_myReport:
                 //TODO: check why the first line dos not working
 //                ReportsListFragmentDirections.ActionGlobalMyReportsFragment action2 = ReportsListFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUserName());
-                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUserName()));
+                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionGlobalMyReportsFragment());
                 return true;
             case R.id.mapMenu_MoveToMap:
-                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(viewModel.getUserName(), null));
+                Navigation.findNavController(view).navigate(ReportsListFragmentDirections.actionReportsListFragmentToMapFragment(null));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -194,13 +192,11 @@ public class ReportsListFragment extends Fragment {
             location.setText(report.getLocation());
             String url = report.getReportUrl();
             if(url != null && !url.equals("")){
-                Log.d("TAG", "url = " + url);
                 Picasso.get().load(url).placeholder(R.drawable.car).into(photo);
             }
             else{
                 photo.setImageResource(R.drawable.car);
             }
-            //TODO: IMAGE  error(R.drawable.camera1)
         }
     }
 

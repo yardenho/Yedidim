@@ -10,16 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ReportListViewModel extends ViewModel {
-
-    private  String username;
-//    List<Report> reports = new LinkedList<Report>();
-
     LiveData<List<Report>> reports = Model.getInstance().getAllReports();
-
-
-    public void setUserName(String u){username = u ;}
-    public String getUserName(){return username;}
-
-//    public void setReports(LiveData<List<Report>> r){reports = r;} // אליאב הוריד אצלו, אמר שאין פונקציית סט
     public LiveData<List<Report>> getReports(){return reports;}
 }

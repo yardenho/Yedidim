@@ -42,7 +42,7 @@ public class firstFragment extends Fragment {
                 }
                 else
                 {
-                    firstFragmentDirections.ActionFirstFragmentToReportsListFragment action = firstFragmentDirections.actionFirstFragmentToReportsListFragment(userEmail);
+                    @NonNull NavDirections action = firstFragmentDirections.actionFirstFragmentToReportsListFragment();
                     Navigation.findNavController(v).navigate(action);
                 }
             }

@@ -54,7 +54,6 @@ import java.util.Locale;
 public class AddingReportFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE=1;
     static final int GET_FROM_GALLERY=2;
-    private AddingReportViewModel viewModel;
     private Button cancelBtn;
     private Button reportBtn;
     private EditText problemEt;
@@ -63,16 +62,10 @@ public class AddingReportFragment extends Fragment {
     private ImageButton photoIBtn;
     private ImageButton galleryBtn;
     private ProgressBar pb;
-    Bitmap bitmap;    // maybe we need to put it in view model??
+    Bitmap bitmap;
     FusedLocationProviderClient fusedLocationProviderClient;
 
     public AddingReportFragment() {
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        viewModel = new ViewModelProvider(this).get(AddingReportViewModel.class);
     }
 
     @Override
@@ -89,10 +82,6 @@ public class AddingReportFragment extends Fragment {
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
         pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
-        viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
-
-        // TODO: צריך להחזיר את השורה הזאת כנסיים לממש את ה- GPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        viewModel.setUsername(AddingReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
         // initialize fusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -107,10 +96,6 @@ public class AddingReportFragment extends Fragment {
         photoIBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-
-//            if(intent.resolveActivity(getActivity().getPackageManager()) != null){
-//                getActivity().startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-//            }
         });
 
         galleryBtn.setOnClickListener(v -> {
@@ -159,7 +144,6 @@ public class AddingReportFragment extends Fragment {
     public void activateGPS(Report report, View v)
     {
         // check permission
-        // TODO: check for replacing MyApplication
         if(ActivityCompat.checkSelfPermission(MyApplication.getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // permission granted
@@ -189,19 +173,25 @@ public class AddingReportFragment extends Fragment {
         reportBtn.setEnabled(false);
         cancelBtn.setEnabled(false);
         Report report = new Report();
-        report.setProblem(problemEt.getText().toString());
-        report.setNotes(noteEt.getText().toString());
-        report.setUserName(viewModel.getUsername());
-        if (bitmap != null) {
-            String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-            Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
-                report.setReportUrl(url);
-                activateGPS(report, v);
-            });
-        } else {
-            report.setReportUrl(null);
-            activateGPS(report, v);
-        }
+
+        Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
+            @Override
+            public void onComplete(String userEmail) {
+                report.setUserName(userEmail);
+                report.setProblem(problemEt.getText().toString());
+                report.setNotes(noteEt.getText().toString());
+                if (bitmap != null) {
+                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                    Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                        report.setReportUrl(url);
+                        activateGPS(report, v);
+                    });
+                } else {
+                    report.setReportUrl(null);
+                    activateGPS(report, v);
+                }
+            }
+        });
     }
 
 

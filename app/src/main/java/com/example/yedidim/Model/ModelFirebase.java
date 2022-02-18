@@ -333,7 +333,7 @@ public class ModelFirebase {
                 });
     }
 
-    public void getUserReportsList(String username, Long since, Model.GetUserReportsListener listener) {
+    public void getUserReportsList(Long since, Model.GetUserReportsListener listener) {
         db.collection(REPORTS).whereGreaterThanOrEqualTo(Report.LAST_UPDATED,new Timestamp(since, 0))
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -343,16 +343,10 @@ public class ModelFirebase {
                 {
                     for(QueryDocumentSnapshot doc:task.getResult())
                     {
+                        currUser = FirebaseAuth.getInstance().getCurrentUser();
+                        String userEmail = currUser.getEmail();
                         Map<String, Object> json = doc.getData();
-                        if(((String)json.get("username")).equals(username)) {
-                            //TODO:note- moved to the report class as fromJson
-//                            Report report = new Report();
-//                            report.setReportID((String) doc.getId());
-//                            report.setProblem((String) json.get("problem"));
-//                            report.setNotes((String) json.get("notes"));
-//                            report.setUserName((String) json.get("username"));
-//                            report.setLatitude((double) json.get("latitude"));
-//                            report.setLongitude((double) json.get("longitude"));
+                        if(((String)json.get("username")).equals(userEmail)) {
                             Report report = Report.fromJson(doc.getId(), doc.getData());
                             if(report != null)
                                 reportsList.add(report);

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -56,7 +57,7 @@ public class logInFragment extends Fragment {
                                 @Override
                                 public void onComplete(boolean success) {
                                     if(success) {
-                                        logInFragmentDirections.ActionLogInFragmentToReportsListFragment action = logInFragmentDirections.actionLogInFragmentToReportsListFragment(usernameEt.getText().toString());
+                                        @NonNull NavDirections action = logInFragmentDirections.actionLogInFragmentToReportsListFragment();
                                         Navigation.findNavController(v).navigate(action);
                                     }
                                     else {

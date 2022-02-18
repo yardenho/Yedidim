@@ -36,8 +36,6 @@ public class myReportsFragment extends Fragment {
 
     public myReportsFragment() {
     }
-// TODO עצרתי רגע כי אנחנו צריכות לתכנן איך רק הדיווחים של יוזר מסויים יוצגו
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -50,9 +48,8 @@ public class myReportsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_reports, container, false);
-        viewModel.setUsername(MyProfileFragmentArgs.fromBundle(getArguments()).getUsername());
-
-        Model.getInstance().reloadUserReportsList(viewModel.getUsername());
+        // TODO: need to move to another place
+        Model.getInstance().reloadUserReportsList();
         viewModel.setMyReports(Model.getInstance().getAllUserReports());
         ProgressBar pb = view.findViewById(R.id.myReports_progressBar);
         pb.setVisibility(View.GONE);
@@ -70,7 +67,7 @@ public class myReportsFragment extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Report r = viewModel.getMyReports().getValue().get(position);
-                myReportsFragmentDirections.ActionMyReportsFragmentToViewReportFragment action = myReportsFragmentDirections.actionMyReportsFragmentToViewReportFragment(viewModel.getUsername(), r.getReportID());
+                myReportsFragmentDirections.ActionMyReportsFragmentToViewReportFragment action = myReportsFragmentDirections.actionMyReportsFragmentToViewReportFragment(r.getReportID());
                 Navigation.findNavController(v).navigate(action);
             }
         });
@@ -83,7 +80,8 @@ public class myReportsFragment extends Fragment {
                 Model.getInstance().deleteReport(r, new Model.deleteReportListener() {
                     @Override
                     public void onComplete() {
-                        Model.getInstance().reloadUserReportsList(viewModel.getUsername());//for updating the list of the user reports
+                        //TODO: need to move
+                        Model.getInstance().reloadUserReportsList();//for updating the list of the user reports
                         pb.setVisibility(View.GONE);
                     }
                 });
@@ -94,7 +92,7 @@ public class myReportsFragment extends Fragment {
             @Override
             public void OnEditClick(int position) {
                 Report r = viewModel.getMyReports().getValue().get(position);
-                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionMyReportsFragmentToEditReportFragment(viewModel.getUsername(), r.getReportID()));
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionMyReportsFragmentToEditReportFragment(r.getReportID()));
                 //TODO: refresh data
             }
         });
@@ -103,7 +101,8 @@ public class myReportsFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Model.getInstance().reloadUserReportsList(viewModel.getUsername());
+                //TODO: need to move maybe?
+                Model.getInstance().reloadUserReportsList();
 
             }
         });
@@ -138,7 +137,6 @@ public class myReportsFragment extends Fragment {
     }
 
     private void noReportMessage(){
-        //try
         if(viewModel.getMyReports().getValue()!=null){
             if(viewModel.getMyReports().getValue().size() == 0)
                 noReportsMessage.setVisibility(View.VISIBLE);
@@ -161,7 +159,7 @@ public class myReportsFragment extends Fragment {
         //TODO: קוד כפול ???
         switch (item.getItemId()) {
             case R.id.myProfileMenu_myProfile:
-                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUsername()));
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyProfileFragment());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

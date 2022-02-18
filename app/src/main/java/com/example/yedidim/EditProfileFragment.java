@@ -20,8 +20,6 @@ import com.example.yedidim.Model.User;
 
 
 public class EditProfileFragment extends Fragment {
-    private EditProfileViewModel viewModel;
-    private User user;
     private EditText vehicleBrand;
     private EditText manufactureYear;
     private EditText carNumber;
@@ -31,14 +29,13 @@ public class EditProfileFragment extends Fragment {
     private EditText phoneNumber;
     private Button saveBtn;
     private Button cancelBtn;
-    View view;
+    private View view;
 
     public EditProfileFragment() {
     }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        viewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,12 +50,18 @@ public class EditProfileFragment extends Fragment {
         phoneNumber = view.findViewById(R.id.editProfile_et_phoneNumber);
         ProgressBar pb = view.findViewById(R.id.editProfile_progressBar);
         pb.setVisibility(View.GONE);
-        viewModel.setUserName(EditProfileFragmentArgs.fromBundle(getArguments()).getUsername());
-        Model.getInstance().getUserByUserName(viewModel.getUserName(), (u) ->
-        {
-            user = u;
-            showUserDetails();
+
+        Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
+            @Override
+            public void onComplete(String userEmail) {
+                Model.getInstance().getUserByUserName(userEmail, (u) ->
+                {
+                    User user = u;
+                    showUserDetails(user);
+                });
+            }
         });
+
 
         cancelBtn = view.findViewById(R.id.editProfile_btn_cancel);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +91,7 @@ public class EditProfileFragment extends Fragment {
         return view;
     }
 
-    private void showUserDetails() {
+    private void showUserDetails(User user) {
         vehicleBrand.setText(user.getVehicleBrand());
         manufactureYear.setText(user.getManufactureYear());
         fuelType.setText(user.getFuelType());
@@ -98,15 +101,22 @@ public class EditProfileFragment extends Fragment {
         phoneNumber.setText(user.getPhoneNumber());
     }
     private void setDetails() {
-        user.setVehicleBrand(vehicleBrand.getText().toString());
-        user.setManufactureYear(manufactureYear.getText().toString());
-        user.setFuelType(fuelType.getText().toString());
-        user.setCarNumber(carNumber.getText().toString());
-        user.setFirstName(firstName.getText().toString());
-        user.setLastName(lastName.getText().toString());
-        user.setPhoneNumber(phoneNumber.getText().toString());
-        Model.getInstance().editUser(user, ()->{
-            Navigation.findNavController(view).navigateUp();
+        User user = new User();
+        Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
+            @Override
+            public void onComplete(String userEmail) {
+                user.setUserName(userEmail);
+                user.setVehicleBrand(vehicleBrand.getText().toString());
+                user.setManufactureYear(manufactureYear.getText().toString());
+                user.setFuelType(fuelType.getText().toString());
+                user.setCarNumber(carNumber.getText().toString());
+                user.setFirstName(firstName.getText().toString());
+                user.setLastName(lastName.getText().toString());
+                user.setPhoneNumber(phoneNumber.getText().toString());
+                Model.getInstance().editUser(user, ()->{
+                    Navigation.findNavController(view).navigateUp();
+                });
+            }
         });
     }
 
@@ -141,9 +151,6 @@ public class EditProfileFragment extends Fragment {
             manufactureYear.requestFocus();
             return true;
         }
-
         return false;
     }
-
-
 }

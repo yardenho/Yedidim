@@ -91,16 +91,6 @@
             app:layout_constraintEnd_toStartOf="@+id/addingReport_btn_report"
             app:layout_constraintTop_toBottomOf="@+id/addingReport_iv_photo" />
 
-        <ProgressBar
-            android:id="@+id/addingReport_progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="74dp"
-            android:layout_height="73dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/addingReport_iv_photo"
             android:layout_width="245dp"
@@ -135,6 +125,16 @@
             app:layout_constraintTop_toTopOf="@+id/addingReport_ibtn_photo"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/gallery_icon_new" />
+
+        <ProgressBar
+            android:id="@+id/addingReport_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="98dp"
+            android:layout_height="96dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

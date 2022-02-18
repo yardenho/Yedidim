@@ -340,13 +340,13 @@ public class Model {
         return userReportsListLd;
     }
 
-    public void reloadUserReportsList(String userName){
+    public void reloadUserReportsList(){
         reportsListLoadingState.setValue(LoadingState.loading);//התחלת הטעינה - אני הוספתי לחשוב אם צריך
 
         //get local last update
         Long localLastUpdate = Report.getLocalLastUpdated();
         //get all reports records since local last update from firebase
-        modelFirebase.getUserReportsList(userName, localLastUpdate,(list)->{
+        modelFirebase.getUserReportsList(localLastUpdate,(list)->{
 
             MyApplication.executorService.execute(()->{
                 //update local last update date
@@ -363,10 +363,14 @@ public class Model {
                 }
                 Report.setLocalLastUpdated(lLastUpdate);
                 //return all records to the caller
-                List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userName);
-                userReportsListLd.postValue(userRepList);
-                reportsListLoadingState.postValue(LoadingState.loaded); // סיום הטעינה - אני הוספתי לחשוב אם צריך
-
+                modelFirebase.getCurrentUser(new getCurrentUserListener() {
+                    @Override
+                    public void onComplete(String userEmail) {
+                        List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userEmail);
+                        userReportsListLd.postValue(userRepList);
+                        reportsListLoadingState.postValue(LoadingState.loaded); // סיום הטעינה - אני הוספתי לחשוב אם צריך
+                    }
+                });
             });
 
         });

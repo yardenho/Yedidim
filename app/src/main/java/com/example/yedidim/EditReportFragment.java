@@ -57,14 +57,11 @@ public class EditReportFragment extends Fragment {
     View view;
     ProgressBar pb;
     boolean flag = false;
-//tryyyyyyyyyyyyy
     FusedLocationProviderClient fusedLocationProviderClient;
     Bitmap bitmap ;
 
 
-
     public EditReportFragment() {
-
     }
 
     @Override
@@ -75,8 +72,6 @@ public class EditReportFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        viewModel.setUserName(EditReportFragmentArgs.fromBundle(getArguments()).getUsername());
 
         String reportId = EditReportFragmentArgs.fromBundle(getArguments()).getReportID();
 
@@ -148,7 +143,6 @@ public class EditReportFragment extends Fragment {
         return view;
     }
 
-
     private void showReportDetails() {
         problem.setText(viewModel.getReport().getProblem());
         notes.setText(viewModel.getReport().getNotes());
@@ -184,7 +178,7 @@ public class EditReportFragment extends Fragment {
         Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {
             @Override
             public void onComplete() {
-                Model.getInstance().reloadUserReportsList(viewModel.getUserName());//for updating the list of the user reports
+                Model.getInstance().reloadUserReportsList();//for updating the list of the user reports
                 Navigation.findNavController(view).navigateUp();
             }
         });
@@ -199,7 +193,6 @@ public class EditReportFragment extends Fragment {
         return false;
     }
 
-    ///tryyyyyyyy
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -222,7 +215,4 @@ public class EditReportFragment extends Fragment {
             }
         }
     }
-
-
-
 }

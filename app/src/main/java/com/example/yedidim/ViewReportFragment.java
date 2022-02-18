@@ -69,11 +69,9 @@ public class ViewReportFragment extends Fragment {
         mapBtn = view.findViewById(R.id.viewReport_imageBtn_map);
         photo = view.findViewById(R.id.viewReport_iv_image);
 
-        viewModel.setUsername(ViewReportFragmentArgs.fromBundle(getArguments()).getUsername());
         viewModel.setReportId(ViewReportFragmentArgs.fromBundle(getArguments()).getReportID());
 
 
-        //yarden//
         String reportId = ViewReportFragmentArgs.fromBundle(getArguments()).getReportID();
         Model.getInstance().getReportByID(reportId, new Model.getReportByReportIDListener() {
             @Override
@@ -84,12 +82,11 @@ public class ViewReportFragment extends Fragment {
             }
         });
 
-        //yarden//
 
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(ViewReportFragmentDirections.actionViewReportFragmentToMapFragment(viewModel.getUsername(),viewModel.getReportId()));
+                Navigation.findNavController(v).navigate(ViewReportFragmentDirections.actionViewReportFragmentToMapFragment(viewModel.getReportId()));
             }
         });
 
@@ -141,10 +138,10 @@ public class ViewReportFragment extends Fragment {
         //TODO: קוד כפול ???
         switch (item.getItemId()) {
             case R.id.myProfileMenu_myProfile:
-                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyProfileFragment(viewModel.getUsername()));
+                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyProfileFragment());
                 return true;
             case R.id.myReportsmenu_myReport:
-                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUsername()));
+                Navigation.findNavController(view).navigate(ViewReportFragmentDirections.actionGlobalMyReportsFragment());
             default:
                 return super.onOptionsItemSelected(item);
         }

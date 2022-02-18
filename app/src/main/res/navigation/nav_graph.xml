@@ -47,20 +47,12 @@
         android:id="@+id/addingReportFragment"
         android:name="com.example.yedidim.AddingReportFragment"
         android:label="Adding Report"
-        tools:layout="@layout/fragment_adding_report">
-        <argument
-            android:name="username"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_adding_report"/>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.yedidim.EditProfileFragment"
         android:label="Edit Profile"
-        tools:layout="@layout/fragment_edit_profile">
-        <argument
-            android:name="username"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_edit_profile"/>
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.example.yedidim.MyProfileFragment"
@@ -69,18 +61,12 @@
         <action
             android:id="@+id/action_myProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
-        <argument
-            android:name="username"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/editReportFragment"
         android:name="com.example.yedidim.EditReportFragment"
         android:label="Edit Report"
         tools:layout="@layout/fragment_edit_report">
-        <argument
-            android:name="username"
-            app:argType="string" />
         <argument
             android:name="reportID"
             app:argType="string" />
@@ -90,9 +76,6 @@
         android:name="com.example.yedidim.ViewReportFragment"
         android:label="View Report"
         tools:layout="@layout/fragment_view_report">
-        <argument
-            android:name="username"
-            app:argType="string" />
         <argument
             android:name="reportID"
             app:argType="string" />
@@ -112,9 +95,6 @@
             android:id="@+id/action_mapFragment_to_viewReportFragment"
             app:destination="@id/viewReportFragment" />
         <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
             android:name="reportID"
             app:argType="string"
             app:nullable="true" />
@@ -133,9 +113,6 @@
         <action
             android:id="@+id/action_reportsListFragment_to_viewReportFragment"
             app:destination="@id/viewReportFragment" />
-        <argument
-            android:name="username"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/myReportsFragment"
@@ -148,9 +125,6 @@
         <action
             android:id="@+id/action_myReportsFragment_to_editReportFragment"
             app:destination="@id/editReportFragment" />
-        <argument
-            android:name="username"
-            app:argType="string" />
     </fragment>
     <action android:id="@+id/action_global_mainScreenFragment" app:destination="@id/mainScreenFragment" app:popUpTo="@+id/mainScreenFragment"
         app:popUpToInclusive="true"/>

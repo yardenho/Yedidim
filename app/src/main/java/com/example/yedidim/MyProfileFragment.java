@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -22,7 +23,6 @@ import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
 
 public class MyProfileFragment extends Fragment {
-    private MyProfileViewModel viewModel;
     TextView vehicleBrandTv;
     TextView manufactureYearTv;
     TextView fuelTypeTv;
@@ -38,7 +38,6 @@ public class MyProfileFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        viewModel = new ViewModelProvider(this).get(MyProfileViewModel.class);
     }
 
     @Override
@@ -59,19 +58,22 @@ public class MyProfileFragment extends Fragment {
         pb = view.findViewById(R.id.myProfile_progressBar);
         pb.setVisibility(View.VISIBLE);
 
-        viewModel.setUsername(MyProfileFragmentArgs.fromBundle(getArguments()).getUsername());
-        Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
+        Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
             @Override
-            public void onComplete(User user) {
-                setDetails(user);
+            public void onComplete(String userEmail) {
+                Model.getInstance().getUserByUserName(userEmail, new Model.getUserByUserNameListener() {
+                    @Override
+                    public void onComplete(User user) {
+                        setDetails(user);
+                    }
+                });
             }
         });
-
 
         editProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyProfileFragmentDirections.ActionMyProfileFragmentToEditProfileFragment action = MyProfileFragmentDirections.actionMyProfileFragmentToEditProfileFragment(viewModel.getUsername());
+                @NonNull NavDirections action = MyProfileFragmentDirections.actionMyProfileFragmentToEditProfileFragment();
                 Navigation.findNavController(v).navigate(action);
             }
         });
@@ -79,20 +81,23 @@ public class MyProfileFragment extends Fragment {
         deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Model.getInstance().getUserByUserName(viewModel.getUsername(), new Model.getUserByUserNameListener() {
+                Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
                     @Override
-                    public void onComplete(User user) {
-                        Model.getInstance().deleteUser(user, new Model.deleteUserListener() {
+                    public void onComplete(String userEmail) {
+                        Model.getInstance().getUserByUserName(userEmail, new Model.getUserByUserNameListener() {
                             @Override
-                            public void onComplete() {
-                                //TODO: check if it is back like it should
-                                Navigation.findNavController(v).navigate(MyProfileFragmentDirections.actionGlobalMainScreenFragment());
+                            public void onComplete(User user) {
+                                Model.getInstance().deleteUser(user, new Model.deleteUserListener() {
+                                    @Override
+                                    public void onComplete() {
+                                        //TODO: check if it is back like it should
+                                        Navigation.findNavController(v).navigate(MyProfileFragmentDirections.actionGlobalMainScreenFragment());
+                                    }
+                                });
                             }
                         });
                     }
                 });
-
-
             }
         });
 
@@ -124,7 +129,7 @@ public class MyProfileFragment extends Fragment {
         //TODO: קוד כפול ???
         switch (item.getItemId()) {
             case R.id.myReportsmenu_myReport:
-                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyReportsFragment(viewModel.getUsername()));
+                Navigation.findNavController(view).navigate(myReportsFragmentDirections.actionGlobalMyReportsFragment());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

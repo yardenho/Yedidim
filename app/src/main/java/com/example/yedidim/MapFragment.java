@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.content.Context;
@@ -33,8 +34,6 @@ public class MapFragment extends Fragment {
     private GoogleMap gMap;
     private MapViewModel viewModel;
     private View view;
-    private String username;        //TODO: need to be deleted because we will not save that in the future
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -50,8 +49,7 @@ public class MapFragment extends Fragment {
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         viewModel.setReportID(MapFragmentArgs.fromBundle(getArguments()).getReportID());
-        //TODO: need to be deleted because we will not save that in the future
-        username = MapFragmentArgs.fromBundle(getArguments()).getUsername();
+
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
@@ -79,7 +77,7 @@ public class MapFragment extends Fragment {
                 gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(Marker marker) {
-                        Navigation.findNavController(view).navigate(MapFragmentDirections.actionMapFragmentToViewReportFragment(username, marker.getTag().toString()));
+                        Navigation.findNavController(view).navigate(MapFragmentDirections.actionMapFragmentToViewReportFragment(marker.getTag().toString()));
                     }
                 });
             }
@@ -103,24 +101,17 @@ public class MapFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.addMenu_addReport:
                 //TODO: when we after the sign up maybe not allow to return there
-                MapFragmentDirections.ActionMapFragmentToAddingReportFragment action = MapFragmentDirections.actionMapFragmentToAddingReportFragment(username);
+                @NonNull NavDirections action = MapFragmentDirections.actionMapFragmentToAddingReportFragment();
                 Navigation.findNavController(view).navigate(action);
                 return true;
             case R.id.myProfileMenu_myProfile:
-                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment(username));
+                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyProfileFragment());
                 return true;
             case R.id.myReportsmenu_myReport:
-                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment(username));
+                Navigation.findNavController(view).navigate(MapFragmentDirections.actionGlobalMyReportsFragment());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-//    LatLng sydney = new LatLng(31.7683, 35.2137);
-//                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Jerusalem"));
-//                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//    LatLng ASH = new LatLng(31.8044, 34.6553);
-//                googleMap.addMarker(new MarkerOptions().position(ASH).title("Marker in Ashdod"));
-//                googleMap.moveCamera(CameraUpdateFactory.newLatLng(ASH));
 }

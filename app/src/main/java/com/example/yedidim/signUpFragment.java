@@ -2,7 +2,9 @@ package com.example.yedidim;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.util.Patterns;
@@ -92,7 +94,7 @@ public class signUpFragment extends Fragment {
         user.setPhoneNumber(phoneNumberEt.getText().toString().trim());
         user.setCarNumber(carNumberEt.getText().toString().trim());
         Model.getInstance().addNewUser(user, password, () -> {
-            signUpFragmentDirections.ActionSignUpFragmentToReportsListFragment action = signUpFragmentDirections.actionSignUpFragmentToReportsListFragment(user.getUserName());
+            @NonNull NavDirections action = signUpFragmentDirections.actionSignUpFragmentToReportsListFragment();
             Navigation.findNavController(v).navigate(action);
         });
     }
