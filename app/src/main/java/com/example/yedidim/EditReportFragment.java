@@ -56,7 +56,6 @@ public class EditReportFragment extends Fragment {
     private ImageView photo;
     View view;
     ProgressBar pb;
-    boolean flag = false;
     FusedLocationProviderClient fusedLocationProviderClient;
     Bitmap bitmap ;
 
@@ -95,7 +94,7 @@ public class EditReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 photo.setImageResource(R.drawable.car);
-                flag = true;
+                viewModel.getReport().setReportUrl(null);
             }
         });
 
@@ -131,7 +130,7 @@ public class EditReportFragment extends Fragment {
                 saveBtn.setEnabled(false);
                 cancelBtn.setEnabled(false);
                 if(!checkCondition()) {
-                    setDetails(flag);
+                    setDetails();
                 }
                 else{
                     pb.setVisibility(View.GONE);
@@ -155,31 +154,18 @@ public class EditReportFragment extends Fragment {
         pb.setVisibility(View.INVISIBLE);
     }
 
-    private void setDetails(boolean deleteFlag) {
+    private void setDetails() {
         viewModel.getReport().setProblem(problem.getText().toString());
         viewModel.getReport().setNotes(notes.getText().toString());
-        if(deleteFlag) {
-            viewModel.getReport().setReportUrl(null);
+        if (bitmap != null) {
+            String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+            Model.getInstance().saveImage(bitmap, viewModel.getReport().getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                viewModel.getReport().setReportUrl(url);
+                activateGPS(viewModel.getReport());
+            });
         }
-        else {
-            if (bitmap != null) {
-                String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                Model.getInstance().saveImage(bitmap, viewModel.getReport().getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
-                    viewModel.getReport().setReportUrl(url);
-                    editReport();
-                });
-            }
-        }
-        editReport();
-    }
-
-    private void editReport(){
-        Model.getInstance().editReport(viewModel.getReport(), new Model.editReportListener() {
-            @Override
-            public void onComplete() {
-                Navigation.findNavController(view).navigateUp();
-            }
-        });
+        else
+            activateGPS(viewModel.getReport());
     }
 
     private boolean checkCondition(){
@@ -211,6 +197,33 @@ public class EditReportFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void activateGPS(Report report)
+    {
+        // check permission
+        if(ActivityCompat.checkSelfPermission(MyApplication.getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // permission granted
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    Location location = task.getResult();
+                    report.setLatitude(location.getLatitude());
+                    report.setLongitude(location.getLongitude());
+                    Model.getInstance().editReport(viewModel.getReport(), ()-> {
+                            Navigation.findNavController(view).navigateUp();
+                    });
+                }
+            });
+        }
+        else {
+            // permission denied
+            // TODO: check what does the number of the requestCode mean
+            // TODO: check if what to do after requesting permission
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
     }
 }
