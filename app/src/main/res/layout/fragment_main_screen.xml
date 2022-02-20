@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".mainScreenFragment">
 
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:src="@drawable/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainScreen_btn_signUp" />
+
     <Button
         android:id="@+id/mainScreen_btn_signUp"
         android:layout_width="180dp"
@@ -26,19 +36,19 @@
         android:id="@+id/mainScreen_tv_yedidim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="10dp"
         android:text="Welcom to Yedidim !"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
     <Button
         android:id="@+id/mainScreen_btn_logIn"
         android:layout_width="180dp"
         android:layout_height="65dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="90dp"
         android:backgroundTint="#F07470"
         android:text="Log In"
         android:textSize="24sp"
@@ -48,25 +58,14 @@
         app:layout_constraintTop_toBottomOf="@+id/mainScreen_tv_yedidim" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/imageView12"
         android:layout_width="wrap_content"
-        android:layout_height="170dp"
-        android:src="@drawable/hello"
-        app:layout_constraintBottom_toTopOf="@+id/mainScreen_tv_yedidim"
+        android:layout_height="99dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/hellomain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainScreen_btn_signUp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
