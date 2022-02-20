@@ -95,7 +95,6 @@ public class ViewReportFragment extends Fragment {
         Model.getInstance().getUserByUserName(r.getUserName(), new Model.getUserByUserNameListener() {
             @Override
             public void onComplete(User user) {
-                //TODO: need to decide what to if user is null
                 if (user != null) {
                     updateUserDetailsDisplay(user);
                 }

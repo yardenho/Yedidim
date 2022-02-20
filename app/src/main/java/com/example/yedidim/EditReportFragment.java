@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +30,7 @@ public class EditReportFragment extends editAddReportFatherFragment {
     private View view;
     private ProgressBar pb;
 
-    public EditReportFragment() {
-    }
+    public EditReportFragment() {}
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -42,7 +40,6 @@ public class EditReportFragment extends editAddReportFatherFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("TAG", "on create view");
         String reportId = EditReportFragmentArgs.fromBundle(getArguments()).getReportID();
 
         view = inflater.inflate(R.layout.fragment_edit_report, container, false);

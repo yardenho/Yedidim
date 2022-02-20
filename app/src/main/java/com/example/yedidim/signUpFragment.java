@@ -1,12 +1,10 @@
 package com.example.yedidim;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
 
@@ -35,9 +32,7 @@ public class signUpFragment extends Fragment {
     private EditText carNumberEt;
     private Button backBtn;
 
-    public signUpFragment() {
-        // Required empty public constructor
-    }
+    public signUpFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

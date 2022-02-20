@@ -2,11 +2,8 @@ package com.example.yedidim;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
-
-import java.util.LinkedList;
 import java.util.List;
 
 public class MyReportsViewModel extends ViewModel {

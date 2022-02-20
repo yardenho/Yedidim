@@ -1,10 +1,7 @@
 package com.example.yedidim;
 
-import static java.lang.Thread.sleep;
-
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,17 +9,14 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 
@@ -159,9 +153,7 @@ public class myReportsFragment extends Fragment {
                 public void onClick(View v) {
                     //TODO: to check if needed here new list
                     int pos = getAdapterPosition();
-                    //need to do from model and remove delete listener
                     deleteListener.OnDeleteClick(pos);
-//                    adapter.notifyDataSetChanged();
                 }
             });
 

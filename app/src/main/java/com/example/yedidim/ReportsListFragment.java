@@ -2,7 +2,6 @@ package com.example.yedidim;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,26 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.SupportActionModeWrapper;
-import androidx.appcompat.widget.ActionBarContextView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
-
 
 public class ReportsListFragment extends Fragment {
     private ReportListViewModel viewModel;
@@ -39,7 +29,7 @@ public class ReportsListFragment extends Fragment {
     private MyAdapter adapter;
     private SwipeRefreshLayout swipeRefresh;
     private TextView noReportsMessage;
-    ProgressBar pb;
+    private ProgressBar pb;
 
     public ReportsListFragment() {
     }
@@ -99,7 +89,6 @@ public class ReportsListFragment extends Fragment {
         pb.setVisibility(View.GONE);
         return view;
     }
-
 
     private void noReportMessage(){
         if(viewModel.getReports().getValue()!=null){

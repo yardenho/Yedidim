@@ -4,17 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
-import android.util.Log;
-import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import com.example.yedidim.MyApplication;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -67,16 +62,12 @@ public class Report {
     public void setNotes(String n){
         this.notes = n;
     }
-    //    public void setImage(ImageView iv){
-//        this.image = iv;  // TODO: need to set for image
-//    }
     public void setLongitude(double lo) {this.longitude = lo;}
     public void setLatitude(double la) {this.latitude = la;}
     public void setUserName(String userName) {this.userName = userName;}
     public void setReportUrl(String rUrl){
         reportUrl=rUrl;
     }
-//    static public void addOneToIdCounter(){ idCounter +=1;}
     public void setLastUpdated(Long lastUpdated){
         this.lastUpdated = lastUpdated;
     }
@@ -102,8 +93,6 @@ public class Report {
         }
         return addresses.get(0).getAddressLine(0);
     }
-//    static public long getIdCounter(){return idCounter;}
-
     public Long getLastUpdated(){
         return lastUpdated;
     }

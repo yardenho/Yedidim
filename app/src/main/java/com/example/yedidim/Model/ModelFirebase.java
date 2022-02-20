@@ -3,9 +3,7 @@ package com.example.yedidim.Model;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,10 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-//import com.google.firebase.firebaseStorage.FirebaseStorage;
 import com.google.firebase.auth.FirebaseAuth; // for authentication with firebase
-
-
 import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
 import java.util.Map;
@@ -33,29 +28,9 @@ public class ModelFirebase {
     final static String REPORTS = "reports";
     final static String USERS = "users";
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
-
-    public void getUsersList(Model.GetAllUsersListener listener) {
-        db.collection(USERS).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                LinkedList<User> usersList = new LinkedList<User>();
-                if(task.isSuccessful())
-                {
-                    for(QueryDocumentSnapshot doc:task.getResult())
-                    {
-                        User user = User.fromJson(doc.getData());
-                        if(user != null)
-                            usersList.add(user);
-                    }
-                }
-                else { }
-                listener.onComplete(usersList);
-            }
-        });
-    }
 
     public void getCurrentUser(Model.getCurrentUserListener listener)
     {
@@ -93,14 +68,12 @@ public class ModelFirebase {
 
     public void loginUser(String email, String password, Model.loginUserListener listener)
     {
-        //Log.d("TAG", "current user before login is: " + )
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            // TODO: check how get current user work
                             currUser = FirebaseAuth.getInstance().getCurrentUser();
                             listener.onComplete(true);
                         }
@@ -122,7 +95,6 @@ public class ModelFirebase {
         DocumentReference docRef = db.collection(USERS).document(userName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            // TODO: need to handle cases were student returns as null
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
@@ -139,24 +111,6 @@ public class ModelFirebase {
                 }
             }
         });
-    }
-
-    public void deleteUser(User user, Model.deleteUserListener listener) {
-        //TODO: when we delete the user - to delete all his reports too ?
-        db.collection(USERS).document(user.getUserName())
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        listener.onComplete(); // TODO:????
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error deleting document ", e);
-                    }
-                });
     }
 
     public void editUser(User user, Model.editUserListener listener) {
@@ -199,44 +153,15 @@ public class ModelFirebase {
     }
 
     public void addNewReport(Report report, Model.addNewReportListener listener) {
-        // Create a new report
-        //TODO: note: moved to the report class - called toJson
-//        Map<String, Object> json = new HashMap<>();
-////        json.put("reportID", report.getReportID());   the reportID comes from the document name
-//        json.put("problem", report.getProblem());
-//        json.put("notes", report.getNotes());
-//        json.put("username", report.getUserName());
-//        json.put("longitude", report.getLongitude());
-//        json.put("latitude", report.getLatitude());
-//        // TODO: need to add photo
-//        // json.put("image", report.getImage());
-
-        // Add a new document
-
-        //TODO: check that value of method works
         Task<DocumentReference> ref = db.collection(REPORTS).add(report.toJson());
         ref.addOnSuccessListener((successListener)-> {
             listener.onComplete();
             Log.d( "TAGs", ref.getResult().getId());
-            // TODO: get reportID with documentReference.getId()
         })
                 .addOnFailureListener((e)-> {
                     Log.d("TAG", e.getMessage());
 
                 });
-
-        /*  try
-        db.collection(REPORTS).add(report.toJson())
-                .addOnSuccessListener((successListener)-> {
-                    listener.onComplete();
-                    // TODO: get reportID with documentReference.getId()
-                })
-                .addOnFailureListener((e)-> {
-                    Log.d("TAG", e.getMessage());
-
-                });
-
-         */
     }
     
 
@@ -244,20 +169,10 @@ public class ModelFirebase {
         DocumentReference docRef = db.collection(REPORTS).document(reportID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            // TODO: need to handle cases were student returns as null
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        //TODO: moved to report class as fromJson
-//                        Map<String, Object> json = document.getData();
-//                        Report report = new Report();
-//                        report.setReportID(document.getId());   // TODO: check if it works
-//                        report.setUserName((String)json.get("username"));
-//                        report.setProblem((String)json.get("problem"));
-//                        report.setNotes((String)json.get("notes"));
-//                        report.setLongitude((double)json.get("longitude"));  // TODO: check how to cast here
-//                        report.setLatitude((double)json.get("latitude"));  // TODO: check how to cast here
                         Report r = Report.fromJson(document.getId(), document.getData());
                         if(r != null)
                             listener.onComplete(r);
@@ -288,34 +203,9 @@ public class ModelFirebase {
                         Log.w("TAG", "Error deleting document ", e);
                     }
                 });
-//        db.collection(REPORTS).document(report.getReportID())
-//                .delete()
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        listener.onComplete(); //TODO: ????
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("TAG", "Error deleting document ", e);
-//                    }
-//                });
     }
 
     public void editReport(Report report, Model.editReportListener listener) {
-        // edit a report
-        //TODO - moved to report class as toJson
-//        Map<String, Object> json = new HashMap<>();
-//        json.put("reportID", report.getReportID());
-//        json.put("problem", report.getProblem());
-//        json.put("notes", report.getNotes());
-//        json.put("username", report.getUserName());
-//        json.put("longitude", report.getLongitude());
-//        json.put("latitude", report.getLatitude());
-        // TODO: need to add photo
-        // json.put("image", report.getImage());
 
         // edit an existing document
         db.collection(REPORTS).document(report.getReportID()).set(report.toJson())
@@ -360,6 +250,7 @@ public class ModelFirebase {
             }
         });
     }
+
     public void saveImage(Bitmap bitmap,String name, Model.saveImageListener listener) {
         FirebaseStorage storage= FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();

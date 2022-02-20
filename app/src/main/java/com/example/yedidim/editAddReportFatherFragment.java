@@ -1,7 +1,6 @@
 package com.example.yedidim;
 
 import static android.app.Activity.RESULT_OK;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,28 +8,23 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -47,7 +41,6 @@ public class editAddReportFatherFragment extends Fragment {
     private ImageView editPhoto;
     private boolean state;
     private FusedLocationProviderClient fusedLocationProviderClient;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -166,11 +159,4 @@ public class editAddReportFatherFragment extends Fragment {
         fusedLocationProviderClient = f;
     }
 
-    public void setBitmap(Bitmap bitmap){
-        this.bitmap = bitmap;
-    }
-
-    public Bitmap getBitmap(){
-        return bitmap;
-    }
 }

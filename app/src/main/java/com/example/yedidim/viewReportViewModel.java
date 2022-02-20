@@ -2,9 +2,6 @@ package com.example.yedidim;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.yedidim.Model.Report;
-import com.example.yedidim.Model.User;
-
 public class viewReportViewModel extends ViewModel {
     private String reportId;
 

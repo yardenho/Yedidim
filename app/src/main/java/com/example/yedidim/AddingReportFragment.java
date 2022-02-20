@@ -1,54 +1,17 @@
 package com.example.yedidim;
 
-
-import static android.app.Activity.RESULT_OK;
-
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.location.Location;
-
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
-
-import com.example.yedidim.Model.Model;
-import com.example.yedidim.Model.Report;
-
-
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 public class AddingReportFragment extends editAddReportFatherFragment {
@@ -56,7 +19,6 @@ public class AddingReportFragment extends editAddReportFatherFragment {
     private Button reportBtn;
     private EditText problemEt;
     private EditText noteEt;
-    private ImageView photo;
     private ImageButton photoIBtn;
     private ImageButton galleryBtn;
     private ProgressBar pb;
@@ -73,7 +35,6 @@ public class AddingReportFragment extends editAddReportFatherFragment {
         noteEt = view.findViewById(R.id.addingReport_et_notes);
         photoIBtn = view.findViewById(R.id.addingReport_ibtn_photo);
         galleryBtn = view.findViewById(R.id.addingReport_ib_gallery);
-//        photo = view.findViewById(R.id.addingReport_iv_photo);
         setAddPhoto(view.findViewById(R.id.addingReport_iv_photo));
         cancelBtn = view.findViewById(R.id.addingReport_btn_cancel);
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
@@ -121,6 +82,4 @@ public class AddingReportFragment extends editAddReportFatherFragment {
         });
         return view;
     }
-
-
 }

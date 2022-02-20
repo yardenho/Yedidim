@@ -1,11 +1,8 @@
 package com.example.yedidim.Model;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,5 +117,4 @@ public class User {
         json.put("fuelType",fuelType);
         return json;
     }
-
 }
