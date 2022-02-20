@@ -51,7 +51,7 @@
         android:id="@+id/mainScreen_btn_logIn"
         android:layout_width="180dp"
         android:layout_height="65dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="#F07470"
         android:text="Log In"
         android:textSize="24sp"
