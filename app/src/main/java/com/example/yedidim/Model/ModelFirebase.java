@@ -344,12 +344,14 @@ public class ModelFirebase {
                     for(QueryDocumentSnapshot doc:task.getResult())
                     {
                         currUser = FirebaseAuth.getInstance().getCurrentUser();
-                        String userEmail = currUser.getEmail();
-                        Map<String, Object> json = doc.getData();
-                        if(((String)json.get("username")).equals(userEmail)) {
-                            Report report = Report.fromJson(doc.getId(), doc.getData());
-                            if(report != null)
-                                reportsList.add(report);
+                        if(currUser != null) {
+                            String userEmail = currUser.getEmail();
+                            Map<String, Object> json = doc.getData();
+                            if (((String) json.get("username")).equals(userEmail)) {
+                                Report report = Report.fromJson(doc.getId(), doc.getData());
+                                if (report != null)
+                                    reportsList.add(report);
+                            }
                         }
                     }
                 }
