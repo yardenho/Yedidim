@@ -63,7 +63,7 @@
     <ImageView
         android:id="@+id/imageView12"
         android:layout_width="wrap_content"
-        android:layout_height="99dp"
+        android:layout_height="95dp"
         android:layout_marginTop="35dp"
         android:src="@drawable/hellomain"
         app:layout_constraintEnd_toEndOf="parent"
