@@ -1,50 +1,38 @@
 package com.example.yedidim;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.Report;
 import com.example.yedidim.Model.User;
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 
 public class ViewReportFragment extends Fragment {
     private viewReportViewModel viewModel;
-    View view;
-    TextView problemTv;
-    TextView notesTv;
-    TextView vehicleBrandTv;
-    TextView manufactureYearTv;
-    TextView fuelTypeTv;
-    TextView firstNameTv;
-    TextView lastNameTv;
-    TextView phoneNumberTv;
-    ImageView photo;
-    ImageButton mapBtn;
+    private View view;
+    private TextView problemTv;
+    private TextView notesTv;
+    private TextView vehicleBrandTv;
+    private TextView manufactureYearTv;
+    private TextView fuelTypeTv;
+    private TextView firstNameTv;
+    private TextView lastNameTv;
+    private TextView phoneNumberTv;
+    private ImageView photo;
+    private ImageButton mapBtn;
 
 
     @Override
@@ -70,7 +58,6 @@ public class ViewReportFragment extends Fragment {
         photo = view.findViewById(R.id.viewReport_iv_image);
 
         viewModel.setReportId(ViewReportFragmentArgs.fromBundle(getArguments()).getReportID());
-
 
         String reportId = ViewReportFragmentArgs.fromBundle(getArguments()).getReportID();
         Model.getInstance().getReportByID(reportId, new Model.getReportByReportIDListener() {

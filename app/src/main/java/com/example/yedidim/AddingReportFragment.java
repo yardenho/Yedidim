@@ -51,9 +51,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class AddingReportFragment extends Fragment {
-    static final int REQUEST_IMAGE_CAPTURE=1;
-    static final int GET_FROM_GALLERY=2;
+public class AddingReportFragment extends editAddReportFatherFragment {
     private Button cancelBtn;
     private Button reportBtn;
     private EditText problemEt;
@@ -62,8 +60,6 @@ public class AddingReportFragment extends Fragment {
     private ImageButton photoIBtn;
     private ImageButton galleryBtn;
     private ProgressBar pb;
-    Bitmap bitmap;
-    FusedLocationProviderClient fusedLocationProviderClient;
 
     public AddingReportFragment() {
     }
@@ -77,14 +73,15 @@ public class AddingReportFragment extends Fragment {
         noteEt = view.findViewById(R.id.addingReport_et_notes);
         photoIBtn = view.findViewById(R.id.addingReport_ibtn_photo);
         galleryBtn = view.findViewById(R.id.addingReport_ib_gallery);
-        photo = view.findViewById(R.id.addingReport_iv_photo);
+//        photo = view.findViewById(R.id.addingReport_iv_photo);
+        setAddPhoto(view.findViewById(R.id.addingReport_iv_photo));
         cancelBtn = view.findViewById(R.id.addingReport_btn_cancel);
         reportBtn = view.findViewById(R.id.addingReport_btn_report);
         pb = view.findViewById(R.id.addingReport_progressBar);
         pb.setVisibility(View.GONE);
-
+        setState(true);
         // initialize fusedLocationProviderClient
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        setFusedLocationProviderClient(LocationServices.getFusedLocationProviderClient(getActivity()));
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,92 +103,23 @@ public class AddingReportFragment extends Fragment {
         reportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
+                reportBtn.setEnabled(false);
+                cancelBtn.setEnabled(false);
                 if (problemEt.getText().toString().equals("")) {
+                    pb.setVisibility(View.INVISIBLE);
+                    reportBtn.setEnabled(true);
+                    cancelBtn.setEnabled(true);
                     problemEt.setError("Problem is required");
                     problemEt.requestFocus();
                 }
                 else{
-                   save(v);
+                    save(view,null, problemEt, noteEt);
+
                 }
             }
         });
         return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle bundle = data.getExtras();
-            bitmap = (Bitmap) bundle.get("data");
-            photo.setImageBitmap(bitmap);
-        }
-        else if(requestCode==GET_FROM_GALLERY && resultCode == RESULT_OK) {
-            Uri selectedImage = data.getData();
-            bitmap = null;
-            try {
-                bitmap = (Bitmap)MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                photo.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                Log.d("TAGS", "file not found");
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void activateGPS(Report report, View v)
-    {
-        // check permission
-        if(ActivityCompat.checkSelfPermission(MyApplication.getContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // permission granted
-            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                @Override
-                public void onComplete(@NonNull Task<Location> task) {
-                    Location location = task.getResult();
-                    report.setLatitude(location.getLatitude());
-                    report.setLongitude(location.getLongitude());
-                    Model.getInstance().addNewReport(report,()->{
-                        Navigation.findNavController(v).navigateUp();
-                    });
-                }
-            });
-        }
-        else {
-            // permission denied
-            // TODO: check what does the number of the requestCode mean
-            // TODO: check if what to do after requesting permission
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
-    }
-
-    public void save(View v){
-        pb.setVisibility(View.VISIBLE);
-        reportBtn.setEnabled(false);
-        cancelBtn.setEnabled(false);
-        Report report = new Report();
-
-        Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
-            @Override
-            public void onComplete(String userEmail) {
-                report.setUserName(userEmail);
-                report.setProblem(problemEt.getText().toString());
-                report.setNotes(noteEt.getText().toString());
-                if (bitmap != null) {
-                    String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                    Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
-                        report.setReportUrl(url);
-                        activateGPS(report, v);
-                    });
-                } else {
-                    report.setReportUrl(null);
-                    activateGPS(report, v);
-                }
-            }
-        });
     }
 
 

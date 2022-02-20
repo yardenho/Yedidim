@@ -45,20 +45,15 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class EditReportFragment extends Fragment {
-    static final int REQUEST_IMAGE_CAPTURE=1;
-    static final int GET_FROM_GALLERY=2;
+public class EditReportFragment extends editAddReportFatherFragment {
     private EditReportViewModel viewModel;
     private EditText problem;
     private EditText notes;
     private Button cancelBtn;
     private Button saveBtn;
     private ImageView photo;
-    View view;
-    ProgressBar pb;
-    FusedLocationProviderClient fusedLocationProviderClient;
-    Bitmap bitmap ;
-
+    private View view;
+    private ProgressBar pb;
 
     public EditReportFragment() {
     }
@@ -78,12 +73,14 @@ public class EditReportFragment extends Fragment {
         problem = view.findViewById(R.id.editReport_et_problem);
         notes = view.findViewById(R.id.editReport_et_notes);
         photo = view.findViewById(R.id.editReport_iv_photo);
+        setEditPhoto(view.findViewById(R.id.editReport_iv_photo));
         ImageButton cameraBtn = view.findViewById(R.id.editReport_btn_camera);
         ImageButton galleryBtn = view.findViewById(R.id.editReport_btn_gallery);
         ImageButton deleteBtn = view.findViewById(R.id.editReport_btn_delete);
         pb = view.findViewById(R.id.editReport_progressBar);
         pb.setVisibility(View.VISIBLE);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        setFusedLocationProviderClient(LocationServices.getFusedLocationProviderClient(getActivity()));
+        setState(false);
 
         Model.getInstance().getReportByID(reportId, (r) -> {
             viewModel.setReport(r);
@@ -130,7 +127,7 @@ public class EditReportFragment extends Fragment {
                 saveBtn.setEnabled(false);
                 cancelBtn.setEnabled(false);
                 if(!checkCondition()) {
-                    setDetails();
+                    save(v, viewModel.getReport().getReportID(),problem, notes);
                 }
                 else{
                     pb.setVisibility(View.GONE);
@@ -154,20 +151,6 @@ public class EditReportFragment extends Fragment {
         pb.setVisibility(View.INVISIBLE);
     }
 
-    private void setDetails() {
-        viewModel.getReport().setProblem(problem.getText().toString());
-        viewModel.getReport().setNotes(notes.getText().toString());
-        if (bitmap != null) {
-            String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-            Model.getInstance().saveImage(bitmap, viewModel.getReport().getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
-                viewModel.getReport().setReportUrl(url);
-                activateGPS(viewModel.getReport());
-            });
-        }
-        else
-            activateGPS(viewModel.getReport());
-    }
-
     private boolean checkCondition(){
         if(problem.getText().toString().equals("")){
             problem.setError("problem is required");
@@ -177,53 +160,4 @@ public class EditReportFragment extends Fragment {
         return false;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle bundle = data.getExtras();
-            bitmap = (Bitmap) bundle.get("data");
-            photo.setImageBitmap(bitmap);
-        }
-        else if(requestCode==GET_FROM_GALLERY && resultCode == RESULT_OK) {
-            Uri selectedImage = data.getData();
-            bitmap = null;
-            try {
-                bitmap = (Bitmap) MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                photo.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                Log.d("TAGS", "file not found");
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void activateGPS(Report report)
-    {
-        // check permission
-        if(ActivityCompat.checkSelfPermission(MyApplication.getContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // permission granted
-            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                @Override
-                public void onComplete(@NonNull Task<Location> task) {
-                    Location location = task.getResult();
-                    report.setLatitude(location.getLatitude());
-                    report.setLongitude(location.getLongitude());
-                    Model.getInstance().editReport(viewModel.getReport(), ()-> {
-                            Navigation.findNavController(view).navigateUp();
-                    });
-                }
-            });
-        }
-        else {
-            // permission denied
-            // TODO: check what does the number of the requestCode mean
-            // TODO: check if what to do after requesting permission
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
-    }
 }
