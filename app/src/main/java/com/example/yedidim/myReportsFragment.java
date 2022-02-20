@@ -103,8 +103,6 @@ public class myReportsFragment extends Fragment {
         });
         setHasOptionsMenu(true);
 
-        if(viewModel.getMyReports().getValue() == null)
-            refreshData();
 
         viewModel.getMyReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
@@ -118,19 +116,6 @@ public class myReportsFragment extends Fragment {
         return view;
     }
 
-    public void refreshData(){
-//        swipeRefresh.setRefreshing(true);
-//
-//        Model.getInstance().getUserReportsList(viewModel.getUsername(), new Model.GetUserReportsListener() {
-//            @Override
-//            public void onComplete(List<Report> data) {
-////                viewModel.setMyReports(data); // אני הורדתי לבדוק מול אליאב, הורדתי כי זה העלה הערה
-//                adapter.notifyDataSetChanged();
-//                if(swipeRefresh.isRefreshing())
-//                    swipeRefresh.setRefreshing(false);
-//            }
-//        });
-    }
 
     private void noReportMessage(){
         if(viewModel.getMyReports().getValue()!=null){

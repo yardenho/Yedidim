@@ -77,7 +77,7 @@ public class ModelFirebase {
                             // Add a new document with a username as the ID
                             db.collection(USERS).document(user.getUserName()).set(user.toJson())
                                     .addOnSuccessListener((successListener)-> {
-                                        listener.onComplete();
+                                        listener.onComplete(true);
                                     })
                                     .addOnFailureListener((e)-> {
                                         Log.d("TAG", e.getMessage());
@@ -85,7 +85,7 @@ public class ModelFirebase {
                                     });
                         }
                         else {
-                            Log.d("TAG", "failed to register user");
+                            listener.onComplete(false);
                         }
                     }
                 });

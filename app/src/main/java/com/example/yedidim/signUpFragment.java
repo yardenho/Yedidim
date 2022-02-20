@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.yedidim.Model.Model;
 import com.example.yedidim.Model.User;
@@ -32,6 +33,7 @@ public class signUpFragment extends Fragment {
     private EditText lastNameEt;
     private EditText phoneNumberEt;
     private EditText carNumberEt;
+    private Button backBtn;
 
     public signUpFragment() {
         // Required empty public constructor
@@ -53,7 +55,7 @@ public class signUpFragment extends Fragment {
         lastNameEt = view.findViewById(R.id.signUp_et_lastName);
         phoneNumberEt = view.findViewById(R.id.signUp_et_phoneNumber);
         carNumberEt = view.findViewById(R.id.signUp_et_carNumber);
-        Button backBtn = view.findViewById(R.id.signUp_btn_back);
+        backBtn = view.findViewById(R.id.signUp_btn_back);
         pb = view.findViewById(R.id.signUp_progressBar);
         pb.setVisibility(View.GONE);
 
@@ -95,9 +97,17 @@ public class signUpFragment extends Fragment {
         user.setFuelType(fuelTypeEt.getText().toString().trim());
         user.setPhoneNumber(phoneNumberEt.getText().toString().trim());
         user.setCarNumber(carNumberEt.getText().toString().trim());
-        Model.getInstance().addNewUser(user, password, () -> {
-            @NonNull NavDirections action = signUpFragmentDirections.actionSignUpFragmentToReportsListFragment();
-            Navigation.findNavController(v).navigate(action);
+        Model.getInstance().addNewUser(user, password, (ifSuccess) -> {
+            if(ifSuccess) {
+                @NonNull NavDirections action = signUpFragmentDirections.actionSignUpFragmentToReportsListFragment();
+                Navigation.findNavController(v).navigate(action);
+            }
+            else{
+                Toast.makeText(getActivity(), "failed to register, please change the email", Toast.LENGTH_LONG).show();
+                pb.setVisibility(View.GONE);
+                signUpBtn.setEnabled(true);
+                backBtn.setEnabled(true);
+            }
         });
     }
 

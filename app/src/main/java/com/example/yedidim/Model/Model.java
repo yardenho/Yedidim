@@ -70,7 +70,7 @@ public class Model {
     }
 
     public interface addNewUserListener{
-        void onComplete();
+        void onComplete(boolean ifSuccess);
     }
 
     public void addNewUser(User user,String password, addNewUserListener listener){

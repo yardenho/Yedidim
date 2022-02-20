@@ -39,6 +39,7 @@ public class ReportsListFragment extends Fragment {
     private MyAdapter adapter;
     private SwipeRefreshLayout swipeRefresh;
     private TextView noReportsMessage;
+    ProgressBar pb;
 
     public ReportsListFragment() {
     }
@@ -54,7 +55,7 @@ public class ReportsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_reports_list, container, false);
-        ProgressBar pb = view.findViewById(R.id.reportList_progressBar);
+        pb = view.findViewById(R.id.reportList_progressBar);
         pb.setVisibility(View.VISIBLE);
         RecyclerView list = view.findViewById(R.id.reportsList_recycler);
         list.setHasFixedSize(true);
@@ -84,8 +85,7 @@ public class ReportsListFragment extends Fragment {
         });
 
         setHasOptionsMenu(true);
-        if(viewModel.getReports() == null)
-            refreshData();
+
         viewModel.getReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
             noReportMessage();
@@ -95,25 +95,11 @@ public class ReportsListFragment extends Fragment {
         Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
         });
-        pb.setVisibility(View.GONE);
 
+        pb.setVisibility(View.GONE);
         return view;
     }
 
-    private void refreshData() {
-//        swipeRefresh.setRefreshing(true);
-
-
-//        Model.getInstance().getReportsList(new Model.GetAllReportsListener() {
-//            @Override
-//            public void onComplete(List<Report> d) {
-//                viewModel.setReports(d);
-//                adapter.notifyDataSetChanged();
-//                if(swipeRefresh.isRefreshing())
-//                    swipeRefresh.setRefreshing(false);
-//            }
-//        });
-    }
 
     private void noReportMessage(){
         if(viewModel.getReports().getValue()!=null){

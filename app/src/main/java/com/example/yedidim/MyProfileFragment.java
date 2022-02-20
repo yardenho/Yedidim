@@ -31,7 +31,6 @@ public class MyProfileFragment extends Fragment {
     TextView phoneNumberTv;
     TextView carNumberTv;
     Button editProfileBtn;
-//    Button deleteAccountBtn;
     View view;
     ProgressBar pb;
 
@@ -54,7 +53,6 @@ public class MyProfileFragment extends Fragment {
         phoneNumberTv = view.findViewById(R.id.myProfile_text_phoneNumber);
         carNumberTv = view.findViewById(R.id.myProfile_text_carNumber);
         editProfileBtn = view.findViewById(R.id.myProfile_btn_editProfile);
-//        deleteAccountBtn = view.findViewById(R.id.myProfile_btn_deleteAccount);
         pb = view.findViewById(R.id.myProfile_progressBar);
         pb.setVisibility(View.VISIBLE);
 
@@ -77,29 +75,6 @@ public class MyProfileFragment extends Fragment {
                 Navigation.findNavController(v).navigate(action);
             }
         });
-
-//        deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
-//                    @Override
-//                    public void onComplete(String userEmail) {
-//                        Model.getInstance().getUserByUserName(userEmail, new Model.getUserByUserNameListener() {
-//                            @Override
-//                            public void onComplete(User user) {
-//                                Model.getInstance().deleteUser(user, new Model.deleteUserListener() {
-//                                    @Override
-//                                    public void onComplete() {
-//                                        //TODO: check if it is back like it should
-//                                        Navigation.findNavController(v).navigate(MyProfileFragmentDirections.actionGlobalMainScreenFragment());
-//                                    }
-//                                });
-//                            }
-//                        });
-//                    }
-//                });
-//            }
-//        });
 
         setHasOptionsMenu(true);
         return view;
