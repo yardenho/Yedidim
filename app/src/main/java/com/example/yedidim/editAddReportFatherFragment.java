@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,8 +137,15 @@ public class editAddReportFatherFragment extends Fragment {
                         activateGPS(v, report);
                     });
                 } else {
-                    report.setReportUrl(null);
-                    activateGPS(v, report);
+                    if(!state)
+                        Model.getInstance().getReportByID(reportID, (r)-> {
+                            report.setReportUrl(r.getReportUrl());
+                            activateGPS(v, report);
+                        });
+                    else {
+                        report.setReportUrl(null);
+                        activateGPS(v, report);
+                    }
                 }
             }
         });
@@ -156,5 +164,13 @@ public class editAddReportFatherFragment extends Fragment {
     }
     public void setFusedLocationProviderClient(FusedLocationProviderClient f){
         fusedLocationProviderClient = f;
+    }
+
+    public void setBitmap(Bitmap bitmap){
+        this.bitmap = bitmap;
+    }
+
+    public Bitmap getBitmap(){
+        return bitmap;
     }
 }

@@ -1,21 +1,11 @@
 package com.example.yedidim;
 
-import static android.app.Activity.RESULT_OK;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -27,23 +17,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import com.example.yedidim.Model.Model;
-import com.example.yedidim.Model.Report;
-import com.example.yedidim.Model.User;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.squareup.picasso.Picasso;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 
 public class EditReportFragment extends editAddReportFatherFragment {
     private EditReportViewModel viewModel;
@@ -66,7 +42,7 @@ public class EditReportFragment extends editAddReportFatherFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Log.d("TAG", "on create view");
         String reportId = EditReportFragmentArgs.fromBundle(getArguments()).getReportID();
 
         view = inflater.inflate(R.layout.fragment_edit_report, container, false);
