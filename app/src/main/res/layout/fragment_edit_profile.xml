@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:hint="Manufacture year">
+                android:hint="Manufacture Year">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editProfile_et_manufYear"
