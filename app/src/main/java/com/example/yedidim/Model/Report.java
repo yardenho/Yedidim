@@ -56,14 +56,14 @@ public class Report {
 
     // setters
     public void setReportID(String reportID) {this.reportID = reportID;}
-    public void setProblem(String p){
-        this.problem = p;
+    public void setProblem(String problem){
+        this.problem = problem;
     }
-    public void setNotes(String n){
-        this.notes = n;
+    public void setNotes(String notes){
+        this.notes = notes;
     }
-    public void setLongitude(double lo) {this.longitude = lo;}
-    public void setLatitude(double la) {this.latitude = la;}
+    public void setLongitude(double longitude) {this.longitude = longitude;}
+    public void setLatitude(double latitude) {this.latitude = latitude;}
     public void setUserName(String userName) {this.userName = userName;}
     public void setReportUrl(String rUrl){
         reportUrl=rUrl;
@@ -82,8 +82,6 @@ public class Report {
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
     public String getLocation() {
-
-        //TODO לחשב את המיקום ולהחזיר
         Geocoder geocoder = new Geocoder(MyApplication.getContext(), Locale.getDefault());
         List<Address> addresses = null;
         try {

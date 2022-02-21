@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.example.yedidim.Model.Model;
 import com.google.android.gms.location.LocationServices;
 import com.squareup.picasso.Picasso;
@@ -46,12 +48,14 @@ public class EditReportFragment extends editAddReportFatherFragment {
         problem = view.findViewById(R.id.editReport_et_problem);
         notes = view.findViewById(R.id.editReport_et_notes);
         photo = view.findViewById(R.id.editReport_iv_photo);
-        setEditPhoto(view.findViewById(R.id.editReport_iv_photo));
         ImageButton cameraBtn = view.findViewById(R.id.editReport_btn_camera);
         ImageButton galleryBtn = view.findViewById(R.id.editReport_btn_gallery);
         ImageButton deleteBtn = view.findViewById(R.id.editReport_btn_delete);
+        saveBtn = view.findViewById(R.id.editReport_btn_save);
+        cancelBtn = view.findViewById(R.id.editReport_btn_cancel);
         pb = view.findViewById(R.id.editReport_progressBar);
         pb.setVisibility(View.VISIBLE);
+        setEditPhoto(view.findViewById(R.id.editReport_iv_photo));
         setFusedLocationProviderClient(LocationServices.getFusedLocationProviderClient(getActivity()));
         setState(false);
 
@@ -84,7 +88,6 @@ public class EditReportFragment extends editAddReportFatherFragment {
             }
         });
 
-        cancelBtn = view.findViewById(R.id.editReport_btn_cancel);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +95,6 @@ public class EditReportFragment extends editAddReportFatherFragment {
             }
         });
 
-        saveBtn = view.findViewById(R.id.editReport_btn_save);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,4 +135,13 @@ public class EditReportFragment extends editAddReportFatherFragment {
         return false;
     }
 
+    @Override
+    public void failAction() {
+        super.failAction();
+        pb.setVisibility(View.GONE);
+        saveBtn.setEnabled(true);
+        cancelBtn.setEnabled(true);
+        Toast.makeText(getActivity(), "failed to edit the report, please try again", Toast.LENGTH_LONG).show();
+
+    }
 }

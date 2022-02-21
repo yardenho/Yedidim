@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.google.android.gms.location.LocationServices;
 
 
@@ -68,7 +70,7 @@ public class AddingReportFragment extends editAddReportFatherFragment {
                 reportBtn.setEnabled(false);
                 cancelBtn.setEnabled(false);
                 if (problemEt.getText().toString().equals("")) {
-                    pb.setVisibility(View.INVISIBLE);
+                    pb.setVisibility(View.GONE);
                     reportBtn.setEnabled(true);
                     cancelBtn.setEnabled(true);
                     problemEt.setError("Problem is required");
@@ -81,5 +83,14 @@ public class AddingReportFragment extends editAddReportFatherFragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void failAction() {
+        super.failAction();
+        pb.setVisibility(View.GONE);
+        reportBtn.setEnabled(true);
+        cancelBtn.setEnabled(true);
+        Toast.makeText(getActivity(), "failed to add the report, please try again", Toast.LENGTH_LONG).show();
     }
 }

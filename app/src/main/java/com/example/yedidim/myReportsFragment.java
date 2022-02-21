@@ -45,6 +45,7 @@ public class myReportsFragment extends Fragment {
         viewModel.setMyReports(Model.getInstance().getAllUserReports());
         ProgressBar pb = view.findViewById(R.id.myReports_progressBar);
         pb.setVisibility(View.GONE);
+
         RecyclerView list = view.findViewById(R.id.myReports_recycler);
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -52,6 +53,7 @@ public class myReportsFragment extends Fragment {
         adapter = new myReportsFragment.MyAdapter();
         list.setAdapter(adapter);
 
+        swipeRefresh = view.findViewById(R.id.myReports_swipeRefresh);
         noReportsMessage = view.findViewById(R.id.myReportsList_tv_noReportsMessage);
         noReportsMessage.setVisibility(View.GONE);
 
@@ -72,7 +74,6 @@ public class myReportsFragment extends Fragment {
                 Model.getInstance().deleteReport(r, new Model.deleteReportListener() {
                     @Override
                     public void onComplete() {
-                        //TODO: need to move
                         pb.setVisibility(View.GONE);
                     }
                 });
@@ -87,16 +88,12 @@ public class myReportsFragment extends Fragment {
             }
         });
 
-        swipeRefresh = view.findViewById(R.id.myReports_swiprRefresh);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Model.getInstance().reloadUserReportsList();
-
             }
         });
-        setHasOptionsMenu(true);
-
 
         viewModel.getMyReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
@@ -107,6 +104,8 @@ public class myReportsFragment extends Fragment {
         Model.getInstance().getReportsListLoadingState().observe(getViewLifecycleOwner(), loadingState -> {
             swipeRefresh.setRefreshing(loadingState == Model.LoadingState.loading);
         });
+
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -147,11 +146,9 @@ public class myReportsFragment extends Fragment {
             this.deleteListener = deleteListener;
             this.editListener = editListener;
 
-
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO: to check if needed here new list
                     int pos = getAdapterPosition();
                     deleteListener.OnDeleteClick(pos);
                 }
@@ -201,24 +198,27 @@ public class myReportsFragment extends Fragment {
             this.listener = listener;
         }
 
-        void setOnDeleteClickListener(OnDeleteClickListener cbListener){
-            this.deleteListener = cbListener;
+        void setOnDeleteClickListener(OnDeleteClickListener deleteListener){
+            this.deleteListener = deleteListener;
         }
 
-        void setOnEditClickListener(OnEditClickListener cbListener){
-            this.editListener = cbListener;
+        void setOnEditClickListener(OnEditClickListener editListener){
+            this.editListener = editListener;
         }
 
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            //יוצר אובייקט חדש מהשורה
             View rowView = getLayoutInflater().inflate(R.layout.my_reports_row,parent,false);
+            //יצירת הולדר שיעטוף אותו
             MyViewHolder viewHolder = new MyViewHolder(rowView, listener, deleteListener, editListener);
             return viewHolder;
         }
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            //תחבר לי את הview עם הdata של אותה שורה
             Report report = viewModel.getMyReports().getValue().get(position);
             holder.bind(report);
         }

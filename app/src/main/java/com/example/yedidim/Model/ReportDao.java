@@ -20,9 +20,6 @@ public interface ReportDao {
     @Delete
     void delete(Report report);
 
-    @Update
-    void editReport(Report report);
-
     @Query("SELECT * FROM Report WHERE reportID=:id")
     Report getReportByID(String id);
 

@@ -31,7 +31,7 @@ public class logInFragment extends Fragment {
         Button logInBtn = view.findViewById(R.id.logIn_btn_logIn);
         Button cancelBtn = view.findViewById(R.id.logIn_btn_cancel);
         ProgressBar pb = view.findViewById(R.id.logIn_progressBar);
-        pb.setVisibility(View.GONE);
+
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +71,7 @@ public class logInFragment extends Fragment {
                 }
             }
         });
+        pb.setVisibility(View.GONE);
         return view;
     }
 

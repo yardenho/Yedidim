@@ -25,13 +25,12 @@ public class EditProfileFragment extends Fragment {
     private Button saveBtn;
     private Button cancelBtn;
     private View view;
+    private ProgressBar pb;
 
     public EditProfileFragment() {
     }
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -43,7 +42,9 @@ public class EditProfileFragment extends Fragment {
         firstName = view.findViewById(R.id.editProfile_et_firstName);
         lastName = view.findViewById(R.id.editProfile_et_lastName);
         phoneNumber = view.findViewById(R.id.editProfile_et_phoneNumber);
-        ProgressBar pb = view.findViewById(R.id.editProfile_progressBar);
+        saveBtn = view.findViewById(R.id.editProfile_btn_save);
+        cancelBtn = view.findViewById(R.id.editProfile_btn_cancel);
+        pb = view.findViewById(R.id.editProfile_progressBar);
         pb.setVisibility(View.GONE);
 
         Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
@@ -58,7 +59,6 @@ public class EditProfileFragment extends Fragment {
         });
 
 
-        cancelBtn = view.findViewById(R.id.editProfile_btn_cancel);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,17 +66,17 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
-        saveBtn = view.findViewById(R.id.editProfile_btn_save);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 saveBtn.setEnabled(false);
                 cancelBtn.setEnabled(false);
                 if(!checkConditions()) {
-                    pb.setVisibility(View.VISIBLE);
                     setDetails();
                 }
                 else {
+                    pb.setVisibility(View.GONE);
                     saveBtn.setEnabled(true);
                     cancelBtn.setEnabled(true);
                 }
@@ -108,8 +108,14 @@ public class EditProfileFragment extends Fragment {
                 user.setFirstName(firstName.getText().toString());
                 user.setLastName(lastName.getText().toString());
                 user.setPhoneNumber(phoneNumber.getText().toString());
-                Model.getInstance().editUser(user, ()->{
-                    Navigation.findNavController(view).navigateUp();
+                Model.getInstance().editUser(user, (success)->{
+                    if(success)
+                        Navigation.findNavController(view).navigateUp();
+                    else{
+                        pb.setVisibility(View.GONE);
+                        saveBtn.setEnabled(true);
+                        cancelBtn.setEnabled(true);
+                    }
                 });
             }
         });

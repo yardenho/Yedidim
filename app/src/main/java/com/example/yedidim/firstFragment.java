@@ -12,14 +12,13 @@ import android.view.ViewGroup;
 import com.example.yedidim.Model.Model;
 
 public class firstFragment extends Fragment {
-    View v;
+    View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
-        v = view;
+        view = inflater.inflate(R.layout.fragment_first, container, false);
         return view;
     }
 
@@ -29,16 +28,12 @@ public class firstFragment extends Fragment {
         Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
             @Override
             public void onComplete(String userEmail) {
+                @NonNull NavDirections action;
                 if(userEmail == null)
-                {
-                    @NonNull NavDirections action = firstFragmentDirections.actionGlobalMainScreenFragment();
-                    Navigation.findNavController(v).navigate(action);
-                }
+                    action = firstFragmentDirections.actionGlobalMainScreenFragment();
                 else
-                {
-                    @NonNull NavDirections action = firstFragmentDirections.actionFirstFragmentToReportsListFragment();
-                    Navigation.findNavController(v).navigate(action);
-                }
+                    action = firstFragmentDirections.actionFirstFragmentToReportsListFragment();
+                Navigation.findNavController(view).navigate(action);
             }
         });
     }

@@ -56,7 +56,7 @@ public class ModelFirebase {
                                     })
                                     .addOnFailureListener((e)-> {
                                         Log.d("TAG", e.getMessage());
-
+                                        //TODO: delete the user from the authentication
                                     });
                         }
                         else {
@@ -120,13 +120,14 @@ public class ModelFirebase {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        listener.onComplete();
+                        listener.onComplete(true);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("TAG", e.getMessage());
+                        listener.onComplete(false);
                     }
                 });
     }
@@ -146,7 +147,6 @@ public class ModelFirebase {
                             reportsList.add(r);
                     }
                 }
-                else { }
                 listener.onComplete(reportsList);
             }
         });
@@ -155,12 +155,11 @@ public class ModelFirebase {
     public void addNewReport(Report report, Model.addNewReportListener listener) {
         Task<DocumentReference> ref = db.collection(REPORTS).add(report.toJson());
         ref.addOnSuccessListener((successListener)-> {
-            listener.onComplete();
-            Log.d( "TAGs", ref.getResult().getId());
+            listener.onComplete(true);
         })
                 .addOnFailureListener((e)-> {
                     Log.d("TAG", e.getMessage());
-
+                    listener.onComplete(false);
                 });
     }
     
@@ -187,24 +186,6 @@ public class ModelFirebase {
         });
     }
 
-//    public void deleteReport(Report report, Model.deleteReportListener listener) {
-//        report.setIsDeleted(true);
-//        db.collection(REPORTS).document(report.getReportID())
-//                .set(report.toJson())
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        listener.onComplete(); //TODO: ????
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("TAG", "Error deleting document ", e);
-//                    }
-//                });
-//    }
-
     public void editReport(Report report, Model.editReportListener listener) {
 
         // edit an existing document
@@ -212,13 +193,14 @@ public class ModelFirebase {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        listener.onComplete();
+                        listener.onComplete(true);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("TAG", e.getMessage());
+                        listener.onComplete(false);
                     }
                 });
     }
@@ -245,7 +227,6 @@ public class ModelFirebase {
                         }
                     }
                 }
-                else { }
                 listener.onComplete(reportsList);
             }
         });

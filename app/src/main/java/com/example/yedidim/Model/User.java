@@ -63,25 +63,25 @@ public class User {
     }
     public String getCarNumber(){return carNumber;}
 
-    public void setVehicleBrand(String vb){
-        this.vehicleBrand = vb;
+    public void setVehicleBrand(String vehicleBrand){
+        this.vehicleBrand = vehicleBrand;
     }
-    public void setManufactureYear(String my){
-        this.manufactureYear=my;
+    public void setManufactureYear(String manufactureYear){
+        this.manufactureYear=manufactureYear;
     }
-    public void setFuelType(String ft){
-        this.fuelType = ft;
+    public void setFuelType(String fuelType){
+        this.fuelType = fuelType;
     }
-    public void setFirstName(String fn){
-        this.firstName = fn;
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
     }
-    public void setLastName(String ln){
-        this.lastName = ln;
+    public void setLastName(String lastName){
+        this.lastName = lastName;
     }
-    public void setPhoneNumber(String pn){
-        this.phoneNumber = pn;
+    public void setPhoneNumber(String phoneNumber){
+        this.phoneNumber = phoneNumber;
     }
-    public void setUserName(String un) {this.userName = un;}
+    public void setUserName(String userName) {this.userName = userName;}
     public void setCarNumber(String carNumber){this.carNumber = carNumber;}
 
     static public User fromJson(Map<String, Object> json){

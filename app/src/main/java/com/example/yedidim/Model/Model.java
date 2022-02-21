@@ -13,31 +13,26 @@ public class Model {
     private ModelFirebase modelFirebase = new ModelFirebase();
     private MutableLiveData<List<Report>> reportsListLd = new MutableLiveData<List<Report>>();
     private MutableLiveData<List<Report>> userReportsListLd = new MutableLiveData<List<Report>>();
-
-
-
-
-
-    private Model(){
-        reportsListLoadingState.setValue(LoadingState.loaded);
-        reloadReportsList();
-        reloadUserReportsList();
-    }
+    //האובייקט שכולם יאזינו אליו
+    private MutableLiveData<LoadingState> reportsListLoadingState = new MutableLiveData<LoadingState>();
 
     public enum LoadingState{
         loading,
         loaded
     }
 
-    //האובייקט שכולם יאזינו אליו
-    MutableLiveData<LoadingState> reportsListLoadingState = new MutableLiveData<LoadingState>();
-    //לא יהיה SET כי אף אחד לא נוגע בוף המודל יהיה זה שאחראי לתקשורת אז הוא זה שישלוט בו, ניתן לתת אפשרות לעידכון דאטא אבל כרגע היחיד שמשנה הוא המודל
-    public LiveData<LoadingState> getReportsListLoadingState(){ return reportsListLoadingState;}
-
-
+    private Model(){
+        reportsListLoadingState.setValue(LoadingState.loaded);
+        reloadReportsList();
+        reloadUserReportsList();
+    }
     public static Model getInstance(){
         return instance;
     }
+
+    //לא יהיה SET כי אף אחד לא נוגע בוף המודל יהיה זה שאחראי לתקשורת אז הוא זה שישלוט בו, ניתן לתת אפשרות לעידכון דאטא אבל כרגע היחיד שמשנה הוא המודל
+    public LiveData<LoadingState> getReportsListLoadingState(){ return reportsListLoadingState;}
+
 
     public interface saveImageListener{
         void onComplete(String url);
@@ -92,7 +87,7 @@ public class Model {
     }
 
     public interface editUserListener{
-        void onComplete();
+        void onComplete(boolean ifSuccess);
     }
 
     // updating by key member of user which is userName
@@ -118,7 +113,7 @@ public class Model {
                 Long lLastUpdate = new Long(0);
                 for(Report r : list) {
                     AppLocalDB.db.reportDao().insertAll(r);
-                    if(r.getIsDeleted())// if the report is deleted in the firebase, delete hom from the cache
+                    if(r.getIsDeleted())// if the report is deleted in the firebase, delete him from the cache
                         AppLocalDB.db.reportDao().delete(r);
                     if(r.getLastUpdated() > lLastUpdate){
                         lLastUpdate = r.getLastUpdated();
@@ -139,14 +134,14 @@ public class Model {
     }
 
     public interface addNewReportListener{
-        void onComplete();
+        void onComplete(boolean ifSuccess);
     }
 
     public void addNewReport(Report report,addNewReportListener listener){
-        modelFirebase.addNewReport(report, ()->{
+        modelFirebase.addNewReport(report, (success)->{
             reloadReportsList();
             reloadUserReportsList();
-            listener.onComplete();
+            listener.onComplete(success);
         });
     }
 
@@ -166,22 +161,24 @@ public class Model {
     public void deleteReport(Report report,deleteReportListener listener )
     {
         report.setIsDeleted(true);
-        modelFirebase.editReport(report,()->{
-            reloadReportsList();
-            reloadUserReportsList();//for updating the list of the user reports
-            listener.onComplete();
+        modelFirebase.editReport(report,(success)->{
+            if (success) {
+                reloadReportsList();
+                reloadUserReportsList();//for updating the list of the user reports
+                listener.onComplete();
+            }
         });
     }
 
     public interface editReportListener{
-        void onComplete();
+        void onComplete(boolean ifSuccess);
     }
 
     public void editReport(Report report,editReportListener listener){
-        modelFirebase.editReport(report, ()->{
+        modelFirebase.editReport(report, (success)->{
             reloadReportsList();
             reloadUserReportsList();
-            listener.onComplete();
+            listener.onComplete(success);
         });
     }
 

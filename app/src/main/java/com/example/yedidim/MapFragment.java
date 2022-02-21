@@ -25,6 +25,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment {
+    static final double ISRAELLATITUDE = 31.3555;
+    static final double ISRAELLONGITUDE = 34.3565;
+    static final float ISRAELZOOMLEVEL = 7.0f;
+    static final float REPORTZOOMLEVEL = 11.0f;
+
     private GoogleMap gMap;
     private MapViewModel viewModel;
     private View view;
@@ -51,17 +56,16 @@ public class MapFragment extends Fragment {
                 if(viewModel.getReportID() == null) {
                     for(Report r : Model.getInstance().getAllReports().getValue())
                         googleMap.addMarker(new MarkerOptions().position(new LatLng(r.getLatitude(), r.getLongitude())).title("Marker in " + r.getLocation())).setTag(r.getReportID());
-                    LatLng Israel = new LatLng(31.3555, 34.3565);
-                    float zoomLevel = 7.0f;
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Israel, zoomLevel));
+                    LatLng Israel = new LatLng(ISRAELLATITUDE, ISRAELLONGITUDE);
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Israel, ISRAELZOOMLEVEL));
                 }
                 else{
                     Model.getInstance().getReportByID(viewModel.getReportID(), new Model.getReportByReportIDListener() {
                         @Override
                         public void onComplete(Report report) {
-                            LatLng loc = new LatLng(report.getLatitude(), report.getLongitude());
-                            googleMap.addMarker(new MarkerOptions().position(loc).title("Marker in " + report.getLocation())).setTag(report.getReportID());
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 11.0f));
+                            LatLng reportLocation = new LatLng(report.getLatitude(), report.getLongitude());
+                            googleMap.addMarker(new MarkerOptions().position(reportLocation).title("Marker in " + report.getLocation())).setTag(report.getReportID());
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(reportLocation, REPORTZOOMLEVEL));
                         }
                     });
                 }

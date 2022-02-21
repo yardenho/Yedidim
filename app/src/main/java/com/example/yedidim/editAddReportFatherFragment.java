@@ -72,7 +72,7 @@ public class editAddReportFatherFragment extends Fragment {
                 else
                     editPhoto.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
-                Log.d("TAGS", "file not found");
+                Log.d("TAG", "file not found");
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -94,12 +94,18 @@ public class editAddReportFatherFragment extends Fragment {
                     report.setLatitude(location.getLatitude());
                     report.setLongitude(location.getLongitude());
                     if(state)
-                        Model.getInstance().addNewReport(report,()->{
-                            Navigation.findNavController(v).navigateUp();
+                        Model.getInstance().addNewReport(report,(success)->{
+                            if(success)
+                                Navigation.findNavController(v).navigateUp();
+                            else
+                                failAction();
                         });
                     else
-                        Model.getInstance().editReport(report,()->{
-                            Navigation.findNavController(v).navigateUp();
+                        Model.getInstance().editReport(report,(success)->{
+                            if(success)
+                                Navigation.findNavController(v).navigateUp();
+                            else
+                                failAction();
                         });
                 }
             });
@@ -111,6 +117,9 @@ public class editAddReportFatherFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
+    }
+
+    public void failAction() {
     }
 
     public void save(View v, String reportID, EditText problemEt, EditText noteEt){
@@ -125,7 +134,7 @@ public class editAddReportFatherFragment extends Fragment {
                     report.setReportID(reportID);
                 if (bitmap != null) {
                     String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                    Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> { // במקום מחרוזת קבועה מספר מזהה של דיווח
+                    Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> {
                         report.setReportUrl(url);
                         activateGPS(v, report);
                     });
@@ -144,18 +153,18 @@ public class editAddReportFatherFragment extends Fragment {
         });
     }
 
-    public void setState(boolean b){
+    protected void setState(boolean b){
         state = b;
     }
 
-    public void setAddPhoto(ImageView addPhoto) {
+    protected void setAddPhoto(ImageView addPhoto) {
         this.addPhoto = addPhoto;
     }
 
-    public void setEditPhoto(ImageView editPhoto){
+    protected void setEditPhoto(ImageView editPhoto){
         this.editPhoto = editPhoto;
     }
-    public void setFusedLocationProviderClient(FusedLocationProviderClient f){
+    protected void setFusedLocationProviderClient(FusedLocationProviderClient f){
         fusedLocationProviderClient = f;
     }
 
