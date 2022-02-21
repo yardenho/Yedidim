@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
 
+    android:label="Yedidim"
     app:startDestination="@id/firstFragment">
     app:startDestination="@id/viewReportFragment">
     app:startDestination="@id/myProfileFragment">
@@ -11,7 +12,6 @@
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.yedidim.mainScreenFragment"
-        android:label="main screen"
         tools:layout="@layout/fragment_main_screen">
         <action
             android:id="@+id/action_mainScreenFragment_to_logInFragment"
@@ -46,13 +46,13 @@
     <fragment
         android:id="@+id/addingReportFragment"
         android:name="com.example.yedidim.AddingReportFragment"
-        android:label="Adding Report"
-        tools:layout="@layout/fragment_adding_report"/>
+        android:label="Add Report"
+        tools:layout="@layout/fragment_adding_report" />
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.yedidim.EditProfileFragment"
         android:label="Edit Profile"
-        tools:layout="@layout/fragment_edit_profile"/>
+        tools:layout="@layout/fragment_edit_profile" />
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.example.yedidim.MyProfileFragment"
@@ -102,7 +102,7 @@
     <fragment
         android:id="@+id/reportsListFragment"
         android:name="com.example.yedidim.ReportsListFragment"
-        android:label="Reports List"
+        android:label="Reports"
         tools:layout="@layout/fragment_reports_list">
         <action
             android:id="@+id/action_reportsListFragment_to_mapFragment"
@@ -117,7 +117,7 @@
     <fragment
         android:id="@+id/myReportsFragment"
         android:name="com.example.yedidim.myReportsFragment"
-        android:label="My Reports List"
+        android:label="My Reports"
         tools:layout="@layout/fragment_my_reports">
         <action
             android:id="@+id/action_myReportsFragment_to_viewReportFragment"
@@ -126,19 +126,30 @@
             android:id="@+id/action_myReportsFragment_to_editReportFragment"
             app:destination="@id/editReportFragment" />
     </fragment>
-    <action android:id="@+id/action_global_mainScreenFragment" app:destination="@id/mainScreenFragment" app:popUpTo="@+id/mainScreenFragment"
-        app:popUpToInclusive="true"/>
-    <action android:id="@+id/action_global_aboutUsFragment" app:destination="@id/aboutUsFragment" />
-    <action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment" />
-    <action android:id="@+id/action_global_myReportsFragment" app:destination="@id/myReportsFragment" />
+    <action
+        android:id="@+id/action_global_mainScreenFragment"
+        app:destination="@id/mainScreenFragment"
+        app:popUpTo="@+id/mainScreenFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_aboutUsFragment"
+        app:destination="@id/aboutUsFragment" />
+    <action
+        android:id="@+id/action_global_myProfileFragment"
+        app:destination="@id/myProfileFragment" />
+    <action
+        android:id="@+id/action_global_myReportsFragment"
+        app:destination="@id/myReportsFragment" />
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.yedidim.firstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
+        android:label="Yedidim"
+        tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_firstFragment_to_reportsListFragment"
             app:destination="@id/reportsListFragment" />
     </fragment>
-    <action android:id="@+id/action_global_firstFragment" app:destination="@id/firstFragment" />
+    <action
+        android:id="@+id/action_global_firstFragment"
+        app:destination="@id/firstFragment" />
 </navigation>
