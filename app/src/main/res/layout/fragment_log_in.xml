@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".logInFragment">
 
     <TextView
@@ -14,6 +15,7 @@
         android:layout_marginTop="100dp"
         android:fontFamily="sans-serif"
         android:text="Hello !"
+        android:textColor="#2C2C2C"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
