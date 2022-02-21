@@ -165,7 +165,8 @@ public class Model {
 
     public void deleteReport(Report report,deleteReportListener listener )
     {
-        modelFirebase.deleteReport(report,()->{
+        report.setIsDeleted(true);
+        modelFirebase.editReport(report,()->{
             reloadReportsList();
             reloadUserReportsList();//for updating the list of the user reports
             listener.onComplete();
