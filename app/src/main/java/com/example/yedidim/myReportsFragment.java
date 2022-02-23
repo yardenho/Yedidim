@@ -44,7 +44,7 @@ public class myReportsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_my_reports, container, false);
         viewModel.setMyReports(Model.getInstance().getAllUserReports());
         ProgressBar pb = view.findViewById(R.id.myReports_progressBar);
-        pb.setVisibility(View.GONE);
+
 
         RecyclerView list = view.findViewById(R.id.myReports_recycler);
         list.setHasFixedSize(true);
@@ -91,7 +91,7 @@ public class myReportsFragment extends Fragment {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Model.getInstance().reloadUserReportsList();
+            Model.getInstance().reloadReportsList();
             }
         });
 
@@ -106,6 +106,7 @@ public class myReportsFragment extends Fragment {
         });
 
         setHasOptionsMenu(true);
+        pb.setVisibility(View.GONE);
         return view;
     }
 

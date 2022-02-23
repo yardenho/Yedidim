@@ -1,10 +1,17 @@
 package com.example.yedidim.Model;
 
 import android.graphics.Bitmap;
+import android.util.Log;
+import android.view.Display;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.yedidim.MyApplication;
+import com.example.yedidim.R;
+
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 ///מחבר לנו בין הפרגמנטים לDATA
 public class Model {
@@ -24,7 +31,6 @@ public class Model {
     private Model(){
         reportsListLoadingState.setValue(LoadingState.loaded);
         reloadReportsList();
-        reloadUserReportsList();
     }
     public static Model getInstance(){
         return instance;
@@ -123,7 +129,9 @@ public class Model {
                 //return all records to the caller
                 List<Report> repList = AppLocalDB.db.reportDao().getAll();
                 reportsListLd.postValue(repList);
+                reloadUserReportsList();//TODO
                 reportsListLoadingState.postValue(LoadingState.loaded);// סיום הטעינה
+
             });
 
         });
@@ -140,7 +148,6 @@ public class Model {
     public void addNewReport(Report report,addNewReportListener listener){
         modelFirebase.addNewReport(report, (success)->{
             reloadReportsList();
-            reloadUserReportsList();
             listener.onComplete(success);
         });
     }
@@ -164,7 +171,6 @@ public class Model {
         modelFirebase.editReport(report,(success)->{
             if (success) {
                 reloadReportsList();
-                reloadUserReportsList();//for updating the list of the user reports
                 listener.onComplete();
             }
         });
@@ -176,9 +182,10 @@ public class Model {
 
     public void editReport(Report report,editReportListener listener){
         modelFirebase.editReport(report, (success)->{
-            reloadReportsList();
-            reloadUserReportsList();
-            listener.onComplete(success);
+            if(success) {
+                reloadReportsList();
+                listener.onComplete(true);
+            }
         });
     }
 
@@ -187,44 +194,55 @@ public class Model {
         void onComplete(List<Report> data);
     }
 
-
     public LiveData<List<Report>> getAllUserReports(){
         return userReportsListLd;
     }
 
-    public void reloadUserReportsList(){
-        reportsListLoadingState.setValue(LoadingState.loading);
-
-        //get local last update
-        Long localLastUpdate = Report.getLocalLastUpdated();
-        //get all reports records since local last update from firebase
-        modelFirebase.getUserReportsList(localLastUpdate,(list)->{
-
-            MyApplication.executorService.execute(()->{
-                //update local last update date
-                //add new record to the local db
-                Long lLastUpdate = new Long(0);
-                for(Report r : list) {
-                    AppLocalDB.db.reportDao().insertAll(r);
-                    if(r.getIsDeleted()) // if the report is deleted in the firebase, delete hom from the cache
-                        AppLocalDB.db.reportDao().delete(r);
-                    if(r.getLastUpdated() > lLastUpdate){
-                        lLastUpdate = r.getLastUpdated();
-                    }
-                }
-                Report.setLocalLastUpdated(lLastUpdate);
-                //return all records to the caller
-                modelFirebase.getCurrentUser(new getCurrentUserListener() {
-                    @Override
-                    public void onComplete(String userEmail) {
-                        List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userEmail);
-                        userReportsListLd.postValue(userRepList);
-                        reportsListLoadingState.postValue(LoadingState.loaded);
-                    }
+    public void reloadUserReportsList() {
+        modelFirebase.getCurrentUser(new getCurrentUserListener() {
+            @Override
+            public void onComplete(String userEmail) {
+                MyApplication.executorService.execute(()-> {
+                    List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userEmail);
+                    userReportsListLd.postValue(userRepList);
                 });
-            });
-
+            }
         });
     }
+
+//    public void reloadUserReportsList(){
+//        reportsListLoadingState.setValue(LoadingState.loading);
+//
+//        //get local last update
+//        Long localLastUpdate = Report.getLocalLastUpdated();
+//        //get all reports records since local last update from firebase
+//        modelFirebase.getUserReportsList(localLastUpdate,(list)->{
+//
+//            MyApplication.executorService.execute(()->{
+//                //update local last update date
+//                //add new record to the local db
+//                Long lLastUpdate = new Long(0);
+//                for(Report r : list) {
+//                    AppLocalDB.db.reportDao().insertAll(r);
+//                    if(r.getIsDeleted()) // if the report is deleted in the firebase, delete hom from the cache
+//                        AppLocalDB.db.reportDao().delete(r);
+//                    if(r.getLastUpdated() > lLastUpdate){
+//                        lLastUpdate = r.getLastUpdated();
+//                    }
+//                }
+//                Report.setLocalLastUpdated(lLastUpdate);
+//                //return all records to the caller
+//                modelFirebase.getCurrentUser(new getCurrentUserListener() {
+//                    @Override
+//                    public void onComplete(String userEmail) {
+//                        List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userEmail);
+//                        userReportsListLd.postValue(userRepList);
+//                        reportsListLoadingState.postValue(LoadingState.loaded);
+//                    }
+//                });
+//            });
+//
+//        });
+//    }
 }
 

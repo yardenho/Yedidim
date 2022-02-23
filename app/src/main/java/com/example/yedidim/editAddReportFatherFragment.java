@@ -122,7 +122,7 @@ public class editAddReportFatherFragment extends Fragment {
     public void failAction() {
     }
 
-    public void save(View v, String reportID, EditText problemEt, EditText noteEt){
+    public void save(View v, Report r, EditText problemEt, EditText noteEt){
         Report report = new Report();
         Model.getInstance().getCurrentUser(new Model.getCurrentUserListener() {
             @Override
@@ -130,8 +130,8 @@ public class editAddReportFatherFragment extends Fragment {
                 report.setUserName(userEmail);
                 report.setProblem(problemEt.getText().toString());
                 report.setNotes(noteEt.getText().toString());
-                if(reportID != null)
-                    report.setReportID(reportID);
+                if(r!= null && r.getReportID() != null)
+                    report.setReportID(r.getReportID());
                 if (bitmap != null) {
                     String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                     Model.getInstance().saveImage(bitmap, report.getUserName() + currentTime, url -> {
@@ -140,14 +140,12 @@ public class editAddReportFatherFragment extends Fragment {
                     });
                 } else {
                     if(!state)
-                        Model.getInstance().getReportByID(reportID, (r)-> {
-                            report.setReportUrl(r.getReportUrl());
-                            activateGPS(v, report);
-                        });
+                        report.setReportUrl(r.getReportUrl());
                     else {
                         report.setReportUrl(null);
-                        activateGPS(v, report);
                     }
+                    activateGPS(v, report);
+
                 }
             }
         });

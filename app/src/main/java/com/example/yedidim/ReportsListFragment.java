@@ -51,6 +51,8 @@ public class ReportsListFragment extends Fragment {
         list.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
+        swipeRefresh = view.findViewById(R.id.reportsList_swipeRefresh);
+
 
         noReportsMessage = view.findViewById(R.id.reportsList_tv_noReportsMessage);
         noReportsMessage.setVisibility(View.GONE);
@@ -66,7 +68,6 @@ public class ReportsListFragment extends Fragment {
             }
         });
 
-        swipeRefresh = view.findViewById(R.id.reportsList_swipeRefresh);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -74,7 +75,6 @@ public class ReportsListFragment extends Fragment {
             }
         });
 
-        setHasOptionsMenu(true);
 
         viewModel.getReports().observe(getViewLifecycleOwner(), (reportsList)-> {
             adapter.notifyDataSetChanged();
@@ -87,6 +87,7 @@ public class ReportsListFragment extends Fragment {
         });
 
         pb.setVisibility(View.GONE);
+        setHasOptionsMenu(true);
         return view;
     }
 

@@ -102,7 +102,7 @@ public class EditReportFragment extends editAddReportFatherFragment {
                 saveBtn.setEnabled(false);
                 cancelBtn.setEnabled(false);
                 if(!checkCondition()) {
-                    save(v, viewModel.getReport().getReportID(),problem, notes);
+                    save(v, viewModel.getReport(),problem, notes);
                 }
                 else{
                     pb.setVisibility(View.GONE);

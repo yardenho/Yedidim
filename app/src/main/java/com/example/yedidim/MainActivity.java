@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         return true;
                     }
+                    if(myFragment.getId() == R.id.mainScreenFragment) {
+                        finish();
+                        return true;
+                    }
                     navctrl.navigateUp();
                     return true;
                 case R.id.baseMenu_aboutUs:
