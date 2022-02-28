@@ -27,14 +27,15 @@ import java.util.Map;
 public class ModelFirebase {
     final static String REPORTS = "reports";
     final static String USERS = "users";
+    final static String USERNAME = "username";
+    final static String REPORT = "report/";
+    final static String JPG = ".jpg";
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public void getCurrentUser(Model.getCurrentUserListener listener)
     {
-        currUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currUser == null)
             listener.onComplete(null);
         else {
@@ -44,6 +45,7 @@ public class ModelFirebase {
 
     public void addNewUser(User user, String password, Model.addNewUserListener listener) {
         // Create a new user
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(user.getUserName(), password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -68,26 +70,22 @@ public class ModelFirebase {
 
     public void loginUser(String email, String password, Model.loginUserListener listener)
     {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
-                        {
-                            currUser = FirebaseAuth.getInstance().getCurrentUser();
                             listener.onComplete(true);
-                        }
                         else
-                        {
                             listener.onComplete(false);
-                        }
+
                     }
                 });
     }
 
     public void logOutUser(Model.logOutUserListener listener) {
         FirebaseAuth.getInstance().signOut();
-        currUser = FirebaseAuth.getInstance().getCurrentUser();
         listener.onComplete();
     }
 
@@ -114,8 +112,7 @@ public class ModelFirebase {
     }
 
     public void editUser(User user, Model.editUserListener listener) {
-        // update user's details
-        // update an existing document document with a username as the ID
+        // update an existing user's document document with a username as the ID
         db.collection(USERS).document(user.getUserName()).set(user.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -187,7 +184,6 @@ public class ModelFirebase {
     }
 
     public void editReport(Report report, Model.editReportListener listener) {
-
         // edit an existing document
         db.collection(REPORTS).document(report.getReportID()).set(report.toJson())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -205,38 +201,11 @@ public class ModelFirebase {
                 });
     }
 
-    public void getUserReportsList(Long since, Model.GetUserReportsListener listener) {
-        db.collection(REPORTS).whereGreaterThanOrEqualTo(Report.LAST_UPDATED,new Timestamp(since, 0))
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                LinkedList<Report> reportsList = new LinkedList<Report>();
-                if(task.isSuccessful())
-                {
-                    for(QueryDocumentSnapshot doc:task.getResult())
-                    {
-                        currUser = FirebaseAuth.getInstance().getCurrentUser();
-                        if(currUser != null) {
-                            String userEmail = currUser.getEmail();
-                            Map<String, Object> json = doc.getData();
-                            if (((String) json.get("username")).equals(userEmail)) {
-                                Report report = Report.fromJson(doc.getId(), doc.getData());
-                                if (report != null)
-                                    reportsList.add(report);
-                            }
-                        }
-                    }
-                }
-                listener.onComplete(reportsList);
-            }
-        });
-    }
 
     public void saveImage(Bitmap bitmap,String name, Model.saveImageListener listener) {
         FirebaseStorage storage= FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference imageRef = storageRef.child("report/"+ name+".jpg");
-
+        StorageReference imageRef = storageRef.child(REPORT + name + JPG);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
@@ -248,6 +217,5 @@ public class ModelFirebase {
             Uri downloadUrl = uri;
             listener.onComplete(downloadUrl.toString());
         }));
-
     }
 }

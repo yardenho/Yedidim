@@ -91,35 +91,62 @@ public class editAddReportFatherFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
                     Location location = task.getResult();
-                    report.setLatitude(location.getLatitude());
-                    report.setLongitude(location.getLongitude());
-                    if(state)
-                        Model.getInstance().addNewReport(report,(success)->{
-                            if(success)
-                                Navigation.findNavController(v).navigateUp();
-                            else
-                                failAction();
-                        });
-                    else
-                        Model.getInstance().editReport(report,(success)->{
-                            if(success)
-                                Navigation.findNavController(v).navigateUp();
-                            else
-                                failAction();
-                        });
+                    setLocation(v, report, location);
                 }
             });
         }
         else {
             // permission denied
-            // TODO: check what does the number of the requestCode mean
-            // TODO: check if what to do after requesting permission
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            getLocation(v, report);
         }
     }
 
     public void failAction() {
+    }
+
+    public void getLocation(View v,Report report)
+    {
+        // check permission
+        if(ActivityCompat.checkSelfPermission(MyApplication.getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            // permission granted
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    Location location = task.getResult();
+                    setLocation(v, report, location);
+                }
+            });
+        }
+        else    // permission denied
+            failAction();
+    }
+
+    public void setLocation(View v, Report report, Location location)
+    {
+        report.setLatitude(location.getLatitude());
+        report.setLongitude(location.getLongitude());
+        if(state)
+            Model.getInstance().addNewReport(report,(success)->{
+                if(success)
+                    Navigation.findNavController(v).navigateUp();
+                else
+                    failAction();
+            });
+        else
+            Model.getInstance().editReport(report,(success)->{
+                if(success)
+                    Navigation.findNavController(v).navigateUp();
+                else
+                    failAction();
+            });
     }
 
     public void save(View v, Report r, EditText problemEt, EditText noteEt){
