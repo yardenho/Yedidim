@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 
 public class MyApplication extends Application {
     public static ExecutorService executorService = Executors.newFixedThreadPool(1);
+    final public static Handler mainHandler = HandlerCompat.createAsync(Looper.getMainLooper());
     private static Context appContext;
 
     @Override

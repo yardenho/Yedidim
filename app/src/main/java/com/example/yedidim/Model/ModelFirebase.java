@@ -22,7 +22,6 @@ import com.google.firebase.storage.UploadTask;
 import com.google.firebase.auth.FirebaseAuth; // for authentication with firebase
 import java.io.ByteArrayOutputStream;
 import java.util.LinkedList;
-import java.util.Map;
 
 public class ModelFirebase {
     final static String REPORTS = "reports";

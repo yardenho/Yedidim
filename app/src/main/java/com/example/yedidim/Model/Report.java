@@ -46,7 +46,6 @@ public class Report {
         this.problem=problem;
         this.notes=notes;
         this.userName=user;
-//        this.image=iv;
         this.longitude=longitude;
         this.latitude=latitude;
         this.reportUrl=rUrl;

@@ -1,17 +1,10 @@
 package com.example.yedidim.Model;
 
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.view.Display;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.yedidim.MyApplication;
-import com.example.yedidim.R;
-
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 ///מחבר לנו בין הפרגמנטים לDATA
 public class Model {
@@ -36,7 +29,7 @@ public class Model {
         return instance;
     }
 
-    //לא יהיה SET כי אף אחד לא נוגע בוף המודל יהיה זה שאחראי לתקשורת אז הוא זה שישלוט בו, ניתן לתת אפשרות לעידכון דאטא אבל כרגע היחיד שמשנה הוא המודל
+    //לא יהיה SET כי אף אחד לא נוגע בו, המודל יהיה זה שאחראי לתקשורת אז הוא זה שישלוט בו, ניתן לתת אפשרות לעידכון דאטא אבל כרגע היחיד שמשנה הוא המודל
     public LiveData<LoadingState> getReportsListLoadingState(){ return reportsListLoadingState;}
 
 
@@ -129,7 +122,7 @@ public class Model {
                 //return all records to the caller
                 List<Report> repList = AppLocalDB.db.reportDao().getAll();
                 reportsListLd.postValue(repList);
-                reloadUserReportsList();//TODO
+                reloadUserReportsList();
                 reportsListLoadingState.postValue(LoadingState.loaded);// סיום הטעינה
 
             });
@@ -158,7 +151,14 @@ public class Model {
 
     public void getReportByID(String reportID, getReportByReportIDListener listener)
     {
-        modelFirebase.getReportByID(reportID, listener);
+//        modelFirebase.getReportByID(reportID, listener);
+        MyApplication.executorService.execute(()-> {
+            Report report = AppLocalDB.db.reportDao().getReportByID(reportID);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete(report);
+            });
+        });
+
     }
 
     public interface deleteReportListener{
@@ -189,11 +189,6 @@ public class Model {
         });
     }
 
-    //get only reports that belong to a specific user
-    public interface GetUserReportsListener{
-        void onComplete(List<Report> data);
-    }
-
     public LiveData<List<Report>> getAllUserReports(){
         return userReportsListLd;
     }
@@ -209,40 +204,5 @@ public class Model {
             }
         });
     }
-
-//    public void reloadUserReportsList(){
-//        reportsListLoadingState.setValue(LoadingState.loading);
-//
-//        //get local last update
-//        Long localLastUpdate = Report.getLocalLastUpdated();
-//        //get all reports records since local last update from firebase
-//        modelFirebase.getUserReportsList(localLastUpdate,(list)->{
-//
-//            MyApplication.executorService.execute(()->{
-//                //update local last update date
-//                //add new record to the local db
-//                Long lLastUpdate = new Long(0);
-//                for(Report r : list) {
-//                    AppLocalDB.db.reportDao().insertAll(r);
-//                    if(r.getIsDeleted()) // if the report is deleted in the firebase, delete hom from the cache
-//                        AppLocalDB.db.reportDao().delete(r);
-//                    if(r.getLastUpdated() > lLastUpdate){
-//                        lLastUpdate = r.getLastUpdated();
-//                    }
-//                }
-//                Report.setLocalLastUpdated(lLastUpdate);
-//                //return all records to the caller
-//                modelFirebase.getCurrentUser(new getCurrentUserListener() {
-//                    @Override
-//                    public void onComplete(String userEmail) {
-//                        List<Report> userRepList = AppLocalDB.db.reportDao().getMyReports(userEmail);
-//                        userReportsListLd.postValue(userRepList);
-//                        reportsListLoadingState.postValue(LoadingState.loaded);
-//                    }
-//                });
-//            });
-//
-//        });
-//    }
 }
 
