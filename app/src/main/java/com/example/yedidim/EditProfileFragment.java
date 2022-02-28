@@ -1,8 +1,6 @@
 package com.example.yedidim;
 
-import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import android.view.LayoutInflater;

@@ -18,6 +18,7 @@ import com.example.yedidim.Model.Model;
 public class logInFragment extends Fragment {
     EditText usernameEt;
     EditText passwordEt;
+    final static int PASSWORDMINDIGIT = 6;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,7 +95,7 @@ public class logInFragment extends Fragment {
             passwordEt.requestFocus();
             return false;
         }
-        if (password.length() < 6) {
+        if (password.length() < PASSWORDMINDIGIT) {
             passwordEt.setError("password should be at least 6 characters");
             passwordEt.requestFocus();
             return false;
