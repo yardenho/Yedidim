@@ -115,7 +115,6 @@ public class signUpFragment extends Fragment {
         String phoneNumber = phoneNumberEt.getText().toString().trim();
         String vehicleBrand = vehicleBrandEt.getText().toString().trim();
         String manufactureYear = manufactureYearEt.getText().toString().trim();
-        String fuelType = fuelTypeEt.getText().toString().trim();
         String carNumber = carNumberEt.getText().toString().trim();
         if(firstName.isEmpty()) {
             firstNameEt.setError("first name is required");
